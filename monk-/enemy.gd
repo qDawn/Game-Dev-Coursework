@@ -11,17 +11,18 @@ var moving = false
 var health = 100
 var enemySize
 var abilityOn = false
+var extraBullets = 4
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	screenSize = get_viewport_rect().size
+	enemySize = $CollisionShape2D.shape.get_rect().size
 	$ShootTimer.timeout.connect(shoot_bullets)
 	$MoveTimer.timeout.connect(new_randPos)
 	$AbilityCooldownTimer.timeout.connect(ability)
 	$AbilityActiveTimer.timeout.connect(set_abilityOn_false)
-	enemySize = $CollisionShape2D.shape.get_rect().size
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,7 +32,7 @@ func _process(delta: float) -> void:
 		
 
 func movement(delta: float) -> void:
-	# Enemy arrived at random location
+	# Enemy arrived at the chosen random location
 	if moving and position.is_equal_approx(randPos):
 		$MoveTimer.start()
 		moving = false
@@ -41,9 +42,11 @@ func movement(delta: float) -> void:
 		direction.x = randPos.x - position.x 
 		direction.y = randPos.y - position.y
 		
+		# if enemy is close enough, change enemy position to the random location
 		if direction.length() < 3:
 			position = randPos
-		position += direction.normalized() * delta * speed
+		else:
+			position += direction.normalized() * delta * speed
 		
 	
 		
@@ -53,7 +56,6 @@ func new_randPos() -> void:
 		return
 	randPos.x = randi_range(100, screenSize.x - 100)
 	randPos.y = randi_range(100, screenSize.y / 2)
-	print(randPos)
 	moving = true
 	
 func _on_area_entered(body: Node2D) -> void:
@@ -71,8 +73,11 @@ func die() -> void:
 	queue_free()
 
 func shoot_bullets() -> void:
-	get_tree().current_scene.add_child(spawn_default_bullet())
-	ability_shoot()
+	if abilityOn:
+		ability_shoot()
+	else:
+		# default shooting
+		get_tree().current_scene.add_child(spawn_default_bullet())
 
 func shoot_bullet(bullet) -> void:
 	get_tree().current_scene.add_child(bullet)
@@ -87,21 +92,17 @@ func spawn_default_bullet():
 func ability_shoot() -> void:
 	if not abilityOn:
 		return
-	
-	var extraBullets = 4
-	for i in range(extraBullets):
+
+	for i in range(0, extraBullets + 1):
 		var bullet = spawn_default_bullet()
-		bullet.velocity = Vector2(-1 + i * 2/ extraBullets, 1).normalized()
+		bullet.velocity = Vector2(-1 + (i * 2.0 / extraBullets), 1).normalized()
 		shoot_bullet(bullet)
 	
 	
 func ability() -> void:
-	print("ON")
 	abilityOn = true
 	$AbilityActiveTimer.start()
 
 func set_abilityOn_false() -> void:
 	abilityOn = false
-	
-
 	
