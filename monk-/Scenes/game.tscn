@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dlbjkwvlm4ula"]
+
+[ext_resource type="Script" uid="uid://vchvo6pj8ihs" path="res://Scripts/game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://2xw46ms6io6n" path="res://Scenes/player.tscn" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://m7arul0dxjqd" path="res://sprites/blue_background_color_153514_1280x960.jpg" id="2_wowpa"]
+[ext_resource type="PackedScene" uid="uid://dwtljiikorit3" path="res://Scenes/enemy.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dff4prj2wfasd" path="res://Scenes/spread_shooter.tscn" id="5_7jktm"]
+
+[node name="Game" type="Node2D" unique_id=642842692]
+script = ExtResource("1_fc0e3")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=709667196]
+offset = Vector2(640, 480)
+
+[node name="Background" type="Sprite2D" parent="." unique_id=550293809]
+position = Vector2(640, 480)
+texture = ExtResource("2_wowpa")
+
+[node name="Player" parent="." unique_id=737089679 instance=ExtResource("2_e2o6t")]
+position = Vector2(624, 512)
+
+[node name="Enemy" parent="." unique_id=127248577 groups=["enemy"] instance=ExtResource("3_feb5d")]
+position = Vector2(640, 160)
+
+[node name="GameOver" type="VBoxContainer" parent="." unique_id=1718148602]
+visible = false
+offset_left = 264.0
+offset_top = 128.0
+offset_right = 1010.0
+offset_bottom = 824.0
+alignment = 1
+
+[node name="Label" type="Label" parent="GameOver" unique_id=1810687898]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "GAME OVER"
+
+[node name="Label2" type="Label" parent="GameOver" unique_id=1619534194]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Press Enter To Try Again"
+
+[node name="HUD" type="VBoxContainer" parent="." unique_id=218777496]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="Label" parent="HUD" unique_id=1555116910]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "HP: 5"
+
+[node name="Score" type="Label" parent="HUD" unique_id=834426097]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Score : "
+
+[node name="Ability" type="Label" parent="HUD" unique_id=1428774409]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="SpreadShooter" parent="." unique_id=1310264243 instance=ExtResource("5_7jktm")]
+position = Vector2(192, 344)

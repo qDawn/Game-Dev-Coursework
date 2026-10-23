@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dwtljiikorit3"]
+
+[ext_resource type="Script" uid="uid://ccuiu5dng51q" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://c8866qxoc5bw2" path="res://dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgns8"]
+size = Vector2(96, 128)
+
+[node name="Enemy" type="Area2D" unique_id=1310264243]
+script = ExtResource("1_4gyqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1078032425]
+position = Vector2(-8, 0)
+rotation = 1.5707964
+texture = ExtResource("1_7k104")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561700062]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_lgns8")
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1727736153]
+wait_time = 0.5
+autostart = true
+
+[node name="MoveTimer" type="Timer" parent="." unique_id=381719613]
+wait_time = 3.0
+autostart = true

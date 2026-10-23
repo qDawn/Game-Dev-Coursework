@@ -1,9 +1,10 @@
-[gd_scene format=3 uid="uid://dlbjkwvlm4ula"]
+[gd_scene format=3 uid="uid://vvca1v2t13ou"]
 
-[ext_resource type="Texture2D" uid="uid://cs51oi5h2f1i6" path="res://blue_background_color_153514_1280x960.jpg" id="1_e2o6t"]
-[ext_resource type="Script" uid="uid://vchvo6pj8ihs" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://2xw46ms6io6n" path="res://player.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://dwtljiikorit3" path="res://enemy.tscn" id="3_feb5d"]
+[ext_resource type="Texture2D" path="res://blue_background_color_153514_1280x960.jpg" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://byq1jyjm2u1aa" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://11lkomcrgl7x" path="res://player.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://dx5lr01beflor" path="res://enemy.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://beoek7kli2dgg" path="res://spread_shooter.tscn" id="5_7jktm"]
 
 [node name="Game" type="Node2D" unique_id=642842692]
 script = ExtResource("1_fc0e3")
@@ -19,7 +20,7 @@ texture = ExtResource("1_e2o6t")
 position = Vector2(624, 512)
 
 [node name="Enemy" parent="." unique_id=127248577 groups=["enemy"] instance=ExtResource("3_feb5d")]
-position = Vector2(632, 160)
+position = Vector2(640, 160)
 
 [node name="GameOver" type="VBoxContainer" parent="." unique_id=1718148602]
 visible = false
@@ -56,3 +57,6 @@ text = "Score : "
 [node name="Ability" type="Label" parent="HUD" unique_id=1428774409]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+
+[node name="SpreadShooter" parent="." unique_id=1310264243 instance=ExtResource("5_7jktm")]
+position = Vector2(192, 344)

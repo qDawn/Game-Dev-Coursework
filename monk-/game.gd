@@ -2,7 +2,7 @@ extends Node2D
 
 signal restart
 
-const enemyScene = preload("res://enemy.tscn")
+const enemyScene = preload("res://Scenes/enemy.tscn")
 
 var gameOver = false
 var score = 0
