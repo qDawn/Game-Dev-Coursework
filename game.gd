@@ -2,7 +2,7 @@ extends Node2D
 
 signal restart
 
-const enemyScene = preload("res://enemy.tscn")
+const enemyScene = preload("res://Scenes/enemy.tscn")
 
 var gameOver = false
 var score = 0
@@ -39,14 +39,16 @@ func _on_enemy_dead() -> void:
 	
 func spawn_enemy() -> void:
 	var enemy = enemyScene.instantiate()
-	
+	enemy.position = Vector2(640, 160)
 	get_tree().current_scene.add_child(enemy)
+	enemy.connect("enemyDied", _on_enemy_dead)
 	
 func _on_player_ability_activated() -> void:
 	$HUD/Ability.text = "Ability: ACTIVE"
 	
 func _on_player_ability_deactivated() -> void:
 	$HUD/Ability.text = "Ability: INACTIVE"
+	
 func game_over() -> void:
 	$Player.queue_free()
 	$GameOver.show()

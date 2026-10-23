@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://buuoxpkyj62vv"]
+
+[ext_resource type="Script" path="res://ability.gd" id="1_urll2"]
+
+[node name="ActiveAbility" type="Node2D" unique_id=1524233100]
+script = ExtResource("1_urll2")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=989041480]
+wait_time = 5.0
+autostart = true
+
+[node name="ActiveTimer" type="Timer" parent="." unique_id=1417843808]
+wait_time = 3.0
+autostart = true

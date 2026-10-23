@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://2xw46ms6io6n"]
+[gd_scene format=3 uid="uid://11lkomcrgl7x"]
 
-[ext_resource type="Script" uid="uid://0yh7pvmgbkgh" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://bgq56gx12h3k2" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://70idi36ajdlx" path="res://icon.svg" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
@@ -29,10 +29,6 @@ shape = SubResource("RectangleShape2D_e2o6t")
 wait_time = 1.5
 autostart = true
 
-[node name="AbilityCooldownTimer" type="Timer" parent="." unique_id=2037687387]
-wait_time = 5.0
-autostart = true
-
 [node name="AbilityArea" type="Area2D" parent="." unique_id=1939731310]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AbilityArea" unique_id=1491951165]
@@ -40,4 +36,8 @@ shape = SubResource("CircleShape2D_lgns8")
 
 [node name="AbilityActiveTimer" type="Timer" parent="." unique_id=1902926173]
 wait_time = 3.0
+autostart = true
+
+[node name="AbilityCooldownTimer" type="Timer" parent="." unique_id=2037687387]
+wait_time = 5.0
 autostart = true

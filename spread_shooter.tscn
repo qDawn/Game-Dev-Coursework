@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://beoek7kli2dgg"]
+
+[ext_resource type="PackedScene" uid="uid://dx5lr01beflor" path="res://enemy.tscn" id="1_gr7t4"]
+[ext_resource type="Script" uid="uid://dfxtq7amhfsg5" path="res://spread_shooter.gd" id="2_4l7fg"]
+[ext_resource type="Texture2D" uid="uid://bkfhscnijqcwk" path="res://dodge_the_creeps_2d_assets/art/playerGrey_up1.png" id="3_obe05"]
+[ext_resource type="PackedScene" uid="uid://b2gxlibx4idnu" path="res://spread_shoot_active_ability.tscn" id="4_sfdjx"]
+
+[node name="SpreadShooter" unique_id=1310264243 groups=["enemy"] instance=ExtResource("1_gr7t4")]
+script = ExtResource("2_4l7fg")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1078032425]
+texture = ExtResource("3_obe05")
+
+[node name="SpreadShootActiveAbility" parent="." index="4" unique_id=1524233100 instance=ExtResource("4_sfdjx")]

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dwtljiikorit3"]
+[gd_scene format=3 uid="uid://dx5lr01beflor"]
 
-[ext_resource type="Script" uid="uid://ccuiu5dng51q" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Script" uid="uid://b732kw1r25eva" path="res://enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://c8866qxoc5bw2" path="res://dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="1_7k104"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgns8"]
@@ -23,13 +23,5 @@ wait_time = 0.5
 autostart = true
 
 [node name="MoveTimer" type="Timer" parent="." unique_id=381719613]
-wait_time = 3.0
-autostart = true
-
-[node name="AbilityCooldownTimer" type="Timer" parent="." unique_id=1214091481]
-wait_time = 5.0
-autostart = true
-
-[node name="AbilityActiveTimer" type="Timer" parent="." unique_id=1512502297]
 wait_time = 3.0
 autostart = true

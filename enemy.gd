@@ -1,14 +1,15 @@
 extends Area2D
 
 signal enemyDied
-const bulletScene = preload("res://enemy_bullet.tscn")
-const speed = 250
+const bulletScene = preload("res://Scenes/enemy_bullet.tscn")
+
 
 var screenSize 
 var randPos : Vector2
 var random = RandomNumberGenerator.new()
-var moving = false
+var state = "idle"
 var health = 100
+var speed = 250
 var enemySize
 var abilityOn = false
 
@@ -18,9 +19,7 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	screenSize = get_viewport_rect().size
 	$ShootTimer.timeout.connect(shoot_bullets)
-	$MoveTimer.timeout.connect(new_randPos)
-	$AbilityCooldownTimer.timeout.connect(ability)
-	$AbilityActiveTimer.timeout.connect(set_abilityOn_false)
+	#$MoveTimer.timeout.connect(new_randPos)
 	enemySize = $CollisionShape2D.shape.get_rect().size
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,13 +28,15 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		die()
 		
+func get_size():
+	return enemySize
 
 func movement(delta: float) -> void:
 	# Enemy arrived at random location
-	if moving and position.is_equal_approx(randPos):
+	if state == "move" and position.is_equal_approx(randPos):
 		$MoveTimer.start()
-		moving = false
-	if moving:
+		state = "idle"
+	if state == "move":
 		var direction : Vector2
 		# calculates the direction that the enemy should move
 		direction.x = randPos.x - position.x 
@@ -48,13 +49,11 @@ func movement(delta: float) -> void:
 	
 		
 func new_randPos() -> void:
-	# Gets a random value inside the screen
-	if moving:
+	if state == "move":
 		return
 	randPos.x = randi_range(100, screenSize.x - 100)
 	randPos.y = randi_range(100, screenSize.y / 2)
-	print(randPos)
-	moving = true
+	state = "move"
 	
 func _on_area_entered(body: Node2D) -> void:
 	if body.is_in_group("player_bullet"):
@@ -72,7 +71,6 @@ func die() -> void:
 
 func shoot_bullets() -> void:
 	get_tree().current_scene.add_child(spawn_default_bullet())
-	ability_shoot()
 
 func shoot_bullet(bullet) -> void:
 	get_tree().current_scene.add_child(bullet)
@@ -84,24 +82,7 @@ func spawn_default_bullet():
 	bullet.velocity = Vector2(0,1)
 	return bullet
 	
-func ability_shoot() -> void:
-	if not abilityOn:
-		return
-	
-	var extraBullets = 4
-	for i in range(extraBullets):
-		var bullet = spawn_default_bullet()
-		bullet.velocity = Vector2(-1 + i * 2/ extraBullets, 1).normalized()
-		shoot_bullet(bullet)
-	
-	
-func ability() -> void:
-	print("ON")
-	abilityOn = true
-	$AbilityActiveTimer.start()
 
-func set_abilityOn_false() -> void:
-	abilityOn = false
 	
 
 	

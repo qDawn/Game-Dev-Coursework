@@ -4,7 +4,7 @@ signal playerTakeDamage
 signal abilityActivated
 signal abilityDeactivated
 
-const bulletScene = preload("res://player_bullet.tscn")
+const bulletScene = preload("res://Scenes/player_bullet.tscn")
 const SPEED = 500
 const bulletAngularSpeed = TAU / 4
 const bulletAngleOffset = TAU / maxAbilityBullet
@@ -15,11 +15,13 @@ var screen_size
 var player_size
 var health = 5
 var invincibility = false
-var abilityAvailable = false
+var abilityAvailable = true
 var abilityOn = false
 var abilityBullet = 0 
 var shootDelay = shootDelayVal
 var bulletAngle = 0
+
+var possessedAbility
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,6 +68,9 @@ func movement(delta: float) -> void:
 	if position.y + player_size.y / 2 >= screen_size.y:
 		position.y = screen_size.y - player_size.y / 2
 	
+func get_size() -> Vector2:
+	return player_size
+	
 func take_damage() -> void:
 	health = max(0, health - 1)
 	emit_signal("playerTakeDamage", health)
@@ -96,6 +101,7 @@ func colliding_bullets() -> bool:
 	
 	
 func ability() -> void:
+	
 	if abilityAvailable and Input.is_action_pressed("enter"):
 		abilityOn = true
 		$AbilityActiveTimer.start()
@@ -113,6 +119,7 @@ func ability() -> void:
 				var bullet = bulletScene.instantiate()
 				add_child(bullet)
 				bullet.connect("bulletDied", _on_bullet_dead)
+		
 		
 			
 func bullets_movement(delta: float) -> void:
