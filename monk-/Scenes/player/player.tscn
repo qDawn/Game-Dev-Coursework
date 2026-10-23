@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://2xw46ms6io6n"]
+
+[ext_resource type="Script" uid="uid://0yh7pvmgbkgh" path="res://Scripts/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dyjsnu8si086b" path="res://Scripts/ui.gd" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://70idi36ajdlx" path="res://sprites/icon.svg" id="2_cvnsp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
+size = Vector2(63.98774, 64.01225)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tydw7"]
+radius = 96.0
+
+[node name="Player" type="CharacterBody2D" unique_id=737089679 groups=["player"]]
+slide_on_ceiling = false
+script = ExtResource("1_4flbx")
+
+[node name="cam" type="Camera2D" parent="." unique_id=1528579824]
+
+[node name="ui" type="VBoxContainer" parent="cam" unique_id=1561905749]
+offset_left = -560.0
+offset_top = -304.0
+offset_right = -334.0
+offset_bottom = -75.0
+script = ExtResource("2_6t5aa")
+
+[node name="player_health" type="Label" parent="cam/ui" unique_id=1939129361]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "HP: X/X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="score" type="Label" parent="cam/ui" unique_id=1400333029]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Score: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=2132191185]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_cvnsp")
+
+[node name="hitbox" type="CollisionShape2D" parent="." unique_id=1340028014]
+position = Vector2(0, -1.9073486e-06)
+rotation = -0.00019150559
+shape = SubResource("RectangleShape2D_e2o6t")
+
+[node name="possession_range" type="Area2D" parent="." unique_id=1034708896]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="possession_range" unique_id=1814512620]
+shape = SubResource("CircleShape2D_tydw7")
+
+[node name="invincible_timer" type="Timer" parent="." unique_id=1746842552]
+wait_time = 1.5
+autostart = true
+
+[node name="possession_cooldown" type="Timer" parent="." unique_id=2037687387]
+wait_time = 5.0
+autostart = true
+
+[node name="attack_cooldown" type="Timer" parent="." unique_id=1182251118]
+one_shot = true
+
+[connection signal="take_damage" from="." to="." method="_on_take_damage"]
+[connection signal="timeout" from="invincible_timer" to="." method="_on_invincible_timer_timeout"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

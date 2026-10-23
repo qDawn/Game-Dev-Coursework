@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://daux7s6ck68f2"]
+
+[ext_resource type="Script" uid="uid://ccuiu5dng51q" path="res://Scripts/basic_shooter.gd" id="1_vm3y3"]
+[ext_resource type="Texture2D" uid="uid://c8866qxoc5bw2" path="res://dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="2_man5n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qcbyg"]
+radius = 40.0
+height = 98.0
+
+[node name="basic_shooter" type="RigidBody2D" unique_id=107408206 groups=["enemy"]]
+input_pickable = true
+script = ExtResource("1_vm3y3")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1078032425]
+texture = ExtResource("2_man5n")
+
+[node name="collision_shape" type="CollisionShape2D" parent="." unique_id=1561700062]
+position = Vector2(10, -1)
+shape = SubResource("CapsuleShape2D_qcbyg")
+
+[node name="attack_cooldown" type="Timer" parent="." unique_id=1727736153]
+one_shot = true
+
+[node name="possession_window" type="Timer" parent="." unique_id=1478351512]
+wait_time = 10.0
+one_shot = true
+
+[node name="decay_timer" type="Timer" parent="." unique_id=1722401979]
+
+[connection signal="attack" from="." to="." method="_on_attack"]
+[connection signal="possession" from="." to="." method="_on_possession"]
+[connection signal="take_damage" from="." to="." method="_on_take_damage"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="possession_window" to="." method="_on_possession_window_timeout"]
