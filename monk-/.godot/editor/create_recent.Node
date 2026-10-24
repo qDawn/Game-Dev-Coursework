@@ -1,0 +1,6 @@
+CollisionShape2D
+Area2D
+Timer
+RigidBody2D
+NavigationAgent2D
+Camera2D

@@ -1,146 +1,76 @@
 extends CharacterBody2D
 
-signal playerTakeDamage
-signal abilityActivated
-signal abilityDeactivated
+signal take_damage
+signal possess
 
-const bulletScene = preload("res://player_bullet.tscn")
-const SPEED = 500
-const bulletAngularSpeed = TAU / 4
-const bulletAngleOffset = TAU / maxAbilityBullet
-const shootDelayVal = 10
-const maxAbilityBullet = 5
+const PLAYER_BULLET = preload("uid://bys54qkalrh2b")
 
-var screen_size
-var player_size
-var health = 5
-var invincibility = false
-var abilityAvailable = true
-var abilityOn = false
-var abilityBullet = 0 
-var shootDelay = shootDelayVal
-var bulletAngle = 0
+var speed: float = 300
+var invincible: bool = false
+var attack_cooldown: bool = false
 
-var possessedAbility
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	screen_size = get_viewport_rect().size
-	player_size = $Area2D/CollisionShape2D.shape.get_rect().size
-	$Area2D.area_entered.connect(_on_attack_body_entered)
-	$InvincTimer.timeout.connect(set_invincibility_false)
-	$AbilityCooldownTimer.timeout.connect(set_abilityAvailable_true)
-	$AbilityActiveTimer.timeout.connect(set_abilityOn_false)
-
-
-func _physics_process(delta: float) -> void:
-	pass
+var currently_possessing: bool = false
+var possession_cooldown: bool = false
+var possession_target: RigidBody2D = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	movement(delta)
-	ability()
-	bullets_movement(delta)
-	if colliding_enemies() or colliding_bullets():
-		take_damage()
-		
-		
-func movement(delta: float) -> void:
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x +=1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -=1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -=1
-	if Input.is_action_pressed("move_down"):
-		velocity.y +=1
-		
+func _physics_process(delta: float) -> void:
+	if currently_possessing: 
+		possession_target.global_position = global_position
 	
-	position += velocity * delta * SPEED
-	# Prevents the player's collision hitbox from exiting the screen.
-	if position.x - player_size.x / 2 <= 0:
-		position.x = 0 + player_size.x / 2
-	if position.x + player_size.x / 2 >= screen_size.x:
-		position.x = screen_size.x - player_size.x / 2
-	if position.y - player_size.y / 2 <= 0:
-		position.y = 0 + player_size.y / 2
-	if position.y + player_size.y / 2 >= screen_size.y:
-		position.y = screen_size.y - player_size.y / 2
+	#player movement
+	#horizontal movement
+	if Input.is_action_pressed("move_right"): velocity.x = speed*delta
+	elif Input.is_action_pressed("move_left"): velocity.x = -speed*delta
+	else: velocity.x = 0
+	#vertical movement
+	if Input.is_action_pressed("move_up"): velocity.y = -speed*delta
+	elif Input.is_action_pressed("move_down"): velocity.y = speed*delta
+	else: velocity.y = 0
+	move_and_collide(velocity)
 	
-func get_size() -> Vector2:
-	return player_size
-	
-func take_damage() -> void:
-	health = max(0, health - 1)
-	emit_signal("playerTakeDamage", health)
-	
-func _on_attack_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
-		body.take_damage(5)
-	
-func colliding_enemies() -> bool:
-	if invincibility:
-		return false
-	for area in $Area2D.get_overlapping_areas():
-		if area.is_in_group("enemy"):
-			invincibility = true
-			$InvincTimer.start()
-			return true
-	return false
-	
-func colliding_bullets() -> bool:
-	if invincibility:
-		return false
-	for area in $Area2D.get_overlapping_areas():
-		if area.is_in_group("enemy_bullet"):
-			invincibility = true
-			$InvincTimer.start()
-			return true
-	return false
-	
-	
-func ability() -> void:
-	
-	if abilityAvailable and Input.is_action_pressed("enter"):
-		abilityOn = true
-		$AbilityActiveTimer.start()
-		abilityActivated.emit()
-		
-	if not abilityOn:
-		return
-	abilityAvailable = false
-	for area in $AbilityArea.get_overlapping_areas():
-		if area.is_in_group("enemy_bullet"):
-			# player's bullet is added after removing enemy bullet
-			if abilityBullet < maxAbilityBullet:
-				area.queue_free()
-				abilityBullet += 1
-				var bullet = bulletScene.instantiate()
-				add_child(bullet)
-				bullet.connect("bulletDied", _on_bullet_dead)
-		
-		
+	#attacking logic
+	if Input.is_action_pressed('shoot'):
+		var direction: Vector2 = global_position.direction_to(get_global_mouse_position())
+		if currently_possessing:
+			possession_target.emit_signal('attack', direction)
+		elif not attack_cooldown:
+			var bullet: Area2D = PLAYER_BULLET.instantiate()
+			bullet.global_position = global_position
+			bullet.direction = direction
+			bullet.speed = 500
+			get_tree().root.add_child(bullet)
 			
-func bullets_movement(delta: float) -> void:
-	bulletAngle += bulletAngularSpeed * delta
-	var angle = bulletAngle
-	for child in get_children():
-		if child.is_in_group("player_bullet"):
-			child.position.x = (player_size.x * cos(angle))
-			child.position.y = (player_size.y * sin(angle))
-			angle += bulletAngleOffset 
-	
-func set_invincibility_false() -> void:
-	invincibility = false
-	
-func set_abilityAvailable_true() -> void:
-	abilityAvailable = true
-	
-func set_abilityOn_false() -> void:
-	abilityOn = false
-	$AbilityActiveTimer.stop()
-	abilityDeactivated.emit()
-	
-func _on_bullet_dead() -> void:
-	abilityBullet = max(0, abilityBullet - 1)
+			attack_cooldown = true
+			$attack_cooldown.start()
+		
+	#possession logic
+	if Input.is_action_just_pressed('possess') and not currently_possessing:
+		var available_hosts: Array[Node2D] = $possession_range.get_overlapping_bodies()
+		if available_hosts:
+			var selected_host: Node2D = available_hosts[0]
+			for host in available_hosts:
+				if get_global_mouse_position().distance_to(host.global_position) < get_global_mouse_position().distance_to(selected_host.global_position):
+					selected_host = host
+			
+			#make player invisible and disable hitbox
+			$sprite.visible = false
+			$hitbox.disabled = true
+			#set the possession target
+			possession_target = selected_host
+			currently_possessing = true
+			selected_host.emit_signal('possession')
+
+func _on_take_damage(damage: int) -> void:
+	if not invincible:
+		#take damage, become invincible, sprite becomes transparent.
+		PlayerInfo.current_health -= damage
+		invincible = true
+		$sprite.self_modulate = Color(1,1,1,0.5)
+		
+func _on_invincible_timer_timeout() -> void:
+	invincible = false
+	$sprite.self_modulate = Color(1,1,1,1)
+
+func _on_attack_cooldown_timeout() -> void:
+	attack_cooldown = false

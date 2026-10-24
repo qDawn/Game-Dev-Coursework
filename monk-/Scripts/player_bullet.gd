@@ -1,22 +1,17 @@
 extends Area2D
 
-signal bulletDied
-var rotatingPlayer = true
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
+var speed: float = 150
+var direction : Vector2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if rotatingPlayer:
-		pass
-		
-	for area in get_overlapping_areas():
-		if area.is_in_group("enemy_bullet"):
-			bulletDied.emit()
+	global_position += speed * delta * direction
+	for body in get_overlapping_bodies():
+		if body.is_in_group('enemy'):
+			var base_damage: int = 500
+			var bonus_damage: int = int(body.max_health/10)
+			body.emit_signal('take_damage',base_damage+bonus_damage)
 			queue_free()
-		
-		if area.is_in_group("enemy"):
-			bulletDied.emit()
-			queue_free()
+
+func _on_expiry_timer_timeout() -> void:
+	queue_free()
