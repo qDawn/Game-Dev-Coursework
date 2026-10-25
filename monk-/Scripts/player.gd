@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 			
 	#cancel possession logic
 	if Input.is_action_just_pressed('cancel_possession') and possession_target:
-		possession_target.current_health = 0
+		possession_target.emit_signal("take_damage", possession_target.max_health)
 
 func _on_take_damage(damage: int) -> void:
 	if not invincible:

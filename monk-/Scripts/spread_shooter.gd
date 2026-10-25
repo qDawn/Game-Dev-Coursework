@@ -7,8 +7,8 @@ signal possession
 const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
 
 #health
-@export var max_health: int = 100
-@export var current_health: int = 100
+@export var max_health: int = 30
+@export var current_health: int = 30
 
 #how fast it moves
 @export var speed: int = 200
