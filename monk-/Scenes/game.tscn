@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://vchvo6pj8ihs" path="res://Scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://2xw46ms6io6n" path="res://Scenes/player/player.tscn" id="2_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://m7arul0dxjqd" path="res://sprites/blue_background_color_153514_1280x960.jpg" id="2_wowpa"]
-[ext_resource type="PackedScene" uid="uid://daux7s6ck68f2" path="res://Scenes/enemies/basic_shooter.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://qc8o7a1cf37q" path="res://Scenes/enemies/spread_shooter.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://daux7s6ck68f2" path="res://Scenes/enemies/basic_shooter.tscn" id="5_wowpa"]
 
 [node name="Game" type="Node2D" unique_id=642842692]
 script = ExtResource("1_fc0e3")
@@ -14,4 +15,6 @@ texture = ExtResource("2_wowpa")
 [node name="Player" parent="." unique_id=737089679 instance=ExtResource("2_e2o6t")]
 position = Vector2(-264, 187)
 
-[node name="basic_shooter" parent="." unique_id=1310264243 instance=ExtResource("4_3dryh")]
+[node name="basic_shooter" parent="." unique_id=107408206 instance=ExtResource("5_wowpa")]
+
+[node name="spread_shooter" parent="." unique_id=494948239 instance=ExtResource("4_3dryh")]

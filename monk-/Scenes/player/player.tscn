@@ -63,6 +63,7 @@ autostart = true
 [node name="attack_cooldown" type="Timer" parent="." unique_id=1182251118]
 one_shot = true
 
+[connection signal="cancel_possession" from="." to="." method="_on_cancel_possession"]
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]
 [connection signal="timeout" from="invincible_timer" to="." method="_on_invincible_timer_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
