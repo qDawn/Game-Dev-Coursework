@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://r8l0c05hsvf8"]
+
+[ext_resource type="Script" uid="uid://jvs4yaebrflp" path="res://Scripts/ability.gd" id="1_fvtus"]
+
+[node name="active_ability" type="Node2D" unique_id=1524233100]
+script = ExtResource("1_fvtus")
+
+[node name="cooldown_timer" type="Timer" parent="." unique_id=989041480]
+wait_time = 5.0
+one_shot = true
+
+[node name="active_timer" type="Timer" parent="." unique_id=1417843808]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="active_timer" to="." method="_on_active_timer_timeout"]
