@@ -1,6 +1,14 @@
+ProgressBar
+CanvasLayer
+Button
+Label
+VBoxContainer
+CenterContainer
+ColorRect
+CanvasGroup
+Control
+MarginContainer
 CollisionShape2D
 Area2D
 Timer
 RigidBody2D
-NavigationAgent2D
-Camera2D

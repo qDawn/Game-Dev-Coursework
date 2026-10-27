@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Monk"
-run/main_scene="uid://dlbjkwvlm4ula"
+run/main_scene="uid://ctph0yn4fj6pl"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

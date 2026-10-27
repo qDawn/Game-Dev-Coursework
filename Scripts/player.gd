@@ -57,10 +57,15 @@ func _physics_process(delta: float) -> void:
 func _on_take_damage(damage: int) -> void:
 	if not invincible:
 		#player only ever takes 1 damage from sources, become invincible, sprite becomes transparent.
-		PlayerInfo.current_health -= 1
+		PlayerInfo.take_damage(1)
 		invincible = true
 		$sprite.self_modulate = Color(1,1,1,0.5)
+		_flash_red()
 		
+func _flash_red() -> void:
+	$sprite.modulate = Color(1.0, 0.25, 0.25)
+	create_tween().tween_property($sprite, "modulate", Color.WHITE, 0.2)
+
 func _on_invincible_timer_timeout() -> void:
 	invincible = false
 	$sprite.self_modulate = Color(1,1,1,1)

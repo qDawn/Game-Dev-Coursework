@@ -40,6 +40,9 @@ func _process(delta: float) -> void:
 			emit_signal('attack', direction)
 	elif state == 'possessed':
 		move_and_collide(PlayerInfo.get_player_direction()*speed*delta)
+	elif state == 'dead':
+		#update the corpse timer bar with the time left to possess
+		$corpse_timer.value = $possession_window.time_left
 
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2):
@@ -60,6 +63,10 @@ func _on_take_damage(num: int) -> void:
 		if state == 'alive':
 			state = 'dead'
 			$possession_window.start()
+			#set up and show the corpse timer bar
+			$corpse_timer.max_value = $possession_window.wait_time
+			$corpse_timer.value = $possession_window.wait_time
+			$corpse_timer.show()
 			collision_layer = 2
 			collision_mask = 2
 			$sprite.self_modulate = Color(1,1,1,0.8)
@@ -92,6 +99,8 @@ func _on_possession() -> void:
 	remove_from_group("enemy")
 	#add to player group
 	add_to_group("player")
+	#hide the corpse timer bar
+	$corpse_timer.hide()
 
 func _on_decay_timer_timeout() -> void:
 	#lose 5% health 

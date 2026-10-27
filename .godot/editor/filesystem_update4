@@ -1,0 +1,15 @@
+res://Scenes/player/player.tscn
+res://Scripts/player_info.gd
+res://Scripts/player.gd
+res://Scenes/hud.tscn
+res://Scenes/hud.gd
+res://Scenes/game.tscn
+res://Scenes/main_menu.tscn
+res://Scenes/main_menu.gd
+res://Scenes/death_menu.tscn
+res://Scenes/death_menu.gd
+res://Scenes/death_menuHUD.gd
+res://Scenes/enemies/spread_shooter.tscn
+res://Scripts/spread_shooter.gd
+res://Scenes/enemies/basic_shooter.tscn
+res://Scripts/basic_shooter.gd
