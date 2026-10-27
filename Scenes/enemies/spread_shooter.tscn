@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://qc8o7a1cf37q"]
 
 [ext_resource type="Script" uid="uid://drrqpmomac5qf" path="res://Scripts/spread_shooter.gd" id="2_l8qng"]
-[ext_resource type="Texture2D" uid="uid://bkfhscnijqcwk" path="res://dodge_the_creeps_2d_assets/art/playerGrey_up1.png" id="3_ckoas"]
+[ext_resource type="Texture2D" uid="uid://bkfhscnijqcwk" path="res://assets/dodge_the_creeps_2d_assets/art/playerGrey_up1.png" id="3_ckoas"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vm3y3"]
 radius = 51.0
@@ -21,7 +21,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="possession_window" type="Timer" parent="." unique_id=276103254]
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true
 
 [node name="decay_timer" type="Timer" parent="." unique_id=709258481]

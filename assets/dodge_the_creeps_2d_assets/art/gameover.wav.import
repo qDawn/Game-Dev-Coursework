@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b5tm568kklmdi"
-path="res://.godot/imported/gameover.wav-206d189a962804931fabbddd48441b8d.sample"
+path="res://.godot/imported/gameover.wav-b9d293029011fcb6c3eca3d4b19b38f2.sample"
 
 [deps]
 
-source_file="res://dodge_the_creeps_2d_assets/art/gameover.wav"
-dest_files=["res://.godot/imported/gameover.wav-206d189a962804931fabbddd48441b8d.sample"]
+source_file="res://assets/dodge_the_creeps_2d_assets/art/gameover.wav"
+dest_files=["res://.godot/imported/gameover.wav-b9d293029011fcb6c3eca3d4b19b38f2.sample"]
 
 [params]
 

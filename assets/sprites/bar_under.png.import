@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbwvjswicjve6"
-path="res://.godot/imported/enemyWalking_2.png-ca9a2538e8aef066c27be6b3cf4b7bf4.ctex"
+uid="uid://cr0i4oi5q5ggd"
+path="res://.godot/imported/bar_under.png-64875b34d665671da17173dd2fb93db5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dodge_the_creeps_2d_assets/art/enemyWalking_2.png"
-dest_files=["res://.godot/imported/enemyWalking_2.png-ca9a2538e8aef066c27be6b3cf4b7bf4.ctex"]
+source_file="res://assets/sprites/bar_under.png"
+dest_files=["res://.godot/imported/bar_under.png-64875b34d665671da17173dd2fb93db5.ctex"]
 
 [params]
 

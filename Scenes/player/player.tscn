@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://2xw46ms6io6n"]
 
 [ext_resource type="Script" uid="uid://0yh7pvmgbkgh" path="res://Scripts/player.gd" id="1_4flbx"]
-[ext_resource type="Texture2D" uid="uid://70idi36ajdlx" path="res://sprites/icon.svg" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://70idi36ajdlx" path="res://assets/sprites/icon.svg" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://blq87xi7r5nir" path="res://Scenes/ui/ui.tscn" id="2_mxepk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(63.98774, 64.01225)
@@ -40,6 +41,8 @@ autostart = true
 
 [node name="attack_cooldown" type="Timer" parent="." unique_id=1182251118]
 one_shot = true
+
+[node name="ui" parent="." unique_id=1116760094 instance=ExtResource("2_mxepk")]
 
 [connection signal="cancel_possession" from="." to="." method="_on_cancel_possession"]
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]

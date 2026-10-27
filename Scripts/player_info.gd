@@ -1,30 +1,26 @@
 extends Node
 
 ##This is a global script. EVERYTHING in the scene can access it.
-signal health_changed
-signal score_changed
 signal player_died
 
-
-var max_health = 3
-var current_health = 3
+const max_health: float = 3
+var current_health: float = 3
+var possession_target: RigidBody2D = null
 var score = 0
 
+
 func take_damage(amount: int) -> void:
-	current_health = maxi(current_health - amount, 0)
-	health_changed.emit()
+	current_health = max(current_health - amount, 0)
 	if current_health ==0:
 		player_died.emit()
 
 func add_score(amount: int) -> void:
 	score += amount
-	score_changed.emit()
 	
 func start_new_run() -> void:
 	current_health = max_health
 	score = 0
-	health_changed.emit()
-	score_changed.emit()
+
 
 ##Method to get the player's direction according to the input
 func get_player_direction() -> Vector2:

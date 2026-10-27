@@ -1,3 +1,4 @@
+TextureProgressBar
 ProgressBar
 CanvasLayer
 Button
@@ -11,4 +12,3 @@ MarginContainer
 CollisionShape2D
 Area2D
 Timer
-RigidBody2D

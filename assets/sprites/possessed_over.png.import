@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceqopfcvq2y52"
-path="res://.godot/imported/enemyFlyingAlt_1.png-1af413211a2529a30da7d9f2f4a6b808.ctex"
+uid="uid://oimwkmaqawu5"
+path="res://.godot/imported/possessed_over.png-3413b349ff2b2fc9f3c1c911aa53d685.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_1.png"
-dest_files=["res://.godot/imported/enemyFlyingAlt_1.png-1af413211a2529a30da7d9f2f4a6b808.ctex"]
+source_file="res://assets/sprites/possessed_over.png"
+dest_files=["res://.godot/imported/possessed_over.png-3413b349ff2b2fc9f3c1c911aa53d685.ctex"]
 
 [params]
 

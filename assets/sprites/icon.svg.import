@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m7arul0dxjqd"
-path="res://.godot/imported/blue_background_color_153514_1280x960.jpg-79845ab0bb93304679e5f2cfaaf74686.ctex"
+uid="uid://70idi36ajdlx"
+path="res://.godot/imported/icon.svg-00a55f41757400f7387d4069be498893.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/blue_background_color_153514_1280x960.jpg"
-dest_files=["res://.godot/imported/blue_background_color_153514_1280x960.jpg-79845ab0bb93304679e5f2cfaaf74686.ctex"]
+source_file="res://assets/sprites/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-00a55f41757400f7387d4069be498893.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

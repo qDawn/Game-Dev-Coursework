@@ -7,8 +7,8 @@ signal possession
 const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
 
 #health
-@export var max_health: int = 30
-@export var current_health: int = 30
+const max_health: float = 30
+@export var current_health: float = 30
 
 #how fast it moves
 @export var speed: int = 200
@@ -19,7 +19,7 @@ const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
 #how fast its projectiles move
 @export var bullet_speed: int = 500
 #how much damage the projectiles do
-@export var bullet_damage: int = 2
+@export var bullet_damage: int = 3
 #whether the attack is on cooldown
 var attack_cooldown: bool = false
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://daux7s6ck68f2"]
 
 [ext_resource type="Script" uid="uid://ccuiu5dng51q" path="res://Scripts/basic_shooter.gd" id="1_vm3y3"]
-[ext_resource type="Texture2D" uid="uid://c8866qxoc5bw2" path="res://dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="2_man5n"]
+[ext_resource type="Texture2D" uid="uid://c8866qxoc5bw2" path="res://assets/dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="2_man5n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s66hy"]
 radius = 48.010414
@@ -20,7 +20,7 @@ shape = SubResource("CircleShape2D_s66hy")
 one_shot = true
 
 [node name="possession_window" type="Timer" parent="." unique_id=1478351512]
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true
 
 [node name="decay_timer" type="Timer" parent="." unique_id=1722401979]
