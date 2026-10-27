@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://b7uwggitym7cy"]
+
+[sub_resource type="GDScript" id="GDScript_p78jv"]
+script/source = "extends CanvasLayer
+
+const MAIN_MENU := \"res://Scenes/ui/main_menu.tscn\"
+
+@onready var score_label: Label = %ScoreLabel
+@onready var restart_button: Button = %RestartButton
+@onready var menu_button: Button = %MenuButton
+@onready var quit_button: Button = %QuitButton
+
+
+func _ready() -> void:
+	hide()
+	PlayerInfo.player_died.connect(_on_player_died)
+	restart_button.pressed.connect(_on_restart_pressed)
+	menu_button.pressed.connect(_on_menu_pressed)
+	quit_button.pressed.connect(get_tree().quit)
+
+
+func _on_player_died() -> void:
+	await get_tree().create_timer(0.6).timeout
+	score_label.text = \"Score  %d\" % PlayerInfo.score
+	show()
+	get_tree().paused = true
+	restart_button.grab_focus()
+
+
+func _on_restart_pressed() -> void:
+	get_tree().paused = false
+	PlayerInfo.start_new_run()
+	get_tree().reload_current_scene()
+
+
+func _on_menu_pressed() -> void:
+	get_tree().paused = false
+	PlayerInfo.start_new_run()
+	get_tree().change_scene_to_file(MAIN_MENU)
+"
+
+[node name="DeathMenu" type="CanvasLayer" unique_id=1338676055]
+process_mode = 3
+script = SubResource("GDScript_p78jv")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1546354039]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.39409488, 0.094771646, 0.031047245, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=362467714]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1210678376]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=149754921]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "YOU DIED!
+"
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1372344419]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1436806097]
+layout_mode = 2
+text = "Try Again"
+
+[node name="MenuButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=871443638]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=800005777]
+layout_mode = 2
+text = "Quit
+"

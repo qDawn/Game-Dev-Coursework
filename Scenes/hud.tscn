@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://blq87xi7r5nir"]
+
+[ext_resource type="Script" uid="uid://cdd64wbu8ydr1" path="res://Scenes/hud.gd" id="1_e0onf"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1116760094]
+script = ExtResource("1_e0onf")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=884875805]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=709656378]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=548927846]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 28)
+offset_right = 4.0
+offset_bottom = 27.0
+show_percentage = false
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=248566692]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
