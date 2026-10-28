@@ -13,7 +13,7 @@ var max_enemy_weight_wave_ratio : float = 0.3
 
 # Distance from player to enemy
 var min_enemy_spawn_distance : int = 500
-var max_enemy_spawn_distance  : int= 2000
+var max_enemy_spawn_distance  : int= 1000
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 

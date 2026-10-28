@@ -21,7 +21,7 @@ func add_score(amount: int) -> void:
 func start_new_run() -> void:
 	current_health = max_health
 	score = 0
-	wave = 0
+	wave = 1
 
 ##Method to get the player's direction according to the input
 func get_player_direction() -> Vector2:

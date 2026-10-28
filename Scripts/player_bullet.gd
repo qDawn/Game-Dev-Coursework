@@ -12,6 +12,8 @@ func _process(delta: float) -> void:
 			var bonus_damage: int = int(body.max_health/10)
 			body.emit_signal('take_damage',base_damage+bonus_damage)
 			queue_free()
+		elif not body.is_in_group("player"):
+			queue_free()
 
 func _on_expiry_timer_timeout() -> void:
 	queue_free()
