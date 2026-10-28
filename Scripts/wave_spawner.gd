@@ -45,7 +45,8 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	var player_position : Vector2 = get_parent().get_node("Player").global_position
 	var enemy_position :Vector2 = player_position
 	var distance : float = enemy_position.distance_to(player_position)
-	while distance < min_enemy_spawn_distance or distance > max_enemy_spawn_distance:
+	
+	while distance < min_enemy_spawn_distance or distance > max_enemy_spawn_distance or enemy_position.y <= -600 or enemy_position.y >= 640 or enemy_position.x <= -1520 or enemy_position.x >= 1950:
 		enemy_position = player_position
 		enemy_position.x +=  rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
 		enemy_position.y += rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
