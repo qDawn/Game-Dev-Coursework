@@ -42,13 +42,15 @@ func spawn_enemy(enemy_name : String) -> void:
 		
 ##method for getting a valid coord to spawn an enemy
 func get_valid_enemy_spawn_position() -> Vector2:
-	var player_position = get_parent().get_node("Player").global_position
-	
-	var x : int = rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
-	var y : int = rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
-	player_position.x += x
-	player_position.y += y
-	return player_position
+	var player_position : Vector2 = get_parent().get_node("Player").global_position
+	var enemy_position :Vector2 = player_position
+	while enemy_position.distance_to(player_position) < min_enemy_spawn_distance:
+		var x : int = rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
+		var y : int = rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
+		
+		enemy_position.x += x
+		enemy_position.y += y
+	return enemy_position
 	
 func _on_timeout() -> void:
 	PlayerInfo.wave += 1
