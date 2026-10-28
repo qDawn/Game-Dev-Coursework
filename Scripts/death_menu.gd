@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-const MAIN_MENU := "res://Scenes/menus/main_menu.tscn"
+const MAIN_MENU := "uid://ctph0yn4fj6pl"
+const GAME := "uid://dlbjkwvlm4ula"
 
 var score_label: Label
 var restart_button: Button
@@ -56,6 +57,7 @@ func _on_player_died() -> void:
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	PlayerInfo.start_new_run()
+	#get_tree().change_scene_to_file(GAME)
 	get_tree().reload_current_scene()
 
 
