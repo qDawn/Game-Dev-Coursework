@@ -1,12 +1,13 @@
 extends Node
 
 const spread_shooter = preload("uid://qc8o7a1cf37q")
+const sniper_shooter = preload("uid://cjws8kflc031e")
 const basic_shooter = preload("uid://daux7s6ck68f2")
 
-const enemies = {"basic_shooter": {"scene": basic_shooter, "weight": 1}, 
+const enemies = {"basic_shooter": {"scene": basic_shooter, "weight": 1},
+				"sniper_shooter": {"scene": sniper_shooter, "weight": 2},
 				"spread_shooter": {"scene": spread_shooter, "weight": 3}}
 				
-var wave_end : bool = true
 var wave : int= 1
 # Each wave gets harder as more weight of enemies can spawn
 var wave_scale : int = 5
@@ -20,17 +21,17 @@ var enemies_alive : int = 0
 var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$".".timeout.connect(generate_enemies)
+	generate_enemies()
+	$".".start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if wave_end:
-		wave_end = false
-		generate_enemies()
+	pass
 
 func generate_enemies() -> void:
-	var max_weight : int = wave * wave_scale
+	var max_weight : int = wave * wave_scale * 5
 	var total_weight : int = 0
 	while total_weight < max_weight:
 	
@@ -40,14 +41,12 @@ func generate_enemies() -> void:
 		var weight = enemies[random_enemy]["weight"]
 		if weight >= max_weight * max_enemy_weight_wave_ratio:
 			continue
-		
 		total_weight += weight
 		spawn_enemy(random_enemy)
 		
 func spawn_enemy(enemy_name : String) -> void:
 	var enemy = enemies[enemy_name]["scene"].instantiate()
 	enemy.global_position = get_valid_enemy_spawn_position()
-	
 	add_child(enemy)
 		
 		
@@ -60,7 +59,3 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	player_position.y += y
 	return player_position
 	
-func _on_enemy_died():
-	enemies_alive -= 1
-	if enemies_alive <= 0:
-		wave_end = true
