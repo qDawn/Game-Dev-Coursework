@@ -11,11 +11,11 @@ const enemies = {"basic_shooter": {"scene": basic_shooter, "weight": 1},
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3
 
+# Distance from player to enemy
 var min_enemy_spawn_distance : int = 500
 var max_enemy_spawn_distance  : int= 2000
-var enemies_alive : int = 0
 
-var rng = RandomNumberGenerator.new()
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,7 +29,7 @@ func generate_enemies() -> void:
 	while total_weight < max_weight:
 		# gets a random key from enemies
 		var random_enemy : String = enemies.keys().pick_random()
-		var weight = enemies[random_enemy]["weight"]
+		var weight : int = enemies[random_enemy]["weight"]
 		if weight + total_weight > max_weight: continue
 		total_weight += weight
 		spawn_enemy(random_enemy)
@@ -44,12 +44,13 @@ func spawn_enemy(enemy_name : String) -> void:
 func get_valid_enemy_spawn_position() -> Vector2:
 	var player_position : Vector2 = get_parent().get_node("Player").global_position
 	var enemy_position :Vector2 = player_position
-	while enemy_position.distance_to(player_position) < min_enemy_spawn_distance:
-		var x : int = rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
-		var y : int = rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
-		
-		enemy_position.x += x
-		enemy_position.y += y
+	var distance : float = enemy_position.distance_to(player_position)
+	while distance < min_enemy_spawn_distance or distance > max_enemy_spawn_distance:
+		enemy_position = player_position
+		enemy_position.x +=  rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
+		enemy_position.y += rng.randi_range(0, max_enemy_spawn_distance) - max_enemy_spawn_distance / 2
+		distance = enemy_position.distance_to(player_position)
+
 	return enemy_position
 	
 func _on_timeout() -> void:
