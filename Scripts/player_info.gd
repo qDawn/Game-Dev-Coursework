@@ -6,8 +6,9 @@ signal player_died
 const max_health: float = 3
 var current_health: float = 3
 var possession_target: RigidBody2D = null
-var score = 0
 
+var score: int = 0
+var wave: int = 1
 
 func take_damage(amount: int) -> void:
 	current_health = max(current_health - amount, 0)
@@ -20,7 +21,6 @@ func add_score(amount: int) -> void:
 func start_new_run() -> void:
 	current_health = max_health
 	score = 0
-
 
 ##Method to get the player's direction according to the input
 func get_player_direction() -> Vector2:

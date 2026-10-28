@@ -30,5 +30,14 @@ offset_bottom = 176.0
 texture_under = ExtResource("2_ag0dx")
 texture_progress = ExtResource("4_atbq8")
 
+[node name="wave_label" type="Label" parent="." unique_id=1030448265]
+offset_left = 384.0
+offset_right = 768.0
+offset_bottom = 128.0
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 64
+text = "Wave: 1"
+horizontal_alignment = 1
+
 [connection signal="health_changed" from="." to="." method="_on_health_changed"]
 [connection signal="score_changed" from="." to="." method="_on_score_changed"]

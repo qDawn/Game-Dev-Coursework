@@ -6,17 +6,22 @@ signal score_changed
 @onready var player_health_bar: TextureProgressBar = %player_health_bar
 @onready var possession_health_bar: TextureProgressBar = $possession_health_bar
 @onready var score_label: Label = %score_label
+@onready var wave_label: Label = $wave_label
 
 func _ready() -> void:
 	emit_signal("health_changed")
 	emit_signal("score_changed")
 
 func _process(delta: float) -> void:
+	#Possession health stats
 	if PlayerInfo.possession_target:
 		possession_health_bar.visible = true
 		possession_health_bar.value = possession_health_bar.max_value * (PlayerInfo.possession_target.current_health/PlayerInfo.possession_target.max_health)
 	else:
 		possession_health_bar.visible = false
+
+	#wave info
+	wave_label.text = "Wave: %s" % max(PlayerInfo.wave-1,1)
 
 func _on_health_changed() -> void:
 	player_health_bar.value = player_health_bar.max_value * (PlayerInfo.current_health / PlayerInfo.max_health)

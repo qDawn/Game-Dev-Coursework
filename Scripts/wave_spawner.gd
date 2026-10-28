@@ -7,7 +7,7 @@ const basic_shooter = preload("uid://daux7s6ck68f2")
 const enemies = {"basic_shooter": {"scene": basic_shooter, "weight": 1},
 				"sniper_shooter": {"scene": sniper_shooter, "weight": 2},
 				"spread_shooter": {"scene": spread_shooter, "weight": 2}}
-var wave : int = 1
+
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3
 
@@ -24,7 +24,7 @@ func _ready() -> void:
 
 ##Method for determining what types of enemies to spawn
 func generate_enemies() -> void:
-	var max_weight : int = 3 + (wave/2.0)
+	var max_weight : int = 3 + (PlayerInfo.wave/2.0)
 	var total_weight : int = 0
 	while total_weight < max_weight:
 		# gets a random key from enemies
@@ -51,7 +51,7 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	return player_position
 	
 func _on_timeout() -> void:
-	wave += 1
+	PlayerInfo.wave += 1
 	generate_enemies()
 	#15 second stagnation between waves
 	start(15)

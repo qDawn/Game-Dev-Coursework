@@ -1,8 +1,8 @@
+Label
 TextureProgressBar
 ProgressBar
 CanvasLayer
 Button
-Label
 VBoxContainer
 CenterContainer
 ColorRect

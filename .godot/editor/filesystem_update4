@@ -1,3 +1,4 @@
-res://Scenes/game.tscn
+res://Scenes/ui/ui.tscn
+res://Scripts/player_info.gd
 res://Scripts/wave_spawner.gd
-res://Scripts/player.gd
+res://Scripts/hud.gd
