@@ -15,3 +15,5 @@ func _ready() -> void:
 func _on_play_pressed() -> void:
 	PlayerInfo.start_new_run()
 	get_tree().change_scene_to_file(GAME_SCENE)
+
+#mibomba
