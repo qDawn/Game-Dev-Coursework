@@ -20,4 +20,7 @@ script = ExtResource("7_1l0tm")
 
 [node name="wave_spawner" type="Timer" parent="." unique_id=2018963229]
 wait_time = 20.0
+one_shot = true
 script = ExtResource("7_v158k")
+
+[connection signal="timeout" from="wave_spawner" to="wave_spawner" method="_on_timeout"]

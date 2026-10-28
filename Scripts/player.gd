@@ -5,7 +5,7 @@ signal cancel_possession
 
 const PLAYER_BULLET = preload("uid://bys54qkalrh2b")
 
-var speed: float = 300
+var speed: float = 400
 
 var invincible: bool = false
 var attack_cooldown: bool = false

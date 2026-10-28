@@ -19,7 +19,7 @@ const max_health: float = 30
 #how fast its projectiles move
 @export var bullet_speed: int = 1000
 #how much damage the projectiles do
-@export var bullet_damage: int = 8
+@export var bullet_damage: int = 10
 #whether the attack is on cooldown
 var attack_cooldown: bool = false
 

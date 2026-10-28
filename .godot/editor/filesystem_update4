@@ -1,15 +1,3 @@
 res://Scenes/game.tscn
-res://Scenes/hud.gd
-res://Scripts/player_info.gd
-res://Scenes/hud.tscn
-res://Scenes/ui/hud.tscn
-res://Scenes/player/player.tscn
+res://Scripts/wave_spawner.gd
 res://Scripts/player.gd
-res://Scripts/hud.gd
-res://Scenes/ui/ui.tscn
-res://Scenes/enemies/basic_shooter.tscn
-res://Scripts/spread_shooter.gd
-res://Scripts/basic_shooter.gd
-res://Scenes/enemies/spread_shooter.tscn
-res://Scripts/sniper_shooter.gd
-res://Scenes/enemies/sniper_shooter.tscn
