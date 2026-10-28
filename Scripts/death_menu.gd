@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const MAIN_MENU := "res://Scenes/ui/main_menu.tscn"
+const MAIN_MENU := "res://Scenes/menus/main_menu.tscn"
 
 var score_label: Label
 var restart_button: Button
