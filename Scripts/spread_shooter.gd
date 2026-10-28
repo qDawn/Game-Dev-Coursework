@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2):
 	if not attack_cooldown:
-		for i in range(-1,2):
+		for i in range(-2,2):
 			var b: Area2D = ENEMY_BULLET.instantiate()
 			b.global_position = global_position
 			b.direction = direction.rotated(PI/12*i)

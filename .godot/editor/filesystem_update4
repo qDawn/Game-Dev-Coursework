@@ -11,3 +11,5 @@ res://Scenes/enemies/basic_shooter.tscn
 res://Scripts/spread_shooter.gd
 res://Scripts/basic_shooter.gd
 res://Scenes/enemies/spread_shooter.tscn
+res://Scripts/sniper_shooter.gd
+res://Scenes/enemies/sniper_shooter.tscn

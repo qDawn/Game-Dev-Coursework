@@ -1,20 +1,21 @@
 [gd_scene format=3 uid="uid://daux7s6ck68f2"]
 
 [ext_resource type="Script" uid="uid://ccuiu5dng51q" path="res://Scripts/basic_shooter.gd" id="1_vm3y3"]
-[ext_resource type="Texture2D" uid="uid://c8866qxoc5bw2" path="res://assets/dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="2_man5n"]
+[ext_resource type="Texture2D" uid="uid://gubagnl0lqm" path="res://assets/sprites/basic_enemy.png" id="2_vm3y3"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s66hy"]
-radius = 48.010414
+[sub_resource type="CircleShape2D" id="CircleShape2D_vfe57"]
+radius = 47.095646
 
 [node name="basic_shooter" type="RigidBody2D" unique_id=107408206 groups=["enemy"]]
 input_pickable = true
 script = ExtResource("1_vm3y3")
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1078032425]
-texture = ExtResource("2_man5n")
+texture = ExtResource("2_vm3y3")
 
 [node name="collision_shape" type="CollisionShape2D" parent="." unique_id=1561700062]
-shape = SubResource("CircleShape2D_s66hy")
+position = Vector2(2, -3)
+shape = SubResource("CircleShape2D_vfe57")
 
 [node name="attack_cooldown" type="Timer" parent="." unique_id=1727736153]
 one_shot = true
