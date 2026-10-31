@@ -1,30 +1,23 @@
-extends RigidBody2D
-
-signal attack
-signal take_damage
-signal possession
+extends "res://Scripts/enemy.gd"
 
 const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
 
-#health
-const max_health: float = 30
-@export var current_health: float = 30
-
-#how fast it moves
-@export var speed: int = 200
-#how close it gets to the player
-@export var min_range: int = 200
-#how fast it can attack
-@export var attack_speed: int = 10
 #how fast its projectiles move
 @export var bullet_speed: int = 500
-#how much damage the projectiles do
-@export var bullet_damage: int = 5
-#whether the attack is on cooldown
-var attack_cooldown: bool = false
 
-#valid states include: 'alive', 'dead', 'possessed'
-var state: String = 'alive'
+func _ready() -> void:
+	max_health = 30
+	current_health = 30
+	#how fast it moves
+	speed = 200
+	#how close it gets to the player
+	min_range = 200
+	#how fast it can attack
+	attack_speed = 10
+	#how fast its projectiles move
+	bullet_speed = 500
+	#how much damage the projectiles do
+	damage = 5
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -51,7 +44,7 @@ func _on_attack(direction: Vector2):
 			var b: Area2D = ENEMY_BULLET.instantiate()
 			b.global_position = global_position
 			b.direction = direction.rotated(PI/12*i)
-			b.damage = bullet_damage
+			b.damage = damage
 			b.speed = 400
 			if state == 'possessed': b.remove_from_group("enemy_bullet"); b.add_to_group("player_bullet")
 			get_tree().current_scene.add_child(b)
@@ -71,7 +64,6 @@ func _on_take_damage(num: int) -> void:
 			collision_layer = 2
 			collision_mask = 2
 			$sprite.self_modulate = Color(1,1,1,0.8)
-			
 		elif state == 'possessed':
 			#send signal to player that the possessed vessel has died.
 			get_tree().get_first_node_in_group('player').emit_signal('cancel_possession')
@@ -101,6 +93,7 @@ func _on_possession() -> void:
 	remove_from_group("enemy")
 	#add to player group
 	add_to_group("player")
+	#hide the corpse timer bar
 	$corpse_timer.hide()
 
 func _on_decay_timer_timeout() -> void:

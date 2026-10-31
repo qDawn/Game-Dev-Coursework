@@ -1,12 +1,13 @@
 extends Timer
 
-const spread_shooter = preload("uid://qc8o7a1cf37q")
-const sniper_shooter = preload("uid://cjws8kflc031e")
-const basic_shooter = preload("uid://daux7s6ck68f2")
+const SPREAD_SHOOTER = preload("uid://c0x624xsja20d")
+const SNIPER_SHOOTER = preload("uid://bji3srgvip7ib")
+const BASIC_SHOOTER = preload("uid://n16anm4mbvgt")
 
-const enemies = {"basic_shooter": {"scene": basic_shooter, "weight": 1},
-				"sniper_shooter": {"scene": sniper_shooter, "weight": 2},
-				"spread_shooter": {"scene": spread_shooter, "weight": 2}}
+
+const enemies = {"basic_shooter": {"scene": BASIC_SHOOTER, "weight": 1},
+				"sniper_shooter": {"scene": SNIPER_SHOOTER, "weight": 2},
+				"spread_shooter": {"scene": SPREAD_SHOOTER, "weight": 2}}
 
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3
