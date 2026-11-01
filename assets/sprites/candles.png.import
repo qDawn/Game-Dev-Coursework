@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gubagnl0lqm"
-path="res://.godot/imported/basic_enemy.png-f1c4d01923bc94b343681986785127a2.ctex"
+uid="uid://cdjmpp7j1dfcu"
+path="res://.godot/imported/candles.png-804b015350672551a4b240b7c0a64d91.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/basic_enemy.png"
-dest_files=["res://.godot/imported/basic_enemy.png-f1c4d01923bc94b343681986785127a2.ctex"]
+source_file="res://assets/sprites/candles.png"
+dest_files=["res://.godot/imported/candles.png-804b015350672551a4b240b7c0a64d91.ctex"]
 
 [params]
 

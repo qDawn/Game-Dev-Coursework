@@ -38,12 +38,24 @@ func _process(delta: float) -> void:
 		if distance < min_range: 
 			move_and_collide(-0.25*direction*speed*delta)
 
+		#aim
+		if direction.x < 0: $weapon.scale.y = -1
+		else: $weapon.scale.y = 1
+		$weapon.rotation = direction.angle()
+		
 		#if player is in attack range, attack
 		if distance <= attack_range and not attack_cooldown:
 			emit_signal('attack', direction)
+
 	elif state == 'possessed':
 		#move in the direction the player moves + movement speed bonus
 		move_and_collide(PlayerInfo.get_player_direction()*speed*delta*1.5)
+		#aim
+		var direction: Vector2 = global_position.direction_to(get_global_mouse_position())
+		if direction.x < 0: $weapon.scale.y = -1
+		else: $weapon.scale.y = 1
+		$weapon.rotation = direction.angle()
+		
 	elif state == 'dead':
 		#update the corpse timer bar with the time left to possess
 		$corpse_timer.value = $possession_window.time_left

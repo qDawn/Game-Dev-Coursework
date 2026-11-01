@@ -26,7 +26,7 @@ func _ready() -> void:
 func _on_attack(direction: Vector2):
 	if not attack_cooldown:
 		var b: Area2D = ENEMY_BULLET.instantiate()
-		b.global_position = global_position
+		b.global_position = $weapon/spr/origin.global_position
 		b.direction = direction
 		b.damage = damage
 		b.speed = bullet_speed
