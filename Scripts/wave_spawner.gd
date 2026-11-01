@@ -56,10 +56,6 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	return enemy_position
 	
 func _on_timeout() -> void:
-	if get_tree().get_nodes_in_group("enemy").size() <= 2:
-		PlayerInfo.wave += 1
-		generate_enemies()
-		#15 second stagnation between waves
-		start(15)
-	else:
-		start(5)
+	PlayerInfo.wave += 1
+	generate_enemies()
+	start(1500)

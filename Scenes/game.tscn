@@ -6,6 +6,12 @@
 [ext_resource type="Script" uid="uid://cf17t6fckymts" path="res://Scripts/death_menu.gd" id="7_1l0tm"]
 [ext_resource type="Script" uid="uid://hkx6dakqtgub" path="res://Scripts/wave_spawner.gd" id="7_v158k"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wowpa"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i6g32"]
 texture = ExtResource("5_wowpa")
 0:0/0 = 0
@@ -58,6 +64,7 @@ texture = ExtResource("5_wowpa")
 10:3/0 = 0
 11:3/0 = 0
 1:4/0 = 0
+1:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_wowpa")
 2:4/0 = 0
 3:4/0 = 0
 4:4/0 = 0
@@ -144,6 +151,7 @@ texture = ExtResource("5_wowpa")
 
 [sub_resource type="TileSet" id="TileSet_4iwvc"]
 physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_i6g32")
 
 [node name="Game" type="Node2D" unique_id=642842692]

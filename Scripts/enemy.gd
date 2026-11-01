@@ -10,8 +10,10 @@ var current_health: float = 10
 
 #how fast it moves
 var speed: int = 200
-#how close it gets to the player
+#how close it moves to the player
 var min_range: int = 200
+#how far it attacks from
+var attack_range: int = 500
 #how fast it can attack
 var attack_speed: int = 10
 #how much damage the enemy does
@@ -24,14 +26,20 @@ var state: String = 'alive'
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if state == 'alive': 
-		#check that the player exists
-		var player: Node = get_tree().get_first_node_in_group('player')
-		if player:
-			var distance: float = global_position.distance_to(player.global_position)
-			var direction: Vector2 = global_position.direction_to(player.global_position)
-			#if the player is outside of range, move toward player
-			if distance > min_range: move_and_collide(direction*speed*delta)
-			#attack player
+		#get the player
+		var player: Node2D = get_tree().get_first_node_in_group('player')
+		var direction: Vector2 = global_position.direction_to(player.global_position)
+		var distance: float = global_position.distance_to(player.global_position)
+		
+		#if the player is too far, move toward player
+		if distance > min_range: 
+			move_and_collide(direction*speed*delta)
+		#if the player is too close, move away from player
+		if distance < min_range: 
+			move_and_collide(-1*direction*speed*delta)
+
+		#if player is in attack range, attack
+		if distance <= attack_range and not attack_cooldown:
 			emit_signal('attack', direction)
 	elif state == 'possessed':
 		#move in the direction the player moves
