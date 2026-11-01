@@ -34,16 +34,16 @@ func _process(delta: float) -> void:
 		#if the player is too far, move toward player
 		if distance > min_range: 
 			move_and_collide(direction*speed*delta)
-		#if the player is too close, move away from player
+		#if the player is too close, move away from player slowly
 		if distance < min_range: 
-			move_and_collide(-1*direction*speed*delta)
+			move_and_collide(-0.25*direction*speed*delta)
 
 		#if player is in attack range, attack
 		if distance <= attack_range and not attack_cooldown:
 			emit_signal('attack', direction)
 	elif state == 'possessed':
-		#move in the direction the player moves
-		move_and_collide(PlayerInfo.get_player_direction()*speed*delta)
+		#move in the direction the player moves + movement speed bonus
+		move_and_collide(PlayerInfo.get_player_direction()*speed*delta*1.5)
 	elif state == 'dead':
 		#update the corpse timer bar with the time left to possess
 		$corpse_timer.value = $possession_window.time_left
@@ -86,8 +86,12 @@ func _on_possession() -> void:
 	collision_mask = 1
 	#make the sprite visible again
 	$sprite.self_modulate = Color(1,1,1,1)
-	#recover hp
+	#recover hp + bonus hp
+	max_health *= 1.5
 	current_health = max_health
+	#damage bonus
+	damage *= 1.5
+	
 	#start decaying
 	$decay_timer.start()
 	#remove from enemy group

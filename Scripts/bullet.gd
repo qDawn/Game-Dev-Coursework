@@ -9,7 +9,7 @@ func _process(delta: float) -> void:
 	global_position += speed * delta * direction
 	for body in get_overlapping_bodies():
 		if body.is_in_group('player') and is_in_group("enemy_bullet") or body.is_in_group('enemy') and is_in_group("player_bullet"):
-			#body.emit_signal('take_damage',damage)
+			body.emit_signal('take_damage',damage)
 			queue_free()
 		elif not body.is_in_group('player') and not body.is_in_group('enemy'):
 			queue_free()

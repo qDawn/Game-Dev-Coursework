@@ -28,6 +28,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="decay_timer" type="Timer" parent="." unique_id=1722401979]
+wait_time = 3.0
 
 [node name="stun_timer" type="Timer" parent="." unique_id=110788322]
 

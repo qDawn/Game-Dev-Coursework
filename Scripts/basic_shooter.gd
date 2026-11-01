@@ -11,9 +11,9 @@ func _ready() -> void:
 	#how fast it moves
 	speed = 200
 	#how close it gets to the player
-	min_range = 300
+	min_range = 200
 	#how far it attacks from
-	attack_range = 400
+	attack_range = 300
 	#how fast it can attack
 	attack_speed = 10
 	#how fast its projectiles move
