@@ -1,22 +1,22 @@
 [gd_scene format=3 uid="uid://bji3srgvip7ib"]
 
 [ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://Scenes/enemies/enemy.tscn" id="1_vfe57"]
-[ext_resource type="Texture2D" uid="uid://xq05f1jnr4l1" path="res://assets/sprites/sniper_enemy.png" id="2_vfe57"]
 [ext_resource type="Script" uid="uid://c65uecd0an4mx" path="res://Scripts/sniper_shooter.gd" id="2_x53qd"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_x53qd"]
-radius = 35.0
+[ext_resource type="Texture2D" uid="uid://bybku52l7ouer" path="res://assets/sprites/sniper_shooter.png" id="3_x53qd"]
+[ext_resource type="Texture2D" uid="uid://c0alkaxlp74gc" path="res://assets/sprites/cross.png" id="4_uh10m"]
 
 [node name="sniper_shooter" unique_id=107408206 instance=ExtResource("1_vfe57")]
 script = ExtResource("2_x53qd")
 bullet_speed = 500
 
 [node name="sprite" parent="." index="0" unique_id=1078032425]
-texture = ExtResource("2_vfe57")
-
-[node name="collision_shape" parent="." index="1" unique_id=1561700062]
-position = Vector2(6, 3)
-shape = SubResource("CircleShape2D_x53qd")
+texture = ExtResource("3_x53qd")
 
 [node name="attack_cooldown" parent="." index="2" unique_id=1727736153]
 wait_time = 2.0
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+texture = ExtResource("4_uh10m")
+
+[node name="origin" parent="weapon/spr" index="0" unique_id=2068338303]
+position = Vector2(0, -11)
