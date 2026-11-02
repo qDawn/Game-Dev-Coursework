@@ -6,6 +6,7 @@ const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
 @export var bullet_speed: int = 500
 
 func _ready() -> void:
+	super()
 	max_health = 30
 	current_health = 30
 	#how fast it moves
