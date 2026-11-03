@@ -23,22 +23,24 @@ var attack_cooldown: bool = false
 #valid states include: 'alive', 'dead', 'possessed'
 var state: String = 'alive'
 #whether or not the enemy can move
-var move : bool = true
-# the player 
-var player: Node2D
+var can_move : bool = true
+#whether the enemy is currently attacking
+var attacking : bool = false
 
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group('player')
+	pass
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if state == 'alive': 
-		var direction: Vector2 = global_position.direction_to(player.global_position)
-		var distance: float = global_position.distance_to(player.global_position)
+		var direction: Vector2 = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
+		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
 		
 		#aim
-		if direction.x < 0: $weapon.scale.y = -1
-		else: $weapon.scale.y = 1
-		$weapon.rotation = direction.angle()
+		if !attacking:
+			if direction.x < 0: $weapon.scale.y = -1
+			else: $weapon.scale.y = 1
+			$weapon.rotation = direction.angle()
 		
 		#if player is in attack range, attack
 		if distance <= attack_range and not attack_cooldown:
@@ -48,10 +50,11 @@ func _process(delta: float) -> void:
 		#move in the direction the player moves + movement speed bonus
 		move_and_collide(PlayerInfo.get_player_direction()*speed*delta*1.5)
 		#aim
-		var direction: Vector2 = global_position.direction_to(get_global_mouse_position())
-		if direction.x < 0: $weapon.scale.y = -1
-		else: $weapon.scale.y = 1
-		$weapon.rotation = direction.angle()
+		if !attacking:
+			var direction: Vector2 = global_position.direction_to(get_global_mouse_position())
+			if direction.x < 0: $weapon.scale.y = -1
+			else: $weapon.scale.y = 1
+			$weapon.rotation = direction.angle()
 		
 	elif state == 'dead':
 		#update the corpse timer bar with the time left to possess
@@ -59,25 +62,23 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or cannot move
-	if state != 'alive' or !move:
+	if state != 'alive' or !can_move:
 		return
 		
-	var direction: Vector2 = global_position.direction_to(player.global_position)
-	var distance: float = global_position.distance_to(player.global_position)
+	var direction: Vector2 = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
+	var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
 
 	# Don't move if approximately in range
-	if 1 > abs(distance - min_range):
-		return 
+	if 1 > abs(distance - min_range): return 
 	#if the player is too far, move toward player
 	if distance > min_range: 
 		move_and_collide(direction*speed*delta)
 	#if the player is too close, move away from player slowly
 	if distance < min_range: 
 		move_and_collide(-0.25*direction*speed*delta)
-		
-	
-		
-			
+
+
+
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2):
 	assert(false, "You need to implement how the enemy attacks!!")
@@ -97,7 +98,7 @@ func _on_take_damage(num: int) -> void:
 			$sprite.self_modulate = Color(1,1,1,0.8)
 		elif state == 'possessed':
 			#send signal to player that the possessed vessel has died.
-			player.emit_signal('cancel_possession')
+			get_tree().get_first_node_in_group('player').emit_signal('cancel_possession')
 			queue_free()
 			
 func _on_attack_cooldown_timeout() -> void:
@@ -136,5 +137,5 @@ func _on_decay_timer_timeout() -> void:
 	current_health -= int(max_health*0.05)
 	if current_health <= 0: 
 		#send signal to player that the possessed vessel has died.
-		player.emit_signal('cancel_possession')
+		get_tree().get_first_node_in_group('player').emit_signal('cancel_possession')
 		queue_free()

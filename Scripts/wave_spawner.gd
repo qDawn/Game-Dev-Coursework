@@ -3,11 +3,12 @@ extends Timer
 const SPREAD_SHOOTER = preload("uid://c0x624xsja20d")
 const SNIPER_SHOOTER = preload("uid://bji3srgvip7ib")
 const BASIC_SHOOTER = preload("uid://n16anm4mbvgt")
+const MELEE_ENEMY = preload("uid://cctu3opvidee6")
 
-
-const enemies = {"basic_shooter": {"scene": BASIC_SHOOTER, "weight": 1},
-				"sniper_shooter": {"scene": SNIPER_SHOOTER, "weight": 2},
-				"spread_shooter": {"scene": SPREAD_SHOOTER, "weight": 2}}
+const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
+									{"resource": SNIPER_SHOOTER, "weight": 2},
+									{"resource": SPREAD_SHOOTER, "weight": 2},
+									{"resource": MELEE_ENEMY, "weight": 2}]
 
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3
@@ -29,15 +30,15 @@ func generate_enemies() -> void:
 	var total_weight : int = 0
 	while total_weight < max_weight:
 		# gets a random key from enemies
-		var random_enemy : String = enemies.keys().pick_random()
-		var weight : int = enemies[random_enemy]["weight"]
+		var random_enemy: Dictionary = enemies.pick_random()
+		var weight : int = random_enemy["weight"]
 		if weight + total_weight > max_weight: continue
 		total_weight += weight
-		spawn_enemy(random_enemy)
+		spawn_enemy(random_enemy["resource"])
 
 #method for spawning enemies
-func spawn_enemy(enemy_name : String) -> void:
-	var enemy = enemies[enemy_name]["scene"].instantiate()
+func spawn_enemy(enemy_resource : Resource) -> void:
+	var enemy = enemy_resource.instantiate()
 	enemy.global_position = get_valid_enemy_spawn_position()
 	add_child(enemy)
 		
@@ -58,4 +59,5 @@ func get_valid_enemy_spawn_position() -> Vector2:
 func _on_timeout() -> void:
 	PlayerInfo.wave += 1
 	generate_enemies()
+	spawn_enemy(MELEE_ENEMY)
 	start(15)
