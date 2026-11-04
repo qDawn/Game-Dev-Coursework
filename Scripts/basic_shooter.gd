@@ -7,8 +7,8 @@ const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
 
 func _ready() -> void:
 	super()
-	max_health = 30
-	current_health = 30
+	max_health = 25
+	current_health = 25
 	#how fast it moves
 	speed = 200
 	#how close it gets to the player

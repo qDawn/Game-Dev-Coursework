@@ -59,5 +59,4 @@ func get_valid_enemy_spawn_position() -> Vector2:
 func _on_timeout() -> void:
 	PlayerInfo.wave += 1
 	generate_enemies()
-	spawn_enemy(MELEE_ENEMY)
 	start(15)
