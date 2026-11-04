@@ -29,6 +29,7 @@ var effects : Dictionary = {}
 #whether the enemy is currently attacking
 var attacking : bool = false
 
+var can_move = true
 func _ready() -> void:
 	pass
 	
@@ -49,8 +50,6 @@ func _process(delta: float) -> void:
 			emit_signal('attack', direction)
 
 	elif state == 'possessed':
-		#move in the direction the player moves + movement speed bonus
-		move_and_collide(PlayerInfo.get_player_direction()*speed*delta*1.5)
 		#aim
 		if !attacking:
 			var direction: Vector2 = global_position.direction_to(get_global_mouse_position())
@@ -64,29 +63,33 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or stunned in effects
-	if state != 'alive' :
-		return
+	if !can_move: return
+	if state == 'alive':
 		
-	var direction: Vector2 = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
-	var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
+		var direction: Vector2 = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
+		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
 
-	# Don't move if approximately in range
-	if 1 > abs(distance - min_range): return 
-	#if the player is too far, move toward player
-	if distance > min_range: 
-		move_and_collide(direction*speed*delta)
-	#if the player is too close, move away from player slowly
-	if distance < min_range: 
-		move_and_collide(-0.25*direction*speed*delta)
+		# Don't move if approximately in range
+		if 1 > abs(distance - min_range): return 
+		#if the player is too far, move toward player
+		if distance > min_range: 
+			move_and_collide(direction*speed*delta)
+		#if the player is too close, move away from player slowly
+		if distance < min_range: 
+			move_and_collide(-0.25*direction*speed*delta)
+	elif state == 'possessed':
+		#move in the direction the player moves + movement speed bonus
+		move_and_collide(PlayerInfo.get_player_direction()*speed*delta*1.5)
 
-
+	
 
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2):
 	assert(false, "You need to implement how the enemy attacks!!")
 	
 func _on_ability():
-	assert(false, "You need to implement how the enemy uses abilities!!")
+	print("Tried to use ability but is not available :(")
+	#assert(false, "You need to implement how the enemy uses abilities!!")
 	
 func _on_take_damage(num: int) -> void:
 	current_health -= num
@@ -128,6 +131,8 @@ func _on_possession() -> void:
 	#recover hp + bonus hp
 	max_health *= 1.5
 	current_health = max_health
+	#reset movement
+	can_move = true
 	#damage bonus
 	damage *= 1.5
 	

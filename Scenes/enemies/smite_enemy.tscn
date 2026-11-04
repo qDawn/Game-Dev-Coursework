@@ -2,10 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://Scenes/enemies/enemy.tscn" id="1_1q6um"]
 [ext_resource type="Script" uid="uid://b0gas2k32wy55" path="res://Scripts/smite_enemy.gd" id="2_8q87x"]
-[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="3_8q87x"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_5hio4"]
-radius = 128.0
 
 [node name="smite_enemy" unique_id=107408206 instance=ExtResource("1_1q6um")]
 script = ExtResource("2_8q87x")
@@ -17,20 +13,6 @@ smite_range = 0
 [node name="ability_cooldown" parent="." index="3" unique_id=286294713]
 one_shot = true
 
-[node name="smite_area" type="Area2D" parent="." index="9" unique_id=382432191]
-position = Vector2(-192, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="smite_area" index="0" unique_id=198942587]
-shape = SubResource("CircleShape2D_5hio4")
-
-[node name="Sprite2D" type="Sprite2D" parent="smite_area" index="1" unique_id=1657289211]
-modulate = Color(0.9270015, 0.9739658, 0, 1)
-scale = Vector2(8.5, 8.5)
-texture = ExtResource("3_8q87x")
-
-[node name="smite_timer" type="Timer" parent="." index="10" unique_id=454817698]
-wait_time = 2.0
+[node name="cast_timer" type="Timer" parent="." index="9" unique_id=371864754]
+wait_time = 0.5
 one_shot = true
-
-[connection signal="ability" from="." to="." method="_on_ability"]
-[connection signal="timeout" from="ability_cooldown" to="." method="_on_ability_cooldown_timeout"]

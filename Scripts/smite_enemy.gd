@@ -1,6 +1,7 @@
 extends "res://Scripts/enemy.gd"
 
 const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
+const SMITE_AREA = preload("uid://ccyp3ra11vl6l")
 @export var bullet_speed : int
 @export var bullet_damage : int 
 @export var smite_damage : int
@@ -26,9 +27,8 @@ func _ready() -> void:
 	bullet_damage = 3
 	#how much damage the smite ability does
 	smite_damage = 15
+	$cast_timer.timeout.connect(spawn_smite)
 	
-	$smite_timer.timeout.connect(_on_smite)
-	$smite_area.hide()
 	
 func _process(delta : float) -> void:
 	super(delta)
@@ -52,27 +52,30 @@ func _on_attack(direction: Vector2):
 		
 func _on_ability() -> void:
 	if not ability_cooldown:
-		if state != 'possessed':
-			$smite_area.global_position = get_tree().get_first_node_in_group('player').global_position
-		else:
-			$smite_area.global_position = get_global_mouse_position()
-			#PlayerInfo.move = false
-			
-		ability_cooldown = true
-		#can_move = false
-		$smite_area.show()
-		$smite_timer.start()
+		#Start casting the smite
+		$cast_timer.start()
 		$ability_cooldown.start()
-			
-func _on_smite() -> void:
+		can_move = false
+		ability_cooldown = true
+		
+func spawn_smite() -> void:
+	var smite: Area2D = SMITE_AREA.instantiate()
+	if state != 'possessed':
+		smite.global_position = get_tree().get_first_node_in_group('player').global_position
+	else:
+		smite.global_position = get_global_mouse_position()
+		
+	can_move = true
+	get_tree().current_scene.add_child(smite)
+	smite.get_node("timer").timeout.connect(_on_smite.bind(smite))
+	
+		
+func _on_smite(smite : Area2D) -> void:
 	var attack_group : String
 	if state == 'possessed' : attack_group = 'enemy'
 	else : attack_group = 'player'
-	for body in $smite_area.get_overlapping_bodies():
+	for body in smite.get_overlapping_bodies():
 		if body.is_in_group(attack_group):
 			body.emit_signal('take_damage', smite_damage)
-	
-	$smite_area.hide()
 		
-	#if state == 'possessed': PlayerInfo.move = true
-	#else : can_move = true
+	smite.queue_free()
