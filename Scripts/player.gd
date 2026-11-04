@@ -34,7 +34,12 @@ func _physics_process(delta: float) -> void:
 			
 			attack_cooldown = true
 			$attack_cooldown.start()
-		
+	
+	#ability logic
+	if Input.is_action_pressed('ability'):
+		if PlayerInfo.possession_target:
+			PlayerInfo.possession_target.emit_signal('ability')
+			
 	#possession logic
 	if Input.is_action_just_pressed('possess') and not PlayerInfo.possession_target:
 		var available_hosts: Array[Node2D] = $possession_range.get_overlapping_bodies()

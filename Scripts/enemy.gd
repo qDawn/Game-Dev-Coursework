@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 signal attack
+signal ability
 signal take_damage
 signal possession
 
@@ -83,7 +84,10 @@ func _physics_process(delta: float) -> void:
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2):
 	assert(false, "You need to implement how the enemy attacks!!")
-
+	
+func _on_ability():
+	assert(false, "You need to implement how the enemy uses abilities!!")
+	
 func _on_take_damage(num: int) -> void:
 	current_health -= num
 	if current_health <= 0: 

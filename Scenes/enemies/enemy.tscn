@@ -51,6 +51,7 @@ texture = ExtResource("3_cpjt6")
 [node name="origin" type="Node2D" parent="weapon/spr" unique_id=2068338303]
 position = Vector2(-1, -11)
 
+[connection signal="ability" from="." to="." method="_on_ability"]
 [connection signal="attack" from="." to="." method="_on_attack"]
 [connection signal="possession" from="." to="." method="_on_possession"]
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]

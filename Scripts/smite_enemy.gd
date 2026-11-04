@@ -32,8 +32,9 @@ func _ready() -> void:
 	
 func _process(delta : float) -> void:
 	super(delta)
+	
 	if state == 'alive':
-		var distance: float = global_position.distance_to(player.global_position)
+		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
 		if distance <= smite_range and not ability_cooldown:
 			_on_ability()
 			
@@ -55,10 +56,10 @@ func _on_ability() -> void:
 			$smite_area.global_position = get_tree().get_first_node_in_group('player').global_position
 		else:
 			$smite_area.global_position = get_global_mouse_position()
-			PlayerInfo.move = false
+			#PlayerInfo.move = false
 			
 		ability_cooldown = true
-		can_move = false
+		#can_move = false
 		$smite_area.show()
 		$smite_timer.start()
 		$ability_cooldown.start()
@@ -73,5 +74,5 @@ func _on_smite() -> void:
 	
 	$smite_area.hide()
 		
-	if state == 'possessed': PlayerInfo.move = true
-	else : can_move = true
+	#if state == 'possessed': PlayerInfo.move = true
+	#else : can_move = true
