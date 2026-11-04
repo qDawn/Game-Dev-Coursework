@@ -55,5 +55,6 @@ position = Vector2(-1, -11)
 [connection signal="possession" from="." to="." method="_on_possession"]
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="ability_cooldown" to="." method="_on_ability_cooldown_timeout"]
 [connection signal="timeout" from="possession_window" to="." method="_on_possession_window_timeout"]
 [connection signal="timeout" from="decay_timer" to="." method="_on_decay_timer_timeout"]

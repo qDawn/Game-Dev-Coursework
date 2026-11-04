@@ -20,10 +20,11 @@ var attack_speed: int = 10
 var damage: int = 5
 #whether the attack is on cooldown
 var attack_cooldown: bool = false
+var ability_cooldown : bool = false
 #valid states include: 'alive', 'dead', 'possessed'
 var state: String = 'alive'
-#whether or not the enemy can move
-var can_move : bool = true
+# Stores effects of the enemy. {name: duration}
+var effects : Dictionary = {}
 #whether the enemy is currently attacking
 var attacking : bool = false
 
@@ -61,8 +62,8 @@ func _process(delta: float) -> void:
 		$corpse_timer.value = $possession_window.time_left
 
 func _physics_process(delta: float) -> void:
-	# Skip if enemy is dead or cannot move
-	if state != 'alive' or !can_move:
+	# Skip if enemy is dead or stunned in effects
+	if state != 'alive' :
 		return
 		
 	var direction: Vector2 = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
@@ -103,6 +104,9 @@ func _on_take_damage(num: int) -> void:
 			
 func _on_attack_cooldown_timeout() -> void:
 	attack_cooldown = false
+	
+func _on_ability_cooldown_timeout() -> void:
+	ability_cooldown = false
 	
 func _on_possession_window_timeout() -> void:
 	queue_free()
