@@ -183,6 +183,7 @@ func _on_bleed_tick() -> void:
 	if effects["bleed"] <= 0.0:
 		_stop_bleed()
 
+#bunch of code for stun
 func apply_stun(duration: float = 2.0) -> void:
 	if state == "dead":
 		return
