@@ -207,6 +207,7 @@ func _on_stun_timer_timeout() -> void:
 	else:
 		$sprite.modulate = Color.WHITE
 
+#to fix some bug where player possess a bleeding enemy and it appears red
 func _stop_bleed() -> void:
 	effects.erase("bleed")
 	if state != "dead" and is_inside_tree() and not effects.has("stun"):
