@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bhmr4tankslam"]
+
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://Scenes/enemies/enemy.tscn" id="1_sk1jw"]
+[ext_resource type="Script" uid="uid://bau5wwxqpfv7b" path="res://Scripts/hammer_enemy.gd" id="2_nadnc"]
+[ext_resource type="Texture2D" uid="uid://b2ucf2xh8uljl" path="res://assets/sprites/hammer_enemy_body.png" id="3_body"]
+[ext_resource type="Texture2D" uid="uid://dqdq6m7vi5yxs" path="res://assets/sprites/hammer_enemy_hammer.png" id="4_hammer"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(90, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(200, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_slam"]
+radius = 180.0
+
+[node name="hammer_enemy" unique_id=107408206 instance=ExtResource("1_sk1jw")]
+angular_damp = 100.0
+script = ExtResource("2_nadnc")
+
+[node name="sprite" parent="." index="0" unique_id=1078032425]
+scale = Vector2(0.42, 0.42)
+texture = ExtResource("3_body")
+
+[node name="collision_shape" parent="." index="1" unique_id=1561700062]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="ability_cooldown" parent="." index="3" unique_id=286294713]
+wait_time = 7.0
+one_shot = true
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(111.99999, 35)
+rotation = 0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_hammer")
+
+[node name="weapon_collision" type="Node2D" parent="." index="9" unique_id=1119328804]
+
+[node name="melee_collision_area" type="Area2D" parent="weapon_collision" index="0" unique_id=267436755]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon_collision/melee_collision_area" index="0" unique_id=1461117770]
+position = Vector2(119, 33)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="slam_area" type="Area2D" parent="." index="10" unique_id=1408327759]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slam_area" index="0" unique_id=1770209398]
+visible = false
+shape = SubResource("CircleShape2D_slam")

@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 			$weapon.rotation = direction.angle()
 		
 		#if player is in attack range, attack
-		if distance <= attack_range and not attack_cooldown:
+		if distance <= attack_range and not attack_cooldown and not effects.has("stun"):
 			emit_signal('attack', direction)
 
 	elif state == 'possessed':
@@ -128,11 +128,15 @@ func _on_possession() -> void:
 	collision_mask = 1
 	#make the sprite visible again
 	$sprite.self_modulate = Color(1,1,1,1)
+	#bleed tints modulate and leaves it on the corpse
+	$sprite.modulate = Color.WHITE
 	#recover hp + bonus hp
 	max_health *= 1.5
 	current_health = max_health
 	#reset movement
 	can_move = true
+	effects.erase("stun")
+	$stun_timer.stop()
 	#damage bonus
 	damage *= 1.5
 	
@@ -152,3 +156,59 @@ func _on_decay_timer_timeout() -> void:
 		#send signal to player that the possessed vessel has died.
 		get_tree().get_first_node_in_group('player').emit_signal('cancel_possession')
 		queue_free()
+
+#Bunch of code for bleed damage below
+func apply_bleed() -> void:
+	effects["bleed"] = 3.0
+	$sprite.modulate = Color(1.0, 0.45, 0.45)
+	if has_node("bleed_tick"):
+		return
+	var timer := Timer.new()
+	timer.name = "bleed_tick"
+	timer.wait_time = 1.0
+	timer.timeout.connect(_on_bleed_tick)
+	add_child(timer)
+	timer.start()
+
+func _on_bleed_tick() -> void:
+	if not is_inside_tree() or state == "dead":
+		_stop_bleed()
+		return
+	emit_signal("take_damage", 1)
+	if not is_inside_tree() or state == "dead":
+		if is_inside_tree():
+			_stop_bleed()
+		return
+	effects["bleed"] = float(effects.get("bleed", 0.0)) - 1.0
+	if effects["bleed"] <= 0.0:
+		_stop_bleed()
+
+func apply_stun(duration: float = 2.0) -> void:
+	if state == "dead":
+		return
+	effects["stun"] = duration
+	can_move = false
+	$sprite.modulate = Color(0.55, 0.7, 1.0)
+	$stun_timer.stop()
+	$stun_timer.wait_time = duration
+	$stun_timer.one_shot = true
+	if not $stun_timer.timeout.is_connected(_on_stun_timer_timeout):
+		$stun_timer.timeout.connect(_on_stun_timer_timeout)
+	$stun_timer.start()
+
+func _on_stun_timer_timeout() -> void:
+	effects.erase("stun")
+	if not is_inside_tree() or state == "dead":
+		return
+	can_move = true
+	if effects.has("bleed"):
+		$sprite.modulate = Color(1.0, 0.45, 0.45)
+	else:
+		$sprite.modulate = Color.WHITE
+
+func _stop_bleed() -> void:
+	effects.erase("bleed")
+	if state != "dead" and is_inside_tree() and not effects.has("stun"):
+		$sprite.modulate = Color.WHITE
+	if has_node("bleed_tick"):
+		$bleed_tick.queue_free()
