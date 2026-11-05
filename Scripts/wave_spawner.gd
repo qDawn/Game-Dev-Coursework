@@ -16,8 +16,8 @@ const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": MELEE_ENEMY, "weight": 2},
 									#{"resource": SMITE_ENEMY, "weight": 3},
 									#{"resource": SMG_SHOOTER, "weight": 2},
-									#{"resource": KATANA_ENEMY, "weight": 2},
-									{"resource": HAMMER_ENEMY, "weight": 3},
+									{"resource": KATANA_ENEMY, "weight": 2},
+									#{"resource": HAMMER_ENEMY, "weight": 3},
 									]
 
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have

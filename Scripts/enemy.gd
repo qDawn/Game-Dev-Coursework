@@ -78,6 +78,7 @@ func _physics_process(delta: float) -> void:
 func _on_attack(direction: Vector2):
 	if $attack_cooldown.is_stopped():
 		$attack_cooldown.start(attack_cooldown)
+		if effects.has("bleed"): _on_take_damage(max_health*0.02)
 #This method describes what the enemy does for its ability
 func _on_ability(): print("Tried to use ability but is not available :(")
 
@@ -98,6 +99,12 @@ func _on_take_damage(num: int) -> void:
 			#send signal to player that the possessed vessel has died.
 			get_tree().get_first_node_in_group('player').emit_signal('cancel_possession')
 			queue_free()
+			
+	#damage indication
+	var tween_damage: Tween = get_tree().create_tween()
+	tween_damage.tween_property($sprite,"self_modulate",Color(1,0,0),0.1)
+	tween_damage.tween_property($sprite,"self_modulate",Color(1,1,1),0.1)
+
 
 func _on_ability_cooldown_timeout() -> void:
 	ability_cooldown = false
