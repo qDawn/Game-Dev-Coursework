@@ -10,13 +10,9 @@ var speed: float = 400
 var invincible: bool = false
 var attack_cooldown: bool = false
 var possession_cooldown: bool = false
-var stunned: bool = false
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if stunned and not PlayerInfo.possession_target:
-		return
 	if not PlayerInfo.possession_target: #if there is currently no possession target
 		move_and_collide(PlayerInfo.get_player_direction()*speed*delta)
 	else: 
@@ -26,8 +22,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed('shoot'):
 		var direction: Vector2 = global_position.direction_to(get_global_mouse_position())
 		if PlayerInfo.possession_target:
-			if not _host_is_stunned():
-				PlayerInfo.possession_target.emit_signal('attack', direction)
+			PlayerInfo.possession_target.emit_signal('attack', direction)
 		elif not attack_cooldown:
 			var bullet: Area2D = PLAYER_BULLET.instantiate()
 			bullet.global_position = global_position
@@ -41,11 +36,11 @@ func _physics_process(delta: float) -> void:
 	
 	#ability logic
 	if Input.is_action_pressed('ability'):
-		if PlayerInfo.possession_target and not _host_is_stunned():
+		if PlayerInfo.possession_target:
 			PlayerInfo.possession_target.emit_signal('ability')
 			
 	#possession logic
-	if Input.is_action_just_pressed('possess') and not PlayerInfo.possession_target and not stunned:
+	if Input.is_action_just_pressed('possess'):
 		var available_hosts: Array[Node2D] = $possession_range.get_overlapping_bodies()
 		if available_hosts:
 			var selected_host: Node2D = available_hosts[0]
@@ -86,26 +81,6 @@ func _on_invincible_timer_timeout() -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	attack_cooldown = false
-
-func apply_stun(duration: float = 2.0) -> void:
-	stunned = true
-	$sprite.modulate = Color(0.55, 0.7, 1.0)
-	if not has_node("stun_timer"):
-		var timer := Timer.new()
-		timer.name = "stun_timer"
-		timer.one_shot = true
-		timer.timeout.connect(_on_stun_timer_timeout)
-		add_child(timer)
-	$stun_timer.wait_time = duration
-	$stun_timer.start()
-
-func _on_stun_timer_timeout() -> void:
-	stunned = false
-	$sprite.modulate = Color.WHITE
-
-func _host_is_stunned() -> bool:
-	var host: Node = PlayerInfo.possession_target
-	return host != null and host.get("effects") != null and host.effects.has("stun")
 
 func _on_cancel_possession() -> void:
 	#reset visibility and hitbox

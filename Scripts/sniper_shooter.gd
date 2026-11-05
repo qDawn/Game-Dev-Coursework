@@ -16,7 +16,7 @@ func _ready() -> void:
 	#how far it attacks from
 	attack_range = 600
 	#how fast it can attack
-	attack_speed = 10
+	attack_cooldown = 3
 	#how fast its projectiles move
 	bullet_speed = 1000
 	#how much damage the projectiles do
@@ -25,7 +25,7 @@ func _ready() -> void:
 
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2):
-	if not attack_cooldown:
+	if $attack_cooldown.is_stopped():
 		var b: Area2D = ENEMY_BULLET.instantiate()
 		b.global_position = $weapon/spr/origin.global_position
 		b.direction = direction
@@ -33,5 +33,6 @@ func _on_attack(direction: Vector2):
 		b.speed = bullet_speed
 		if state == 'possessed': b.remove_from_group("enemy_bullet"); b.add_to_group("player_bullet")
 		get_tree().current_scene.add_child(b)
-		attack_cooldown = true
 		$attack_cooldown.start()
+		
+	super(direction)

@@ -31,7 +31,7 @@ one_shot = true
 [node name="decay_timer" type="Timer" parent="." unique_id=1722401979]
 wait_time = 3.0
 
-[node name="stun_timer" type="Timer" parent="." unique_id=110788322]
+[node name="effect_timer" type="Timer" parent="." unique_id=472479290]
 
 [node name="corpse_timer" type="ProgressBar" parent="." unique_id=897901901]
 visible = false
@@ -55,7 +55,9 @@ position = Vector2(-1, -11)
 [connection signal="attack" from="." to="." method="_on_attack"]
 [connection signal="possession" from="." to="." method="_on_possession"]
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]
+[connection signal="take_effect" from="." to="." method="_on_take_effect"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="ability_cooldown" to="." method="_on_ability_cooldown_timeout"]
 [connection signal="timeout" from="possession_window" to="." method="_on_possession_window_timeout"]
 [connection signal="timeout" from="decay_timer" to="." method="_on_decay_timer_timeout"]
+[connection signal="timeout" from="effect_timer" to="." method="_on_effect_timer_timeout"]

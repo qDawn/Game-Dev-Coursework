@@ -16,6 +16,7 @@ func _ready() -> void:
 	speed = 220
 	min_range = 160
 	attack_range = 340
+	attack_cooldown = 2
 	bullet_speed = 700
 	damage = 3
 
@@ -31,13 +32,13 @@ func _on_attack(direction: Vector2) -> void:
 	# enemy.gd emits attack every frame while the player is in range.
 	# Possessed bodies also get attack every frame while the mouse is held.
 	# Leave immediately once a burst has started.
-	if attack_cooldown:
+	if $attack_cooldown.is_stopped():
 		return
 	burst_direction = direction
 	burst_left = burst_total
-	attack_cooldown = true
 	_fire_burst_shot()
 	burst_timer.start()
+	super(direction)
 
 func _fire_burst_shot() -> void:
 	var bullet: Area2D = ENEMY_BULLET.instantiate()
