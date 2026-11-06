@@ -10,7 +10,7 @@ const SMITE_AREA = preload("uid://ccyp3ra11vl6l")
 func _ready() -> void:
 	super()
 	max_health = 25
-	current_health = 1
+	current_health = 25
 	#how fast it moves
 	speed = 200
 	#how close it gets to the player
