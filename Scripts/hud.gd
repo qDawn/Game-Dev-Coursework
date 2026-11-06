@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
 	else:
 		possession_health_bar.visible = false
 
+	score_label.text = "Score  %d" % PlayerInfo.score
 	#wave info
 	wave_label.text = "Wave: %s" % max(PlayerInfo.wave-1,1)
 

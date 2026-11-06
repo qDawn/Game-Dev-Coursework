@@ -10,14 +10,14 @@ const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
 const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
 
 
-const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
-									#{"resource": SNIPER_SHOOTER, "weight": 2},
-									#{"resource": SPREAD_SHOOTER, "weight": 2},
-									#{"resource": MELEE_ENEMY, "weight": 1},
-									{"resource": SMITE_ENEMY, "weight": 1},
-									#{"resource": SMG_SHOOTER, "weight": 1},
-									#{"resource": KATANA_ENEMY, "weight": 2},
-									#{"resource": HAMMER_ENEMY, "weight": 3},
+const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
+									{"resource": SNIPER_SHOOTER, "weight": 2},
+									{"resource": SPREAD_SHOOTER, "weight": 2},
+									{"resource": MELEE_ENEMY, "weight": 1},
+									{"resource": SMITE_ENEMY, "weight": 3},
+									{"resource": SMG_SHOOTER, "weight": 1},
+									{"resource": KATANA_ENEMY, "weight": 2},
+									{"resource": HAMMER_ENEMY, "weight": 3},
 									]
 
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
@@ -33,6 +33,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready() -> void:
 	#3 second buffer before starting to spawn
 	start(3)
+	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn
 func generate_enemies() -> void:
@@ -68,5 +69,6 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	
 func _on_timeout() -> void:
 	PlayerInfo.wave += 1
+	PlayerInfo.add_score(PlayerInfo.get_wave_points(max(PlayerInfo.wave - 1, 1)))
 	generate_enemies()
 	start(15)
