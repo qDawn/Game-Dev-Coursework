@@ -69,6 +69,8 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	
 func _on_timeout() -> void:
 	PlayerInfo.wave += 1
-	PlayerInfo.add_score(PlayerInfo.get_wave_points(max(PlayerInfo.wave - 1, 1)))
+	var completed_wave: int = PlayerInfo.wave - 2
+	if completed_wave >= 1:
+		PlayerInfo.add_score(PlayerInfo.get_wave_points(completed_wave))
 	generate_enemies()
 	start(15)
