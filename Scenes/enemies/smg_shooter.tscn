@@ -21,3 +21,9 @@ wait_time = 2.0
 position = Vector2(24.000004, 22.000002)
 scale = Vector2(0.14577465, 0.18032788)
 texture = ExtResource("4_a8ah7")
+
+[node name="burst_timer" type="Timer" parent="." index="9" unique_id=520751677]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="burst_timer" to="." method="_on_burst_timer_timeout"]

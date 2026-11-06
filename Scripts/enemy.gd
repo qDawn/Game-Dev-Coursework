@@ -17,7 +17,7 @@ var min_range: int = 200
 #how far it attacks from
 var attack_range: int = 500
 #how fast it can attack
-var attack_cooldown: int = 1
+var attack_cooldown: float = 1
 #how much damage the enemy does
 var damage: int = 5
 #whether the ability is on cooldown
