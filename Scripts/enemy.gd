@@ -28,7 +28,6 @@ var state: String = 'alive'
 var effects : Dictionary[String,int] = {}
 #whether the enemy is currently attacking
 var attacking : bool = false
-var can_move: bool = true
 
 func _ready() -> void:
 	pass
@@ -58,7 +57,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or stunned in effects
-	if effects.has("stun") or not can_move: return
+	if effects.has("stun"): return
 	if state == 'alive':
 		var direction: Vector2 = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
 		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
