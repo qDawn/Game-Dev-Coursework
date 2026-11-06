@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			PlayerInfo.possession_target.emit_signal('ability')
 			
 	#possession logic
-	if Input.is_action_just_pressed('possess'):
+	if Input.is_action_just_pressed('possess') and not PlayerInfo.possession_target:
 		var available_hosts: Array[Node2D] = $possession_range.get_overlapping_bodies()
 		if available_hosts:
 			var selected_host: Node2D = available_hosts[0]

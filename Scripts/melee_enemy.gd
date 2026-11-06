@@ -6,6 +6,7 @@ var swing_speed: float = 0.1
 func _ready() -> void:
 	super()
 
+
 func _on_attack(direction: Vector2):
 	if $attack_cooldown.is_stopped():
 		attacking = true
