@@ -7,4 +7,4 @@
 script = ExtResource("2_q862t")
 
 [node name="expiry_timer" parent="." index="2" unique_id=292093934]
-wait_time = 0.5
+wait_time = 0.25

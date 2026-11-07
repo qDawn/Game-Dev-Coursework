@@ -102,8 +102,8 @@ func _on_take_damage(damage: float) -> void:
 			$corpse_timer.max_value = $possession_window.wait_time
 			$corpse_timer.value = $possession_window.wait_time
 			$corpse_timer.show()
-			collision_layer = 2
-			collision_mask = 0
+			set_collision_layer_value(1,false)
+			set_collision_mask_value(1,false)
 			$sprite.self_modulate = Color(1,1,1,0.8)
 		elif state == 'possessed':
 			#send signal to player that the possessed vessel has died.
@@ -131,8 +131,8 @@ func _on_possession() -> void:
 	#set the state to possessed.
 	state = 'possessed'
 	#reset the collision layers (so the possessed enemy can take damage again
-	collision_layer = 1
-	collision_mask = 1
+	set_collision_layer_value(1,true)
+	set_collision_mask_value(1,true)
 	#make the sprite visible again
 	$sprite.self_modulate = Color(1,1,1,1)
 	#bleed tints modulate and leaves it on the corpse
