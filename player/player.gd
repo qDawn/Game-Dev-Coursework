@@ -4,11 +4,9 @@ signal take_damage
 signal cancel_possession
 
 const PLAYER_BULLET = preload("uid://bys54qkalrh2b")
+const BASE_SPEED: float = 400
+var speed: float = BASE_SPEED
 
-var speed: float = 400
-
-var invincible: bool = false
-var attack_cooldown: bool = false
 var ability_cooldown: bool = false
 var possession_cooldown: bool = false
 
@@ -24,23 +22,27 @@ func _physics_process(delta: float) -> void:
 		var direction: Vector2 = global_position.direction_to(get_global_mouse_position())
 		if PlayerInfo.possession_target:
 			PlayerInfo.possession_target.emit_signal('attack', direction)
-		elif not attack_cooldown:
+		elif $attack_cooldown.is_stopped():
 			var bullet: Area2D = PLAYER_BULLET.instantiate()
 			bullet.global_position = global_position
 			bullet.direction = direction
 			bullet.speed = 500
-			
 			get_tree().root.add_child(bullet)
-			
-			attack_cooldown = true
 			$attack_cooldown.start()
 	
 	#ability logic
-	if Input.is_action_pressed('ability'):
+	if Input.is_action_just_pressed('ability'):
 		if PlayerInfo.possession_target:
 			PlayerInfo.possession_target.emit_signal('ability')
-		
-			
+		elif not ability_cooldown:
+			ability_cooldown = true
+			$sprite.self_modulate = Color(1,1,1,0.5)
+			$hitbox.disabled = true
+			speed *= 1.2
+			$invincible_timer.start(3)
+			$ability_cooldown.start(10)
+
+
 	#possession logic
 	if Input.is_action_just_pressed('possess') and not PlayerInfo.possession_target:
 		var available_hosts: Array[Node2D] = $possession_range.get_overlapping_bodies()
@@ -62,27 +64,25 @@ func _physics_process(delta: float) -> void:
 		PlayerInfo.possession_target.emit_signal("take_damage", PlayerInfo.possession_target.max_health)
 
 func _on_take_damage(_damage: int) -> void:
-	if not invincible:
-		#player only ever takes 1 damage from sources, become invincible.
-		PlayerInfo.take_damage(1)
-		invincible = true
-		#sprite becomes transparent
-		$sprite.self_modulate = Color(1,1,1,0.5)
-		_flash_red()
-		
-		#send a signal to the HUD
-		$ui.emit_signal("health_changed")
+	#player only ever takes 1 damage from sources, become invincible.
+	PlayerInfo.take_damage(1)
+	#sprite becomes transparent
+	$sprite.self_modulate = Color(1,1,1,0.5)
+	$hitbox.disabled = true
+	$invincible_timer.start(1.5)
+	_flash_red()
+	#send a signal to the HUD
+	$ui.emit_signal("health_changed")
 		
 func _flash_red() -> void:
 	$sprite.modulate = Color(1.0, 0.25, 0.25)
 	create_tween().tween_property($sprite, "modulate", Color.WHITE, 0.2)
 
 func _on_invincible_timer_timeout() -> void:
-	invincible = false
-	$sprite.self_modulate = Color(1,1,1,1)
-
-func _on_attack_cooldown_timeout() -> void:
-	attack_cooldown = false
+	speed = BASE_SPEED
+	if not PlayerInfo.possession_target:
+		$sprite.self_modulate = Color(1,1,1,1)
+		$hitbox.disabled = false
 
 func _on_cancel_possession() -> void:
 	#reset visibility and hitbox
@@ -90,3 +90,6 @@ func _on_cancel_possession() -> void:
 	$hitbox.disabled = false
 	#reset the possession target
 	PlayerInfo.possession_target = null
+
+func _on_ability_cooldown_timeout() -> void:
+	ability_cooldown = false

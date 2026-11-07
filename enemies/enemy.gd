@@ -77,7 +77,7 @@ func _physics_process(delta: float) -> void:
 func _on_attack(direction: Vector2):
 	if $attack_cooldown.is_stopped():
 		$attack_cooldown.start(attack_cooldown)
-		if effects.has("bleed"): _on_take_damage(max_health*0.02)
+		if effects.has("bleed"): _on_take_damage(damage)
 #This method describes what the enemy does for its ability
 func _on_ability(): print("Tried to use ability but is not available :(")
 
