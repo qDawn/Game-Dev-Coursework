@@ -28,7 +28,7 @@ rotation = -0.00019150559
 shape = SubResource("CapsuleShape2D_i8dmy")
 
 [node name="possession_range" type="Area2D" parent="." unique_id=1034708896]
-collision_mask = 255
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="possession_range" unique_id=1814512620]
 shape = SubResource("CircleShape2D_tydw7")
