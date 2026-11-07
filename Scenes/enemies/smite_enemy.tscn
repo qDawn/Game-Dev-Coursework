@@ -16,3 +16,5 @@ one_shot = true
 [node name="cast_timer" type="Timer" parent="." index="9" unique_id=371864754]
 wait_time = 0.5
 one_shot = true
+
+[connection signal="timeout" from="cast_timer" to="." method="_on_cast_timer_timeout"]

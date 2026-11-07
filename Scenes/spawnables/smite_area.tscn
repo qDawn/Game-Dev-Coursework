@@ -7,6 +7,7 @@
 radius = 128.0
 
 [node name="smite_area" type="Area2D" unique_id=1431378648]
+z_index = -1
 script = ExtResource("1_3t70p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1769368306]

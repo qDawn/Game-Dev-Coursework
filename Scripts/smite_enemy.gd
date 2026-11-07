@@ -20,19 +20,16 @@ func _ready() -> void:
 	#how far it can activate ability from
 	smite_range = 700
 	#how fast it can attack
-	attack_cooldown = 2
+	attack_cooldown = 3
 	#how fast its projectiles move
 	bullet_speed = 500
 	#how much damage the projectiles do
 	bullet_damage = 3
 	#how much damage the smite ability does
 	smite_damage = 15
-	$cast_timer.timeout.connect(spawn_smite)
-	
-	
+
 func _process(delta : float) -> void:
 	super(delta)
-	
 	if state == 'alive':
 		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
 		if distance <= smite_range and not ability_cooldown:
@@ -47,7 +44,6 @@ func _on_attack(direction: Vector2):
 		b.speed = bullet_speed
 		if state == 'possessed': b.remove_from_group("enemy_bullet"); b.add_to_group("player_bullet")
 		get_tree().current_scene.add_child(b)
-		$attack_cooldown.start()
 	super(direction)
 		
 func _on_ability() -> void:
@@ -57,8 +53,8 @@ func _on_ability() -> void:
 		$ability_cooldown.start()
 		_on_take_effect("stun", 1)
 		ability_cooldown = true
-		
-func spawn_smite() -> void:
+
+func _on_cast_timer_timeout() -> void:
 	var smite: Area2D = SMITE_AREA.instantiate()
 	if state != 'possessed':
 		smite.global_position = get_tree().get_first_node_in_group('player').global_position
@@ -66,7 +62,4 @@ func spawn_smite() -> void:
 	else:
 		smite.global_position = get_global_mouse_position()
 		smite.attack_group = "enemy"
-		
 	get_tree().current_scene.add_child(smite)
-	
-		
