@@ -40,6 +40,8 @@ one_shot = true
 wait_time = 3.0
 
 [node name="effect_timer" type="Timer" parent="." unique_id=472479290]
+wait_time = 0.5
+one_shot = true
 
 [node name="hesitation_timer" type="Timer" parent="." unique_id=1524607355]
 wait_time = 0.1

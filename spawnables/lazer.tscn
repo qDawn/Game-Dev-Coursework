@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bqa3wjbpwh3yv"]
+
+[ext_resource type="Script" uid="uid://nqvtxck56moi" path="res://spawnables/lazer.gd" id="1_4iejr"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4iejr"]
+
+[node name="lazer" type="Node2D" unique_id=937874381]
+script = ExtResource("1_4iejr")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1561669724]
+width = 2.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="expiration_timer" type="Timer" parent="." unique_id=1261560570]
+wait_time = 0.05
+
+[node name="prime_timer" type="Timer" parent="." unique_id=1480793379]
+one_shot = true
+
+[node name="collision_box" type="Area2D" parent="." unique_id=1124524107]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision_box" unique_id=971317122]
+shape = SubResource("SegmentShape2D_4iejr")
+
+[connection signal="setup" from="." to="." method="_on_setup"]
+[connection signal="timeout" from="expiration_timer" to="." method="_on_expiration_timer_timeout"]
+[connection signal="timeout" from="prime_timer" to="." method="_on_prime_timer_timeout"]

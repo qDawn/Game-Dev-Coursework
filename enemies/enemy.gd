@@ -152,8 +152,8 @@ func _on_decay_timer_timeout() -> void:
 
 func _on_effect_timer_timeout() -> void:
 	for effect in effects:
-		effects[effect] -= 1
-		if effects[effect] == 0: effects.erase(effect)
+		effects[effect] -= 0.5
+		if effects[effect] <= 0: effects.erase(effect)
 
 func _on_take_effect(effect: String, duration: int) -> void:
 	if not effects.has(effect):
@@ -161,7 +161,7 @@ func _on_take_effect(effect: String, duration: int) -> void:
 
 #Method for aiming the weapon
 func aim(direction: Vector2):
-	if !attacking:
+	if !attacking and not effects.has("stun"):
 		if direction.x < 0: $weapon.scale.y = -1
 		else: $weapon.scale.y = 1
 		$weapon.rotation = direction.angle()

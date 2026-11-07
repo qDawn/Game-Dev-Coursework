@@ -21,15 +21,9 @@ script = ExtResource("2_qcy70")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_qlytt")
 
-[node name="collision_shape" parent="." index="1" unique_id=1561700062]
+[node name="collision_shape" parent="." index="2" unique_id=1561700062]
 position = Vector2(2, 7)
 shape = SubResource("RectangleShape2D_equw2")
-
-[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
-position = Vector2(73, 5.999998)
-rotation = 0.7853982
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_66uxq")
 
 [node name="CollisionShape2D" parent="weapon_collision/melee_collision_area" parent_id_path=PackedInt32Array(1046232765) index="0" unique_id=733389090]
 position = Vector2(4.5, -50)
@@ -40,3 +34,9 @@ shape = SubResource("RectangleShape2D_3u6to")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slam_area" index="0" unique_id=1016690279]
 position = Vector2(3, 5)
 shape = SubResource("CircleShape2D_ncer4")
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(73, 5.999998)
+rotation = 0.7853982
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_66uxq")

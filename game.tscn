@@ -150,7 +150,7 @@ texture = ExtResource("5_vef74")
 0:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_4iwvc"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 255
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_i6g32")
 
