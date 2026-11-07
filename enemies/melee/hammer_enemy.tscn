@@ -25,6 +25,10 @@ texture = ExtResource("3_qlytt")
 position = Vector2(2, 7)
 shape = SubResource("RectangleShape2D_equw2")
 
+[node name="ability_cooldown" parent="." index="4" unique_id=286294713]
+wait_time = 7.0
+one_shot = true
+
 [node name="CollisionShape2D" parent="weapon_collision/melee_collision_area" parent_id_path=PackedInt32Array(1046232765) index="0" unique_id=733389090]
 position = Vector2(4.5, -50)
 shape = SubResource("RectangleShape2D_3u6to")

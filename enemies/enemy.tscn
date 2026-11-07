@@ -31,6 +31,11 @@ one_shot = true
 
 [node name="ability_cooldown" type="Timer" parent="." unique_id=286294713]
 wait_time = 5.0
+one_shot = true
+
+[node name="ability_active" type="Timer" parent="." unique_id=853278684]
+wait_time = 5.0
+one_shot = true
 
 [node name="possession_window" type="Timer" parent="." unique_id=1478351512]
 wait_time = 5.0

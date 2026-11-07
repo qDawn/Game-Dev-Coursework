@@ -73,6 +73,7 @@ func _on_take_damage(_damage: int) -> void:
 	$ui.emit_signal("health_changed")
 
 func _on_invincible_timer_timeout() -> void:
+	speed = BASE_SPEED
 	$sprite.self_modulate = Color(1,1,1,1)
 	set_collision_layer_value(1,true)
 

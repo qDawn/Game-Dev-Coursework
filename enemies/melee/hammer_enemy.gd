@@ -18,8 +18,6 @@ func _ready() -> void:
 	swing_speed = 0.3
 	# The bat recovers in 0.5 seconds. This swing is slower, so the pause is longer.
 	attack_cooldown = 1.5
-	$ability_cooldown.wait_time = 7.0
-	$ability_cooldown.one_shot = true
 	$slam_area/CollisionShape2D.shape.radius = slam_radius
 
 func _process(delta: float) -> void:
@@ -49,12 +47,13 @@ func _on_ability() -> void:
 	ring_alpha = 0.75
 	ring_fading = false
 	queue_redraw()
-	$ability_cooldown.start()
 
 	# Raise the hammer, then the impact callback brings it down.
 	var windup := create_tween()
 	windup.tween_property($weapon, "rotation_degrees", -90.0, 0.55)
 	windup.tween_callback(_slam_down)
+	
+	super()
 
 func _slam_down() -> void:
 	if not is_inside_tree() or state == "dead":

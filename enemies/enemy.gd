@@ -16,15 +16,18 @@ var speed: float = 200
 var min_range: float = 200
 #how far it attacks from
 var attack_range: float = 500
-#how fast it can attack
+#how long the attack cooldown is
 var attack_cooldown: float = 1
 #how much damage the enemy does
 var damage: float = 5
-#whether the ability is on cooldown
-var ability_cooldown : bool = false
+#How long the ability cooldown is
+var ability_cooldown: float = 6
+#how long the ability lasts
+var ability_duration: float = 0
 #valid states include: 'alive', 'dead', 'possessed'
 var state: String = 'alive'
 # Stores effects of the enemy. Format: {name: duration}
+#current effects include: slow, bleed, stun, silence.
 var effects : Dictionary[String,int] = {}
 #whether the enemy is currently attacking
 var attacking : bool = false
@@ -83,10 +86,13 @@ func _on_attack(direction: Vector2):
 		$attack_cooldown.start(attack_cooldown)
 		if effects.has("bleed"): _on_take_damage(damage)
 #This method describes what the enemy does for its ability
-func _on_ability(): print("Tried to use ability but is not available :(")
+func _on_ability(): 
+	if $ability_cooldown.is_stopped() and not effects.has("silence"): 
+		$ability_cooldown.start(ability_cooldown+ability_duration)
+		$ability_active.start(ability_duration)
 
-func _on_take_damage(num: float) -> void:
-	current_health -= num
+func _on_take_damage(damage: float) -> void:
+	current_health -= damage
 	if current_health <= 0: 
 		if state == 'alive':
 			state = 'dead'
@@ -110,7 +116,7 @@ func _on_take_damage(num: float) -> void:
 	tween_damage.tween_property($sprite,"self_modulate",Color(1,1,1),0.1)
 	
 	var damage_ui: Label = preload("res://ui/damage_ui.tscn").instantiate()
-	damage_ui.text = str(num)
+	damage_ui.text = str(damage)
 	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
 	get_tree().root.add_child(damage_ui)
 

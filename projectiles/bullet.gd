@@ -16,9 +16,9 @@ func _on_expiry_timer_timeout() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group('player') and is_in_group("enemy_bullet") or body.is_in_group('enemy') and is_in_group("player_bullet"):
+		$CollisionShape2D.disabled = true
 		body.emit_signal('take_damage',damage)
-		for effect in effects: 
-			body.emit_signal("take_effect", effect, effects[effect])
+		for effect in effects: body.emit_signal("take_effect", effect, effects[effect])
 		queue_free()
 	elif not body.is_in_group('player') and not body.is_in_group('enemy'):
 		queue_free()
