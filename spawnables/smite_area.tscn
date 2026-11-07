@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ccyp3ra11vl6l"]
+
+[ext_resource type="Script" uid="uid://bxbab5en3ib34" path="res://spawnables/smite_area.gd" id="1_mg4d8"]
+[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="2_g8xqg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5hio4"]
+radius = 128.0
+
+[node name="smite_area" type="Area2D" unique_id=1431378648]
+z_index = -1
+script = ExtResource("1_mg4d8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1769368306]
+shape = SubResource("CircleShape2D_5hio4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=496195671]
+modulate = Color(0.9270015, 0.9739658, 0, 1)
+scale = Vector2(8.5, 8.5)
+texture = ExtResource("2_g8xqg")
+
+[node name="timer" type="Timer" parent="." unique_id=965433023]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]

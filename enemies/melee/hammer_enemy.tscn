@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cps8a5ofc76u7"]
+
+[ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/melee/melee_enemy.tscn" id="1_ql2ov"]
+[ext_resource type="Script" uid="uid://bau5wwxqpfv7b" path="res://enemies/melee/hammer_enemy.gd" id="2_qcy70"]
+[ext_resource type="Texture2D" uid="uid://b2ucf2xh8uljl" path="res://assets/sprites/hammer_enemy_body.png" id="3_qlytt"]
+[ext_resource type="Texture2D" uid="uid://dqdq6m7vi5yxs" path="res://assets/sprites/hammer_enemy_hammer.png" id="4_66uxq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_equw2"]
+size = Vector2(28, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3u6to"]
+size = Vector2(131, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ncer4"]
+radius = 70.035706
+
+[node name="hammer_enemy" unique_id=107408206 instance=ExtResource("1_ql2ov")]
+script = ExtResource("2_qcy70")
+
+[node name="sprite" parent="." index="0" unique_id=1078032425]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_qlytt")
+
+[node name="collision_shape" parent="." index="1" unique_id=1561700062]
+position = Vector2(2, 7)
+shape = SubResource("RectangleShape2D_equw2")
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(73, 5.999998)
+rotation = 0.7853982
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_66uxq")
+
+[node name="CollisionShape2D" parent="weapon_collision/melee_collision_area" parent_id_path=PackedInt32Array(1046232765) index="0" unique_id=733389090]
+position = Vector2(4.5, -50)
+shape = SubResource("RectangleShape2D_3u6to")
+
+[node name="slam_area" type="Area2D" parent="." index="10" unique_id=262727202]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slam_area" index="0" unique_id=1016690279]
+position = Vector2(3, 5)
+shape = SubResource("CircleShape2D_ncer4")

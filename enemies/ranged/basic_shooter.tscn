@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://n16anm4mbvgt"]
+
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/enemy.tscn" id="1_556hm"]
+[ext_resource type="Script" uid="uid://bp6lkqhsm1flj" path="res://enemies/ranged/basic_shooter.gd" id="2_pc235"]
+
+[node name="basic_shooter" unique_id=107408206 instance=ExtResource("1_556hm")]
+script = ExtResource("2_pc235")
+bullet_speed = 500
+
+[node name="attack_cooldown" parent="." index="2" unique_id=1727736153]
+wait_time = 2.0
