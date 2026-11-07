@@ -34,14 +34,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed('ability'):
 		if PlayerInfo.possession_target:
 			PlayerInfo.possession_target.emit_signal('ability')
-		elif not ability_cooldown:
-			ability_cooldown = true
+		elif $ability_cooldown.is_stopped():
 			$sprite.self_modulate = Color(1,1,1,0.5)
-			$hitbox.disabled = true
+			set_collision_layer_value(1,false)
 			speed *= 1.2
 			$invincible_timer.start(3)
 			$ability_cooldown.start(10)
-
 
 	#possession logic
 	if Input.is_action_just_pressed('possess') and not PlayerInfo.possession_target:
@@ -58,7 +56,8 @@ func _physics_process(delta: float) -> void:
 			PlayerInfo.possession_target = selected_host
 			#send a signal to the target to let it know that it is possessed.
 			selected_host.emit_signal('possession')
-			
+
+
 	#cancel possession logic
 	if Input.is_action_just_pressed('cancel_possession') and PlayerInfo.possession_target:
 		PlayerInfo.possession_target.emit_signal("take_damage", PlayerInfo.possession_target.max_health)
@@ -68,21 +67,14 @@ func _on_take_damage(_damage: int) -> void:
 	PlayerInfo.take_damage(1)
 	#sprite becomes transparent
 	$sprite.self_modulate = Color(1,1,1,0.5)
-	$hitbox.disabled = true
-	$invincible_timer.start(1.5)
-	_flash_red()
+	set_collision_layer_value(1,false)
+	$invincible_timer.start(2)
 	#send a signal to the HUD
 	$ui.emit_signal("health_changed")
-		
-func _flash_red() -> void:
-	$sprite.modulate = Color(1.0, 0.25, 0.25)
-	create_tween().tween_property($sprite, "modulate", Color.WHITE, 0.2)
 
 func _on_invincible_timer_timeout() -> void:
-	speed = BASE_SPEED
-	if not PlayerInfo.possession_target:
-		$sprite.self_modulate = Color(1,1,1,1)
-		$hitbox.disabled = false
+	$sprite.self_modulate = Color(1,1,1,1)
+	set_collision_layer_value(1,true)
 
 func _on_cancel_possession() -> void:
 	#reset visibility and hitbox
@@ -90,6 +82,3 @@ func _on_cancel_possession() -> void:
 	$hitbox.disabled = false
 	#reset the possession target
 	PlayerInfo.possession_target = null
-
-func _on_ability_cooldown_timeout() -> void:
-	ability_cooldown = false

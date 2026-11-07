@@ -59,20 +59,23 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or stunned in effects
 	if effects.has("stun"): return
+	var movement_vector: Vector2
 	if state == 'alive':
 		var direction: Vector2 = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
 		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
-
 		# Don't move if approximately in range
 		if 1 > abs(distance - min_range): return 
 		#if the player is too far, move toward player
-		if distance > min_range: move_and_collide(direction*speed*delta)
+		movement_vector = direction*speed*delta
 		#if the player is too close, move away from player slowly
-		if distance < min_range: move_and_collide(-0.25*direction*speed*delta)
+		if distance < min_range: movement_vector *= -0.25
 	elif state == 'possessed':
 		#move in the direction the player moves
-		move_and_collide(PlayerInfo.get_player_direction()*speed*delta) 
+		movement_vector = PlayerInfo.get_player_direction()*speed*delta
 
+	if effects.has("slow"):
+		movement_vector *= 0.75
+	move_and_collide(movement_vector)
 
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2):
@@ -105,7 +108,11 @@ func _on_take_damage(num: float) -> void:
 	var tween_damage: Tween = get_tree().create_tween()
 	tween_damage.tween_property($sprite,"self_modulate",Color(1,0,0),0.1)
 	tween_damage.tween_property($sprite,"self_modulate",Color(1,1,1),0.1)
-
+	
+	var damage_ui: Label = preload("res://ui/damage_ui.tscn").instantiate()
+	damage_ui.text = str(num)
+	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
+	get_tree().root.add_child(damage_ui)
 
 func _on_ability_cooldown_timeout() -> void:
 	ability_cooldown = false

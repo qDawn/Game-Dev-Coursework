@@ -1,5 +1,5 @@
 extends "res://enemies/enemy.gd"
-const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
+const ENEMY_BULLET = preload("uid://mq4hucp4nyfe")
 
 @export var bullet_speed: int = 700
 var burst_max_count: int = 3

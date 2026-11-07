@@ -1,23 +1,25 @@
-[gd_scene format=3 uid="uid://dpygu43fwffkp"]
+[gd_scene format=3 uid="uid://mq4hucp4nyfe"]
 
-[ext_resource type="Script" uid="uid://diuseadu2k1gy" path="res://projectiles/bullet.gd" id="1_0355m"]
-[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="2_gr3oa"]
+[ext_resource type="Script" uid="uid://diuseadu2k1gy" path="res://projectiles/bullet.gd" id="1_4ambd"]
+[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="2_cqswp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gl7bs"]
 radius = 16.0
 
-[node name="enemy_bullet" type="Area2D" unique_id=1295280477 groups=["enemy_bullet"]]
-script = ExtResource("1_0355m")
+[node name="enemy_bullet" type="Area2D" unique_id=2096292205 groups=["enemy_bullet"]]
+script = ExtResource("1_4ambd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=310515303]
 shape = SubResource("CircleShape2D_gl7bs")
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1491523117]
-texture = ExtResource("2_gr3oa")
+texture = ExtResource("2_cqswp")
 
 [node name="expiry_timer" type="Timer" parent="." unique_id=292093934]
 wait_time = 3.0
 one_shot = true
 autostart = true
 
+[connection signal="add_effect" from="." to="." method="_on_add_effect"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="expiry_timer" to="." method="_on_expiry_timer_timeout"]

@@ -15,10 +15,10 @@ bullet_speed = 500
 [node name="sprite" parent="." index="0" unique_id=1078032425]
 texture = ExtResource("3_s66hy")
 
-[node name="collision_shape" parent="." index="1" unique_id=1561700062]
+[node name="collision_shape" parent="." index="2" unique_id=1561700062]
 shape = SubResource("RectangleShape2D_s66hy")
 
-[node name="attack_cooldown" parent="." index="2" unique_id=1727736153]
+[node name="attack_cooldown" parent="." index="3" unique_id=1727736153]
 wait_time = 3.5
 
 [node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]

@@ -1,6 +1,6 @@
 extends "res://enemies/enemy.gd"
 
-const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
+const ENEMY_BULLET = preload("uid://mq4hucp4nyfe")
 const SMITE_AREA = preload("uid://ccyp3ra11vl6l")
 @export var bullet_speed : int
 @export var bullet_damage : int 

@@ -1,6 +1,6 @@
 extends "res://enemies/enemy.gd"
 
-const ENEMY_BULLET = preload("uid://dpygu43fwffkp")
+const ENEMY_BULLET = preload("uid://mq4hucp4nyfe")
 
 #how fast its projectiles move
 @export var bullet_speed: int = 500
@@ -32,6 +32,7 @@ func _on_attack(direction: Vector2):
 		b.damage = damage
 		b.speed = bullet_speed
 		if state == 'possessed': b.remove_from_group("enemy_bullet"); b.add_to_group("player_bullet")
+		b.emit_signal("add_effect","slow",3)
 		get_tree().current_scene.add_child(b)
 		$attack_cooldown.start()
 		
