@@ -17,7 +17,7 @@ func _ready() -> void:
 	damage = 12
 	swing_speed = 0.3
 	# The bat recovers in 0.5 seconds. This swing is slower, so the pause is longer.
-	attack_cooldown = 1.7
+	attack_cooldown = 1.5
 	$ability_cooldown.wait_time = 7.0
 	$ability_cooldown.one_shot = true
 	$slam_area/CollisionShape2D.shape.radius = slam_radius

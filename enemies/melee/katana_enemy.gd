@@ -9,6 +9,7 @@ func _ready() -> void:
 	attack_range = 150
 	damage = 10
 	swing_speed = 0.05
+	attack_cooldown = 0.8
 
 func _process(delta: float) -> void:
 	super(delta)

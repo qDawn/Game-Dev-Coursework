@@ -5,7 +5,13 @@ var swing_speed: float = 0.1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
-
+	max_health = 30
+	current_health = 30
+	speed = 200
+	min_range = 50
+	attack_range = 150
+	damage = 10
+	attack_cooldown = 0.5
 
 func _on_attack(direction: Vector2):
 	if $attack_cooldown.is_stopped():

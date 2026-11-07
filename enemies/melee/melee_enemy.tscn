@@ -12,7 +12,6 @@ size = Vector2(40, 65)
 size = Vector2(75, 52)
 
 [node name="melee_enemy" unique_id=107408206 instance=ExtResource("1_veapw")]
-angular_damp = 100.0
 script = ExtResource("2_cprtf")
 
 [node name="sprite" parent="." index="0" unique_id=1078032425]
@@ -25,10 +24,6 @@ shape = SubResource("RectangleShape2D_cpjt6")
 [node name="attack_cooldown" parent="." index="2" unique_id=1727736153]
 wait_time = 0.5
 
-[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
-rotation = 1.5707964
-texture = ExtResource("4_cprtf")
-
 [node name="weapon_collision" type="Node2D" parent="." index="9" unique_id=1889839535]
 
 [node name="melee_collision_area" type="Area2D" parent="weapon_collision" index="0" unique_id=1046232765]
@@ -38,6 +33,10 @@ rotation = 1.5707964
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weapon_collision/melee_collision_area" index="0" unique_id=733389090]
 position = Vector2(-1.5000007, -22)
 shape = SubResource("RectangleShape2D_ncer4")
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+rotation = 1.5707964
+texture = ExtResource("4_cprtf")
 
 [connection signal="area_entered" from="weapon_collision/melee_collision_area" to="." method="_on_melee_collision_area_area_entered"]
 [connection signal="body_entered" from="weapon_collision/melee_collision_area" to="." method="_on_melee_collision_area_body_entered"]

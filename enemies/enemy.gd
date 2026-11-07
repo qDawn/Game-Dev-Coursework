@@ -46,9 +46,10 @@ func _process(_delta: float) -> void:
 			
 			distance = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
 			#if player is in attack range, attack
-			if distance <= attack_range and $attack_cooldown.is_stopped() and not effects.has("stun"):
-				emit_signal('attack', direction)
-		
+			if distance <= attack_range and $attack_cooldown.is_stopped() and $hesitation_timer.is_stopped() and not effects.has("stun"):
+				$exclamation.visible = true
+				$hesitation_timer.start(randf_range(0.1,1))
+
 		if not effects.is_empty() and $effect_timer.is_stopped():
 			$effect_timer.start()
 	else:
@@ -93,7 +94,7 @@ func _on_take_damage(num: float) -> void:
 			$corpse_timer.value = $possession_window.wait_time
 			$corpse_timer.show()
 			collision_layer = 2
-			collision_mask = 2
+			collision_mask = 0
 			$sprite.self_modulate = Color(1,1,1,0.8)
 		elif state == 'possessed':
 			#send signal to player that the possessed vessel has died.
@@ -164,3 +165,7 @@ func aim(direction: Vector2):
 		if direction.x < 0: $weapon.scale.y = -1
 		else: $weapon.scale.y = 1
 		$weapon.rotation = direction.angle()
+
+func _on_hesitation_timer_timeout() -> void:
+	$exclamation.visible = false
+	_on_attack(Vector2.from_angle($weapon.rotation))
