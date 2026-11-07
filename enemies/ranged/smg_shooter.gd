@@ -34,9 +34,7 @@ func _on_burst_timer_timeout() -> void:
 	bullet.direction = Vector2.from_angle($weapon.rotation + randf_range(-PI/36, PI/36))
 	bullet.damage = damage
 	bullet.speed = bullet_speed
-	if state == "possessed":
-		bullet.remove_from_group("enemy_bullet")
-		bullet.add_to_group("player_bullet")
+	if state == 'possessed': bullet.attacking_group = "enemy"
 	get_tree().current_scene.add_child(bullet)
 	burst_count += 1
 	$burst_timer.start()

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bg0r6w8dw8fou"]
+
+[ext_resource type="PackedScene" uid="uid://mq4hucp4nyfe" path="res://projectiles/enemy_bullet.tscn" id="1_0od80"]
+[ext_resource type="Script" uid="uid://ilo65trlmu0o" path="res://projectiles/splitting_bullet.gd" id="2_q862t"]
+
+[node name="splitting_bullet" unique_id=2096292205 instance=ExtResource("1_0od80")]
+script = ExtResource("2_q862t")
+
+[node name="expiry_timer" parent="." index="2" unique_id=292093934]
+wait_time = 0.5

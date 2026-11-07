@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/enemy.tscn" id="1_s66hy"]
 [ext_resource type="Script" uid="uid://bbmsf38xfdep" path="res://enemies/ranged/spread_shooter.gd" id="2_l8qng"]
 [ext_resource type="Texture2D" uid="uid://b3m0nm134lx31" path="res://assets/sprites/spread_shooter.png" id="3_s66hy"]
+[ext_resource type="Texture2D" uid="uid://4quce3p51xe4" path="res://assets/sprites/halo.png" id="4_ese6i"]
 [ext_resource type="Texture2D" uid="uid://cdjmpp7j1dfcu" path="res://assets/sprites/candles.png" id="4_l8qng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s66hy"]
@@ -15,10 +16,14 @@ bullet_speed = 500
 [node name="sprite" parent="." index="0" unique_id=1078032425]
 texture = ExtResource("3_s66hy")
 
-[node name="collision_shape" parent="." index="2" unique_id=1561700062]
+[node name="halo" type="Sprite2D" parent="." index="1" unique_id=2133605861]
+self_modulate = Color(1, 1, 1, 0)
+texture = ExtResource("4_ese6i")
+
+[node name="collision_shape" parent="." index="3" unique_id=1561700062]
 shape = SubResource("RectangleShape2D_s66hy")
 
-[node name="attack_cooldown" parent="." index="3" unique_id=1727736153]
+[node name="attack_cooldown" parent="." index="4" unique_id=1727736153]
 wait_time = 3.5
 
 [node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]

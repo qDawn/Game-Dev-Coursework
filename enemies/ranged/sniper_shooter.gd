@@ -31,7 +31,7 @@ func _on_attack(direction: Vector2):
 		b.direction = direction
 		b.damage = damage
 		b.speed = bullet_speed
-		if state == 'possessed': b.remove_from_group("enemy_bullet"); b.add_to_group("player_bullet")
+		if state == 'possessed': b.attacking_group = "enemy"
 		b.emit_signal("add_effect","slow",3)
 		get_tree().current_scene.add_child(b)
 		$attack_cooldown.start()

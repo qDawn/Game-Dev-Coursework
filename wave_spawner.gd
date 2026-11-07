@@ -10,9 +10,9 @@ const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
 const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
 const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 
-const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
+const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": SNIPER_SHOOTER, "weight": 1},
-									#{"resource": SPREAD_SHOOTER, "weight": 2},
+									{"resource": SPREAD_SHOOTER, "weight": 1},
 									#{"resource": MELEE_ENEMY, "weight": 1},
 									#{"resource": SMITE_ENEMY, "weight": 3},
 									#{"resource": SMG_SHOOTER, "weight": 1},
@@ -32,8 +32,9 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawn_enemy(SPREAD_SHOOTER)
 	#3 second buffer before starting to spawn
-	start(3)
+	start(300)
 	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn
