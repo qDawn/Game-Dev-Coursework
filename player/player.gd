@@ -55,10 +55,20 @@ func _physics_process(delta: float) -> void:
 			PlayerInfo.possession_target = selected_host
 			#send a signal to the target to let it know that it is possessed.
 			selected_host.emit_signal('possession')
+			#if the player was using ability
+			_on_invincible_timer_timeout()
 
 	#possession cancel logic
 	if Input.is_action_just_pressed('cancel_possession') and PlayerInfo.possession_target:
-		PlayerInfo.possession_target.emit_signal("take_damage", PlayerInfo.possession_target.max_health)
+		PlayerInfo.possession_target.queue_free()
+		#reset the possession target
+		PlayerInfo.possession_target = null
+		#reset visibility and hitbox
+		$sprite.visible = true
+		$hitbox.disabled = false
+		#reset ability cooldown immediately
+		$ability_cooldown.stop()
+
 
 func _on_take_damage(_damage: int) -> void:
 	#player only ever takes 1 damage from sources, become invincible.
@@ -83,10 +93,11 @@ func _on_start_invincibility(duration: float) -> void:
 	$invincible_timer.start(duration)
 
 func _on_cancel_possession() -> void:
+	#brief invincibility
+	_on_start_invincibility(0.5)
+	$ability_cooldown.start()
 	#reset visibility and hitbox
 	$sprite.visible = true
 	$hitbox.disabled = false
-	#brief invincibility
-	_on_start_invincibility(1)
 	#reset the possession target
 	PlayerInfo.possession_target = null

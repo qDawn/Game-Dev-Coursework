@@ -9,6 +9,7 @@
 size = Vector2(59, 66)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1378295628 groups=["enemy"]]
+collision_layer = 3
 input_pickable = true
 script = ExtResource("1_orwns")
 
@@ -41,7 +42,6 @@ wait_time = 5.0
 one_shot = true
 
 [node name="decay_timer" type="Timer" parent="." unique_id=1722401979]
-wait_time = 3.0
 
 [node name="effect_timer" type="Timer" parent="." unique_id=472479290]
 wait_time = 0.5

@@ -107,7 +107,6 @@ func _on_take_damage(d: float) -> void:
 			$corpse_timer.value = $possession_window.wait_time
 			$corpse_timer.show()
 			set_collision_layer_value(1,false)
-			set_collision_layer_value(5,true)
 			set_collision_mask_value(1,false)
 			$sprite.self_modulate = Color(1,1,1,0.8)
 		elif state == 'possessed':
@@ -137,7 +136,6 @@ func _on_possession() -> void:
 	state = 'possessed'
 	#reset the collision layers (so the possessed enemy can take damage again
 	set_collision_layer_value(1,true)
-	set_collision_layer_value(5,false)
 	set_collision_mask_value(1,true)
 	#make the sprite visible again
 	$sprite.self_modulate = Color(1,1,1,1)

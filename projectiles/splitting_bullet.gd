@@ -8,8 +8,9 @@ func _on_expiry_timer_timeout() -> void:
 		var b: Area2D = ENEMY_BULLET.instantiate()
 		b.global_position = global_position
 		b.direction = direction.rotated(PI/12*i)
-		b.damage = damage
-		b.speed = 400
+		b.damage = damage/2
+		b.speed = speed*1.1
+		b.scale *= 0.5
 		b.attacking_group = attacking_group
 		get_tree().current_scene.add_child(b)
 	queue_free()

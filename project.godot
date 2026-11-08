@@ -71,6 +71,7 @@ ability={
 [layer_names]
 
 2d_physics/layer_1="entities"
+2d_physics/layer_2="dead enemies"
 2d_physics/layer_5="intangible"
 
 [physics]

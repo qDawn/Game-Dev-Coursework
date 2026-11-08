@@ -2,7 +2,7 @@ extends Area2D
 
 var speed: float = 150
 var direction : Vector2
-var damage: int = 1
+var damage: float = 1
 var effects: Dictionary[String,int] = {}
 var splitting: bool = false
 var attacking_group: String = "ally"
