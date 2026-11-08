@@ -17,11 +17,11 @@ script = ExtResource("2_cprtf")
 [node name="sprite" parent="." index="0" unique_id=1078032425]
 texture = ExtResource("2_nnvf6")
 
-[node name="collision_shape" parent="." index="1" unique_id=1561700062]
+[node name="collision_shape" parent="." index="2" unique_id=1561700062]
 position = Vector2(1, -13.5)
 shape = SubResource("RectangleShape2D_cpjt6")
 
-[node name="attack_cooldown" parent="." index="2" unique_id=1727736153]
+[node name="attack_cooldown" parent="." index="3" unique_id=1727736153]
 wait_time = 0.5
 
 [node name="weapon_collision" type="Node2D" parent="." index="9" unique_id=1889839535]

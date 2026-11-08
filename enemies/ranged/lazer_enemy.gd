@@ -19,27 +19,27 @@ func _ready() -> void:
 	#damage
 	damage = 6
 
-func _on_attack(direction: Vector2):
-	if $attack_cooldown.is_stopped():
-		var space_state = get_world_2d().direct_space_state
-		var start: Vector2 = $weapon/spr/origin.global_position
-		var end: Vector2 = start + direction*99999
-		var query = PhysicsRayQueryParameters2D.create(start, end)
-		query.collision_mask = 2
-		var result: Dictionary = space_state.intersect_ray(query)
-		if result:
-			var l: Node2D = LAZER.instantiate()
-			if state == "possessed": 
-				l.target_group = "enemy"
-			else: 
-				l.target_group = "player"  
-			l.damage = damage
-			
-			get_tree().root.add_child(l)
-			l.emit_signal("setup",prime_time, start, result.position, 20)
-		_on_take_effect('stun',prime_time*2)
+func _on_attack(direction: Vector2) -> bool:
+	if not super(direction): return false
 
-	super(direction)
+	var space_state = get_world_2d().direct_space_state
+	var start: Vector2 = $weapon/spr/origin.global_position
+	var end: Vector2 = start + direction*99999
+	var query = PhysicsRayQueryParameters2D.create(start, end)
+	query.collision_mask = 2
+	var result: Dictionary = space_state.intersect_ray(query)
+	if result:
+		var l: Node2D = LAZER.instantiate()
+		if state == "possessed": 
+			l.target_group = "enemy"
+		else: 
+			l.target_group = "player"  
+		l.damage = damage
+		
+		get_tree().root.add_child(l)
+		l.emit_signal("setup",prime_time, start, result.position, 20)
+	_on_take_effect('stun',prime_time*2)
+	return true
 
 func _on_possession() -> void:
 	super()

@@ -28,7 +28,7 @@ var ability_duration: float = 0
 var state: String = 'alive'
 # Stores effects of the enemy. Format: {name: duration}
 #current effects include: slow, bleed, stun, silence.
-var effects : Dictionary[String,int] = {}
+var effects : Dictionary[String,float] = {}
 #whether the enemy is currently attacking
 var attacking : bool = false
 
@@ -76,23 +76,28 @@ func _physics_process(delta: float) -> void:
 		#move in the direction the player moves
 		movement_vector = PlayerInfo.get_player_direction()*speed*delta
 
-	if effects.has("slow"):
-		movement_vector *= 0.75
+
+	if effects.has("slow"): movement_vector *= 0.75
 	move_and_collide(movement_vector)
 
-##This method describes how the enemy attacks
-func _on_attack(direction: Vector2):
-	if $attack_cooldown.is_stopped():
+##This method describes how the enemy attacks. Returns true if successful. False otherwise.
+func _on_attack(_direction: Vector2) -> bool:
+	if $attack_cooldown.is_stopped() and not effects.has("stun"):
 		$attack_cooldown.start(attack_cooldown)
 		if effects.has("bleed"): _on_take_damage(damage)
-#This method describes what the enemy does for its ability
-func _on_ability(): 
+		return true
+	return false
+
+#This method describes what the enemy does for its ability. Returns true if successful. False otherwise.
+func _on_ability() -> bool: 
 	if $ability_cooldown.is_stopped() and not effects.has("silence"): 
 		$ability_cooldown.start(ability_cooldown+ability_duration)
 		$ability_active.start(ability_duration)
+		return true
+	return false
 
-func _on_take_damage(damage: float) -> void:
-	current_health -= damage
+func _on_take_damage(d: float) -> void:
+	current_health -= d
 	if current_health <= 0: 
 		if state == 'alive':
 			state = 'dead'
@@ -170,9 +175,9 @@ func _on_effect_timer_timeout() -> void:
 		effects[effect] -= 0.5
 		if effects[effect] <= 0: effects.erase(effect)
 
-func _on_take_effect(effect: String, duration: int) -> void:
-	if not effects.has(effect):
-		effects[effect] = duration
+func _on_take_effect(effect: String, duration: float) -> void:
+	effects[effect] = max(effects.get(effect,0),duration)
+
 
 #Method for aiming the weapon
 func aim(direction: Vector2):

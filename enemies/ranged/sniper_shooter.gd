@@ -24,16 +24,15 @@ func _ready() -> void:
 	
 
 ##This method describes how the enemy attacks
-func _on_attack(direction: Vector2):
-	if $attack_cooldown.is_stopped():
-		var b: Area2D = ENEMY_BULLET.instantiate()
-		b.global_position = $weapon/spr/origin.global_position
-		b.direction = direction
-		b.damage = damage
-		b.speed = bullet_speed
-		if state == 'possessed': b.attacking_group = "enemy"
-		b.emit_signal("add_effect","slow",3)
-		get_tree().current_scene.add_child(b)
-		$attack_cooldown.start()
-		
-	super(direction)
+func _on_attack(direction: Vector2) -> bool:
+	if not super(direction): return false
+	var b: Area2D = ENEMY_BULLET.instantiate()
+	b.global_position = $weapon/spr/origin.global_position
+	b.direction = direction
+	b.damage = damage
+	b.speed = bullet_speed
+	if state == 'possessed': b.attacking_group = "enemy"
+	b.emit_signal("add_effect","slow",3)
+	get_tree().current_scene.add_child(b)
+	$attack_cooldown.start()
+	return true

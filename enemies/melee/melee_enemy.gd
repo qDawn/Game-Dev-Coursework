@@ -13,30 +13,30 @@ func _ready() -> void:
 	damage = 10
 	attack_cooldown = 0.5
 
-func _on_attack(direction: Vector2):
-	if $attack_cooldown.is_stopped():
-		attacking = true
-		var direction_angle: float = 180*direction.angle()/PI
-		var direction_multiplier = 1 if (-90 <= direction_angle and direction_angle  <= 90) else -1
+func _on_attack(direction: Vector2) -> bool:
+	if not super(direction): return false
+	attacking = true
+	var direction_angle: float = 180*direction.angle()/PI
+	var direction_multiplier = 1 if (-90 <= direction_angle and direction_angle  <= 90) else -1
 
-		#swinging the weapon
-		$weapon.rotation_degrees -= direction_multiplier*80
-		#tween for swinging
-		var tween_swing: Tween = get_tree().create_tween()
-		tween_swing.tween_property($weapon, "rotation_degrees", direction_angle+direction_multiplier*80, swing_speed)
-		tween_swing.tween_property($'.', "attacking", false, 0)
-		#tween for extending
-		var tween_extend: Tween = get_tree().create_tween()
-		tween_extend.tween_property($weapon/spr, "position", Vector2(64,0), swing_speed)
-		tween_extend.tween_property($weapon/spr, "position", Vector2(32,0), 0)
-		
-		#weapon collison
-		$weapon_collision.rotation_degrees = direction_angle
-		$attack_cooldown.start(attack_cooldown)
-		
-		#clear the array of entities hit
-		already_hit.clear()
-	super(direction)
+	#swinging the weapon
+	$weapon.rotation_degrees -= direction_multiplier*80
+	#tween for swinging
+	var tween_swing: Tween = get_tree().create_tween()
+	tween_swing.tween_property($weapon, "rotation_degrees", direction_angle+direction_multiplier*80, swing_speed)
+	tween_swing.tween_property($'.', "attacking", false, 0)
+	#tween for extending
+	var tween_extend: Tween = get_tree().create_tween()
+	tween_extend.tween_property($weapon/spr, "position", Vector2(64,0), swing_speed)
+	tween_extend.tween_property($weapon/spr, "position", Vector2(32,0), 0)
+	
+	#weapon collison
+	$weapon_collision.rotation_degrees = direction_angle
+	$attack_cooldown.start(attack_cooldown)
+	
+	#clear the array of entities hit
+	already_hit.clear()
+	return true
 
 func _process(delta: float) -> void:
 	super(delta)

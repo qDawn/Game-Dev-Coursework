@@ -26,23 +26,22 @@ func _ready() -> void:
 	damage = 5
 
 ##This method describes how the enemy attacks
-func _on_attack(direction: Vector2):
-	if $attack_cooldown.is_stopped():
-		attack_count += 1
-		for i in range(int(-bullet_qty/2.0),int((bullet_qty+1)/2.0)):
-			var b: Area2D = SPLITTING_BULLET.instantiate() if attack_count % 3 == 0 else ENEMY_BULLET.instantiate() 
-			b.global_position = $weapon/spr/origin.global_position
-			b.direction = direction.rotated(PI/12*i)
-			b.damage = damage
-			b.speed = 400
-			if state == 'possessed': b.attacking_group = "enemy"
-			get_tree().current_scene.add_child(b)
-		$attack_cooldown.start()
-		
-		#ability indication
-		if attack_count % 3 == 0:
-			var tween_flash: Tween = create_tween()
-			tween_flash.tween_property($halo,"self_modulate",Color(1,1,1,1),0.5)
-			tween_flash.tween_property($halo,"self_modulate",Color(1,1,1,0),0.5)
-
-	super(direction)
+func _on_attack(direction: Vector2) -> bool:
+	if not super(direction): return false
+	attack_count += 1
+	for i in range(int(-bullet_qty/2.0),int((bullet_qty+1)/2.0)):
+		var b: Area2D = SPLITTING_BULLET.instantiate() if attack_count % 3 == 0 else ENEMY_BULLET.instantiate() 
+		b.global_position = $weapon/spr/origin.global_position
+		b.direction = direction.rotated(PI/12*i)
+		b.damage = damage
+		b.speed = 400
+		if state == 'possessed': b.attacking_group = "enemy"
+		get_tree().current_scene.add_child(b)
+	$attack_cooldown.start()
+	
+	#ability indication
+	if attack_count % 3 == 0:
+		var tween_flash: Tween = create_tween()
+		tween_flash.tween_property($halo,"self_modulate",Color(1,1,1,1),0.5)
+		tween_flash.tween_property($halo,"self_modulate",Color(1,1,1,0),0.5)
+	return true

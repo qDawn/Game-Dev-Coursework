@@ -38,9 +38,9 @@ func _draw() -> void:
 		return
 	draw_arc(Vector2.ZERO, slam_radius, 0, TAU, 48, Color(1, 0.78, 0.15, ring_alpha), 6.0)
 
-func _on_ability() -> void:
-	if ability_cooldown or slamming or attacking or effects.has("stun") or state == "dead":
-		return
+func _on_ability() -> bool:
+	if not super(): return false
+	if slamming or attacking: return false
 	ability_cooldown = true
 	slamming = true
 	attacking = true
@@ -53,7 +53,7 @@ func _on_ability() -> void:
 	windup.tween_property($weapon, "rotation_degrees", -90.0, 0.55)
 	windup.tween_callback(_slam_down)
 	
-	super()
+	return true
 
 func _slam_down() -> void:
 	if not is_inside_tree() or state == "dead":

@@ -1,7 +1,7 @@
 extends Node2D
 
 signal setup
-var width: float = 10
+var lazer_width: float = 10
 var damage: float = 1
 var target_group: String = "player"
 
@@ -12,7 +12,7 @@ func _on_expiration_timer_timeout() -> void:
 	queue_free()
 
 func _on_prime_timer_timeout() -> void:
-	$Line2D.width = width
+	$Line2D.width = lazer_width
 	$expiration_timer.start()
 	
 func _on_setup(prime_time: float, start_point: Vector2, end_point: Vector2, width: float) -> void:

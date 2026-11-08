@@ -35,24 +35,25 @@ func _process(delta : float) -> void:
 		if distance <= smite_range and not ability_cooldown:
 			_on_ability()
 			
-func _on_attack(direction: Vector2):
-	if $attack_cooldown.is_stopped():
-		var b: Area2D = ENEMY_BULLET.instantiate()
-		b.global_position = $weapon/spr/origin.global_position
-		b.direction = direction
-		b.damage = damage
-		b.speed = bullet_speed
-		if state == 'possessed': b.attacking_group = "enemy"
-		get_tree().current_scene.add_child(b)
-	super(direction)
+func _on_attack(direction: Vector2) -> bool:
+	if not super(direction): return false
+	var b: Area2D = ENEMY_BULLET.instantiate()
+	b.global_position = $weapon/spr/origin.global_position
+	b.direction = direction
+	b.damage = damage
+	b.speed = bullet_speed
+	if state == 'possessed': b.attacking_group = "enemy"
+	get_tree().current_scene.add_child(b)
+	return true
 		
-func _on_ability() -> void:
-	if not ability_cooldown:
-		#Start casting the smite
-		$cast_timer.start()
-		$ability_cooldown.start()
-		_on_take_effect("stun", 1)
-		ability_cooldown = true
+func _on_ability() -> bool:
+	if not super(): return false
+	#Start casting the smite
+	$cast_timer.start()
+	$ability_cooldown.start()
+	_on_take_effect("stun", 1)
+	ability_cooldown = true
+	return true
 
 func _on_cast_timer_timeout() -> void:
 	var smite: Area2D = SMITE_AREA.instantiate()

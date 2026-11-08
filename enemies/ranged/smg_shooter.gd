@@ -16,14 +16,11 @@ func _ready() -> void:
 	damage = 2
 	attack_cooldown = 2
 
-func _on_attack(direction: Vector2) -> void:
-	# enemy.gd emits attack every frame while the player is in range.
-	# Possessed bodies also get attack every frame while the mouse is held.
-	# Leave immediately once a burst has started.
-	if not $attack_cooldown.is_stopped(): return
+func _on_attack(direction: Vector2) -> bool:
+	if not super(direction): return false
 	burst_count = 0
 	$burst_timer.start()
-	super(direction)
+	return true
 
 func _on_burst_timer_timeout() -> void:
 	#if the max burst has been reached, stop calling itself
