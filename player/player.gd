@@ -38,6 +38,7 @@ func _physics_process(delta: float) -> void:
 			$sprite.self_modulate = Color(1,1,1,0.5)
 			set_collision_layer_value(1,false)
 			set_collision_mask_value(1,false)
+			set_collision_mask_value(5,true)
 			speed *= 1.2
 			$invincible_timer.start(3)
 			$ability_cooldown.start(10)
@@ -70,6 +71,7 @@ func _on_take_damage(_damage: int) -> void:
 	$sprite.self_modulate = Color(1,1,1,0.5)
 	set_collision_layer_value(1,false)
 	set_collision_mask_value(1,false)
+	set_collision_mask_value(5,true)
 	$invincible_timer.start(2)
 	#send a signal to the HUD
 	$ui.emit_signal("health_changed")
@@ -79,6 +81,7 @@ func _on_invincible_timer_timeout() -> void:
 	$sprite.self_modulate = Color(1,1,1,1)
 	set_collision_layer_value(1,true)
 	set_collision_mask_value(1,true)
+	set_collision_mask_value(5,false)
 
 func _on_cancel_possession() -> void:
 	#reset visibility and hitbox

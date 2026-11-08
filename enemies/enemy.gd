@@ -122,7 +122,7 @@ func _on_take_damage(d: float) -> void:
 	tween_damage.tween_property($sprite,"self_modulate",Color(1,1,1),0.1)
 	
 	var damage_ui: Label = preload("res://ui/damage_ui.tscn").instantiate()
-	damage_ui.text = str(damage)
+	damage_ui.text = str(d)
 	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
 	get_tree().root.add_child(damage_ui)
 

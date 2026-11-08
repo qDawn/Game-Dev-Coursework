@@ -22,7 +22,6 @@ func _ready() -> void:
 	#how much damage the projectiles do
 	damage = 10
 	
-
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2) -> bool:
 	if not super(direction): return false
@@ -32,6 +31,7 @@ func _on_attack(direction: Vector2) -> bool:
 	b.damage = damage
 	b.speed = bullet_speed
 	if state == 'possessed': b.attacking_group = "enemy"
+	b.emit_signal("add_effect","silence",3)
 	b.emit_signal("add_effect","slow",3)
 	get_tree().current_scene.add_child(b)
 	$attack_cooldown.start()
