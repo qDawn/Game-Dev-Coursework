@@ -24,9 +24,9 @@ func _on_attack(direction: Vector2) -> bool:
 
 	var space_state = get_world_2d().direct_space_state
 	var start: Vector2 = $weapon/spr/origin.global_position
-	var end: Vector2 = start + direction*99999
+	var end: Vector2 = start + direction*9999
 	var query = PhysicsRayQueryParameters2D.create(start, end)
-	query.collision_mask = 2
+	query.collision_mask = 8
 	var result: Dictionary = space_state.intersect_ray(query)
 	if result:
 		var l: Node2D = LAZER.instantiate()
