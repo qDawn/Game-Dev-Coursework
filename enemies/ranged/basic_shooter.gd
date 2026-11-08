@@ -5,6 +5,7 @@ const ENEMY_BULLET = preload("uid://mq4hucp4nyfe")
 @export var bullet_speed: int = 500
 const base_speed: float = 200
 const base_attack_cooldown: float = 2
+var used_ability: bool = false
 func _ready() -> void:
 	super()
 	max_health = 25
@@ -26,8 +27,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	super(_delta)
-	if current_health <= max_health*0.5 and $ability_cooldown.is_stopped() and state != "possessed":
+	if current_health <= max_health*0.5 and $ability_cooldown.is_stopped() and state != "possessed" and not used_ability:
 		_on_ability()
+		used_ability = true
 
 func _on_take_damage(num: float) -> void:
 	if current_health - num <= 0 and not $ability_active.is_stopped():

@@ -9,7 +9,6 @@
 size = Vector2(59, 66)
 
 [node name="Enemy" type="RigidBody2D" unique_id=107408206 groups=["enemy"]]
-collision_layer = 17
 input_pickable = true
 angular_damp = 100.0
 script = ExtResource("1_orwns")
