@@ -25,7 +25,7 @@ const DEFAULT_KILL_POINTS: int = 50
 
 
 var current_health: float = 3
-var possession_target: RigidBody2D = null
+var possession_target: CharacterBody2D = null
 
 var score: int = 0
 var wave: int = 1

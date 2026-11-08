@@ -9,12 +9,3 @@ bullet_speed = 0
 bullet_damage = 0
 smite_damage = 0
 smite_range = 0
-
-[node name="ability_cooldown" parent="." index="3" unique_id=286294713]
-one_shot = true
-
-[node name="cast_timer" type="Timer" parent="." index="9" unique_id=371864754]
-wait_time = 0.5
-one_shot = true
-
-[connection signal="timeout" from="cast_timer" to="." method="_on_cast_timer_timeout"]

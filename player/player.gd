@@ -13,7 +13,8 @@ var possession_cooldown: bool = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if not PlayerInfo.possession_target: #if there is currently no possession target
-		move_and_collide(PlayerInfo.get_player_direction()*speed*delta)
+		velocity = PlayerInfo.get_player_direction()*speed*delta
+		move_and_collide(velocity)
 	else: 
 		global_position = PlayerInfo.possession_target.global_position
 	

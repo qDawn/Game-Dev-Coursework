@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends CharacterBody2D
 
 signal attack
 signal ability
@@ -31,12 +31,14 @@ var state: String = 'alive'
 var effects : Dictionary[String,float] = {}
 #whether the enemy is currently attacking
 var attacking : bool = false
+var target: CharacterBody2D
 
 func _ready() -> void:
-	pass
+	target = get_tree().get_first_node_in_group('player')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	target = get_tree().get_first_node_in_group('player')
 	if state != 'dead':
 		var direction: Vector2
 		var distance: float
@@ -44,10 +46,10 @@ func _process(_delta: float) -> void:
 			direction = global_position.direction_to(get_global_mouse_position())
 			aim(direction)
 		else:
-			direction = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
+			direction = global_position.direction_to(target.global_position)
 			aim(direction)
 			
-			distance = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
+			distance = global_position.distance_to(target.global_position)
 			#if player is in attack range, attack
 			if distance <= attack_range and $attack_cooldown.is_stopped() and $hesitation_timer.is_stopped() and not effects.has("stun"):
 				$exclamation.visible = true
@@ -61,24 +63,25 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or stunned in effects
-	if effects.has("stun"): return
-	var movement_vector: Vector2
+	if effects.has("stun") or state == "dead": return
+	var velocity: Vector2 = Vector2.ZERO
 	if state == 'alive':
-		var direction: Vector2 = global_position.direction_to(get_tree().get_first_node_in_group('player').global_position)
-		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
-		# Don't move if approximately in range
-		if 1 > abs(distance - min_range): return 
-		#if the player is too far, move toward player
-		movement_vector = direction*speed*delta
-		#if the player is too close, move away from player slowly
-		if distance < min_range: movement_vector *= -0.25
+		var distance: float = global_position.distance_to(target.global_position)
+		if abs(distance - min_range) > 10:
+			$nav.target_position = target.global_position
+			var next: Vector2 = $nav.get_next_path_position()
+			var direction: Vector2 = global_position.direction_to(next)
+			if distance < min_range: direction *= -0.5
+			velocity += direction*speed*delta
+
+
+
 	elif state == 'possessed':
 		#move in the direction the player moves
-		movement_vector = PlayerInfo.get_player_direction()*speed*delta
+		velocity = PlayerInfo.get_player_direction()*speed*delta
 
-
-	if effects.has("slow"): movement_vector *= 0.75
-	move_and_collide(movement_vector)
+	if effects.has("slow"): velocity *= 0.5
+	move_and_collide(velocity)
 
 ##This method describes how the enemy attacks. Returns true if successful. False otherwise.
 func _on_attack(_direction: Vector2) -> bool:

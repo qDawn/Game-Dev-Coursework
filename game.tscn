@@ -6,7 +6,37 @@
 [ext_resource type="Script" uid="uid://hkx6dakqtgub" path="res://wave_spawner.gd" id="4_j5wjh"]
 [ext_resource type="Texture2D" uid="uid://b2jjlhr4s660m" path="res://assets/kenny_dungeon/Tilemap/tilemap_packed.png" id="5_vef74"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7jktm"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wowpa"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ryrav"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_eow3j"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j5wjh"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vef74"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
@@ -66,9 +96,13 @@ texture = ExtResource("5_vef74")
 1:4/0 = 0
 1:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_wowpa")
 2:4/0 = 0
+2:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ryrav")
 3:4/0 = 0
+3:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_eow3j")
 4:4/0 = 0
+4:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_j5wjh")
 5:4/0 = 0
+5:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_vef74")
 6:4/0 = 0
 7:4/0 = 0
 8:4/0 = 0
@@ -148,6 +182,7 @@ texture = ExtResource("5_vef74")
 10:10/0 = 0
 11:10/0 = 0
 0:4/0 = 0
+0:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_7jktm")
 
 [sub_resource type="TileSet" id="TileSet_4iwvc"]
 physics_layer_0/collision_layer = 255

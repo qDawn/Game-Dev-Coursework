@@ -31,8 +31,8 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	super(delta)
 	if state == 'alive':
-		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
-		if distance <= smite_range and not ability_cooldown:
+		var distance: float = global_position.distance_to(target.global_position)
+		if distance <= smite_range and $ability_cooldown.is_stopped():
 			_on_ability()
 			
 func _on_attack(direction: Vector2) -> bool:
@@ -48,14 +48,6 @@ func _on_attack(direction: Vector2) -> bool:
 		
 func _on_ability() -> bool:
 	if not super(): return false
-	#Start casting the smite
-	$cast_timer.start()
-	$ability_cooldown.start()
-	_on_take_effect("stun", 1)
-	ability_cooldown = true
-	return true
-
-func _on_cast_timer_timeout() -> void:
 	var smite: Area2D = SMITE_AREA.instantiate()
 	if state != 'possessed':
 		smite.global_position = get_tree().get_first_node_in_group('player').global_position
@@ -64,3 +56,5 @@ func _on_cast_timer_timeout() -> void:
 		smite.global_position = get_global_mouse_position()
 		smite.attack_group = "enemy"
 	get_tree().current_scene.add_child(smite)
+	_on_take_effect("stun", 1)
+	return true

@@ -8,9 +8,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_we58l"]
 size = Vector2(59, 66)
 
-[node name="Enemy" type="RigidBody2D" unique_id=107408206 groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=1378295628 groups=["enemy"]]
 input_pickable = true
-angular_damp = 100.0
 script = ExtResource("1_orwns")
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1078032425]
@@ -70,12 +69,14 @@ texture = ExtResource("3_07tka")
 [node name="origin" type="Node2D" parent="weapon/spr" unique_id=2068338303]
 position = Vector2(-1, -11)
 
+[node name="nav" type="NavigationAgent2D" parent="." unique_id=1692933140]
+path_postprocessing = 1
+
 [connection signal="ability" from="." to="." method="_on_ability"]
 [connection signal="attack" from="." to="." method="_on_attack"]
 [connection signal="possession" from="." to="." method="_on_possession"]
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]
 [connection signal="take_effect" from="." to="." method="_on_take_effect"]
-[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="ability_cooldown" to="." method="_on_ability_cooldown_timeout"]
 [connection signal="timeout" from="possession_window" to="." method="_on_possession_window_timeout"]
 [connection signal="timeout" from="decay_timer" to="." method="_on_decay_timer_timeout"]
