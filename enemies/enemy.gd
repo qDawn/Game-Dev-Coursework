@@ -52,7 +52,7 @@ func _process(_delta: float) -> void:
 			#if player is in attack range, attack
 			if distance <= attack_range and $attack_cooldown.is_stopped() and $hesitation_timer.is_stopped() and not effects.has("stun"):
 				$exclamation.visible = true
-				$hesitation_timer.start(randf_range(0.1,1))
+				$hesitation_timer.start(randf_range(0.1,1.5))
 
 		if not effects.is_empty() and $effect_timer.is_stopped():
 			$effect_timer.start()
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		var distance: float = global_position.distance_to(target.global_position)
 		if abs(distance - min_range) < 10: return
 
-		var direction: Vector2 = global_position.direction_to(target.global_position+target.velocity*target.speed*delta*10)
+		var direction: Vector2 = global_position.direction_to(target.global_position+target.velocity*target.speed*delta*5)
 		if distance < min_range: direction *= -0.5
 		velocity += direction*speed*delta
 

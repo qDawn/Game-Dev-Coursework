@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 			if body in already_hit: continue #if the entity has already taken damage.
 			already_hit.append(body)
 			#deal damage
-			if attacking and (state == 'possessed' and body.is_in_group('enemy') or state != 'possessed' and body.is_in_group('player')):
+			if attacking and (state == 'possessed' and body.is_in_group('enemy') or state != 'possessed' and body.is_in_group('ally')):
 				body.emit_signal('take_damage', damage)
 		for area in $weapon_collision/melee_collision_area.get_overlapping_areas():
 			#destroy bullets
