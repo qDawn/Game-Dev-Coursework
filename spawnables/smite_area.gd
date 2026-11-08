@@ -3,7 +3,6 @@ extends Area2D
 var smite_damage : int = 15
 var attack_group : String
 
-
 func _process(_delta: float) -> void:
 	$Sprite2D.self_modulate = Color(1,1,1,($timer.wait_time-$timer.time_left)/$timer.wait_time)
 

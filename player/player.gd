@@ -17,6 +17,7 @@ func _physics_process(delta: float) -> void:
 		move_and_collide(velocity)
 	else: 
 		global_position = PlayerInfo.possession_target.global_position
+		velocity = PlayerInfo.possession_target.velocity
 	
 	#attacking logic
 	if Input.is_action_pressed('shoot'):
@@ -60,8 +61,7 @@ func _physics_process(delta: float) -> void:
 			#send a signal to the target to let it know that it is possessed.
 			selected_host.emit_signal('possession')
 
-
-	#cancel possession logic
+	#possession cancel logic
 	if Input.is_action_just_pressed('cancel_possession') and PlayerInfo.possession_target:
 		PlayerInfo.possession_target.emit_signal("take_damage", PlayerInfo.possession_target.max_health)
 

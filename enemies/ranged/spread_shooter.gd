@@ -35,7 +35,10 @@ func _on_attack(direction: Vector2) -> bool:
 		b.direction = direction.rotated(PI/12*i)
 		b.damage = damage
 		b.speed = 400
-		if state == 'possessed': b.attacking_group = "enemy"
+		if state == 'possessed': 
+			b.attacking_group = "enemy"
+		else:
+			b.attacking_group = "ally"
 		get_tree().current_scene.add_child(b)
 	$attack_cooldown.start()
 	

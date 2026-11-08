@@ -14,7 +14,7 @@ func _ready() -> void:
 	#how fast it moves
 	speed = 200
 	#how close it gets to the player
-	min_range = 500
+	min_range = 300
 	#how far it attacks from
 	attack_range = 500
 	#how far it can activate ability from
@@ -31,7 +31,7 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	super(delta)
 	if state == 'alive':
-		var distance: float = global_position.distance_to(target.global_position)
+		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
 		if distance <= smite_range and $ability_cooldown.is_stopped():
 			_on_ability()
 			
@@ -42,7 +42,10 @@ func _on_attack(direction: Vector2) -> bool:
 	b.direction = direction
 	b.damage = damage
 	b.speed = bullet_speed
-	if state == 'possessed': b.attacking_group = "enemy"
+	if state == 'possessed': 
+		b.attacking_group = "enemy"
+	else:
+		b.attacking_group = "ally"
 	get_tree().current_scene.add_child(b)
 	return true
 		

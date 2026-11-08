@@ -3,7 +3,7 @@ extends Node2D
 signal setup
 var lazer_width: float = 10
 var damage: float = 1
-var target_group: String = "player"
+var target_group: String = "ally"
 
 func _on_expiration_timer_timeout() -> void:
 	for body in $collision_box.get_overlapping_bodies():

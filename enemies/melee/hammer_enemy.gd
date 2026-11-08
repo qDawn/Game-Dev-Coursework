@@ -8,6 +8,7 @@ var ring_fading: bool = false
 var hammer_rest: Vector2
 
 func _ready() -> void:
+	super()
 	# Keep whatever position was set on weapon/spr in the editor.
 	max_health = 80
 	current_health = 80

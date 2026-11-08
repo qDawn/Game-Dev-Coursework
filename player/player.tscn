@@ -11,7 +11,7 @@ height = 50.00077
 [sub_resource type="CircleShape2D" id="CircleShape2D_tydw7"]
 radius = 96.0
 
-[node name="Player" type="CharacterBody2D" unique_id=737089679 groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=737089679 groups=["ally", "player"]]
 slide_on_ceiling = false
 script = ExtResource("1_4flbx")
 
@@ -22,6 +22,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_e41v5")
 
 [node name="hitbox" type="CollisionShape2D" parent="." unique_id=1340028014]
+visible = false
 position = Vector2(-1, 2)
 rotation = -0.00019150559
 shape = SubResource("CapsuleShape2D_i8dmy")

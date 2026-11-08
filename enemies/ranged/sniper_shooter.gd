@@ -30,9 +30,13 @@ func _on_attack(direction: Vector2) -> bool:
 	b.direction = direction
 	b.damage = damage
 	b.speed = bullet_speed
-	if state == 'possessed': b.attacking_group = "enemy"
-	b.emit_signal("add_effect","silence",3)
-	b.emit_signal("add_effect","slow",3)
+	if state == 'possessed': 
+		b.attacking_group = "enemy"
+	else:
+		b.attacking_group = "ally"
+	if not effects.has("silence"):
+		b.emit_signal("add_effect","silence",3)
+		b.emit_signal("add_effect","slow",3)
 	get_tree().current_scene.add_child(b)
 	$attack_cooldown.start()
 	return true

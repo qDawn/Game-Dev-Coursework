@@ -52,7 +52,10 @@ func _on_attack(direction: Vector2) -> bool:
 	b.direction = direction
 	b.damage = damage
 	b.speed = bullet_speed
-	if state == 'possessed': b.attacking_group = "enemy"
+	if state == 'possessed': 
+		b.attacking_group = "enemy"
+	else:
+		b.attacking_group = "ally"
 	get_tree().current_scene.add_child(b)
 	return true
 

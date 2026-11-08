@@ -33,7 +33,7 @@ func _on_attack(direction: Vector2) -> bool:
 		if state == "possessed": 
 			l.target_group = "enemy"
 		else: 
-			l.target_group = "player"  
+			l.target_group = "ally"  
 		l.damage = damage
 		
 		get_tree().root.add_child(l)

@@ -10,11 +10,11 @@ const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
 const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
 const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 
-const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
-									#{"resource": SNIPER_SHOOTER, "weight": 1},
+const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
+									{"resource": SNIPER_SHOOTER, "weight": 1},
 									#{"resource": SPREAD_SHOOTER, "weight": 1},
 									#{"resource": MELEE_ENEMY, "weight": 1},
-									{"resource": SMITE_ENEMY, "weight": 1},
+									#{"resource": SMITE_ENEMY, "weight": 1},
 									#{"resource": SMG_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
 									#{"resource": HAMMER_ENEMY, "weight": 1},
@@ -32,9 +32,8 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_enemy(SMITE_ENEMY)
 	#3 second buffer before starting to spawn
-	start(300)
+	start(3)
 	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn
@@ -53,7 +52,7 @@ func generate_enemies() -> void:
 func spawn_enemy(enemy_resource : Resource) -> void:
 	var enemy = enemy_resource.instantiate()
 	enemy.global_position = get_valid_enemy_spawn_position()
-	add_child(enemy)
+	get_tree().root.add_child(enemy)
 		
 ##method for getting a valid coord to spawn an enemy
 func get_valid_enemy_spawn_position() -> Vector2:

@@ -34,11 +34,10 @@ var attacking : bool = false
 var target: CharacterBody2D
 
 func _ready() -> void:
-	target = get_tree().get_first_node_in_group('player')
+	target = get_tree().get_first_node_in_group('ally')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	target = get_tree().get_first_node_in_group('player')
 	if state != 'dead':
 		var direction: Vector2
 		var distance: float
@@ -63,18 +62,15 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or stunned in effects
-	if effects.has("stun") or state == "dead": return
-	var velocity: Vector2 = Vector2.ZERO
+	if effects.has("stun"): return
+	velocity = Vector2.ZERO
 	if state == 'alive':
 		var distance: float = global_position.distance_to(target.global_position)
-		if abs(distance - min_range) > 10:
-			$nav.target_position = target.global_position
-			var next: Vector2 = $nav.get_next_path_position()
-			var direction: Vector2 = global_position.direction_to(next)
-			if distance < min_range: direction *= -0.5
-			velocity += direction*speed*delta
+		if abs(distance - min_range) < 10: return
 
-
+		var direction: Vector2 = global_position.direction_to(target.global_position+target.velocity*target.speed*delta*10)
+		if distance < min_range: direction *= -0.5
+		velocity += direction*speed*delta
 
 	elif state == 'possessed':
 		#move in the direction the player moves
@@ -161,7 +157,7 @@ func _on_possession() -> void:
 	#remove from enemy group
 	remove_from_group("enemy")
 	#add to player group
-	add_to_group("player")
+	add_to_group("ally")
 	#hide the corpse timer bar
 	$corpse_timer.hide()
 
