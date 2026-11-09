@@ -89,7 +89,7 @@ func _on_attack(_direction: Vector2) -> bool:
 
 #This method describes what the enemy does for its ability. Returns true if successful. False otherwise.
 func _on_ability() -> bool: 
-	if $ability_cooldown.is_stopped() and not effects.has("silence"): 
+	if $ability_cooldown.is_stopped() and $ability_active.is_stopped() and not effects.has("silence"): 
 		$ability_cooldown.start(ability_cooldown+ability_duration)
 		$ability_active.start(ability_duration)
 		return true

@@ -36,9 +36,17 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed('ability'):
 		if PlayerInfo.possession_target:
 			PlayerInfo.possession_target.emit_signal('ability')
-		elif $ability_cooldown.is_stopped():
+		elif $ability_cooldown.is_stopped() and $invincible_timer.is_stopped():
 			_on_start_invincibility(3)
 			$ability_cooldown.start(10)
+			
+	if not PlayerInfo.possession_target:
+		if not $invincible_timer.is_stopped():
+			$ui.emit_signal("ability_changed", $invincible_timer.time_left/$invincible_timer.wait_time)
+		elif not $ability_cooldown.is_stopped():
+			$ui.emit_signal("ability_changed", 1-$ability_cooldown.time_left/$ability_cooldown.wait_time)
+		else:
+			$ui.emit_signal("ability_changed", 1)
 
 	#possession logic
 	if Input.is_action_just_pressed('possess') and not PlayerInfo.possession_target:
@@ -83,6 +91,7 @@ func _on_invincible_timer_timeout() -> void:
 	set_collision_layer_value(1,true)
 	set_collision_mask_value(1,true)
 	set_collision_mask_value(5,false)
+	$ability_cooldown.start()
 
 func _on_start_invincibility(duration: float) -> void:
 	speed *= 1.2

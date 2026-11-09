@@ -2,6 +2,7 @@ extends CanvasLayer
 
 signal health_changed
 signal score_changed
+signal ability_changed
 
 @onready var player_health_bar: TextureProgressBar = %player_health_bar
 @onready var possession_health_bar: TextureProgressBar = $possession_health_bar
@@ -21,7 +22,6 @@ func _process(_delta: float) -> void:
 		possession_health_bar.visible = false
 
 	score_label.text = "Score  %d" % PlayerInfo.score
-	#wave info
 	wave_label.text = "Wave: %s" % max(PlayerInfo.wave-1,1)
 
 func _on_health_changed() -> void:
@@ -29,3 +29,6 @@ func _on_health_changed() -> void:
 
 func _on_score_changed() -> void:
 	score_label.text = "Score  %d" % PlayerInfo.score
+
+func _on_ability_changed(fill_fraction: float) -> void:
+	$ability_bar.value = fill_fraction*100
