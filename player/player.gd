@@ -47,6 +47,8 @@ func _physics_process(delta: float) -> void:
 			$ui.emit_signal("ability_changed", 1-$ability_cooldown.time_left/$ability_cooldown.wait_time)
 		else:
 			$ui.emit_signal("ability_changed", 1)
+	else:
+		$ui.emit_signal("ability_changed",PlayerInfo.possession_target.get_ability_cooldown())
 
 	#possession logic
 	if Input.is_action_just_pressed('possess') and not PlayerInfo.possession_target:

@@ -69,6 +69,7 @@ func _on_ability() -> bool:
 	return true
 
 func _on_ability_active_timeout() -> void:
+	super()
 	speed = base_speed
 	attack_cooldown = base_attack_cooldown
 	$halo.visible = false

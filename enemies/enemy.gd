@@ -90,7 +90,6 @@ func _on_attack(_direction: Vector2) -> bool:
 #This method describes what the enemy does for its ability. Returns true if successful. False otherwise.
 func _on_ability() -> bool: 
 	if $ability_cooldown.is_stopped() and $ability_active.is_stopped() and not effects.has("silence"): 
-		$ability_cooldown.start(ability_cooldown+ability_duration)
 		$ability_active.start(ability_duration)
 		return true
 	return false
@@ -123,6 +122,10 @@ func _on_take_damage(d: float) -> void:
 	damage_ui.text = str(d)
 	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
 	get_tree().root.add_child(damage_ui)
+
+
+func _on_ability_active_timeout() -> void:
+	$ability_cooldown.start()
 
 func _on_ability_cooldown_timeout() -> void:
 	ability_cooldown = false
@@ -175,7 +178,6 @@ func _on_effect_timer_timeout() -> void:
 func _on_take_effect(effect: String, duration: float) -> void:
 	effects[effect] = max(effects.get(effect,0),duration)
 
-
 #Method for aiming the weapon
 func aim(direction: Vector2):
 	if !attacking and not effects.has("stun"):
@@ -186,3 +188,11 @@ func aim(direction: Vector2):
 func _on_hesitation_timer_timeout() -> void:
 	$exclamation.visible = false
 	_on_attack(Vector2.from_angle($weapon.rotation))
+
+#Method to get the current ability cooldown/active remaining time.
+func get_ability_cooldown() -> float:
+	if not $ability_active.is_stopped():
+		return $ability_active.time_left/$ability_active.wait_time
+	elif not $ability_cooldown.is_stopped():
+		return 1-$ability_cooldown.time_left/$ability_cooldown.wait_time
+	return 1
