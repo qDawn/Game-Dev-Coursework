@@ -67,4 +67,4 @@ func get_player_direction() -> Vector2:
 	#vertical movement
 	if Input.is_action_pressed("move_up"): direction.y -= 1
 	elif Input.is_action_pressed("move_down"): direction.y += 1
-	return direction
+	return direction.normalized()

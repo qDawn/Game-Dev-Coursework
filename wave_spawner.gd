@@ -11,17 +11,19 @@ const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 const MELEE_ENEMY = preload("uid://cctu3opvidee6")
 const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
 const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
+const LANCE_ENEMY = preload("uid://bcdpacwxtejuo")
 
 
 const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": SPREAD_SHOOTER, "weight": 1},
 									#{"resource": SNIPER_SHOOTER, "weight": 1},
-									{"resource": SMITE_SHOOTER, "weight": 1},
+									#{"resource": SMITE_SHOOTER, "weight": 1},
 									#{"resource": MELEE_ENEMY, "weight": 1},
 									#{"resource": BURST_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
 									#{"resource": HAMMER_ENEMY, "weight": 1},
-									#{"resource": LAZER_ENEMY, "weight": 1}
+									#{"resource": LAZER_ENEMY, "weight": 1},
+									{"resource": LANCE_ENEMY, "weight": 1}
 									]
 
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have

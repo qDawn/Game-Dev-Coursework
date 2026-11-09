@@ -6,6 +6,10 @@
 [node name="lance_enemy" unique_id=107408206 instance=ExtResource("1_rl3nj")]
 script = ExtResource("2_52gmk")
 
-[node name="effect_timer" parent="." index="8" unique_id=472479290]
-one_shot = false
-autostart = true
+[node name="CollisionShape2D" parent="weapon_collision/melee_collision_area" parent_id_path=PackedInt32Array(1046232765) index="0" unique_id=733389090]
+position = Vector2(-2.0000043, -92)
+rotation = 1.5707964
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(93.42146, -3.5222e-06)
+scale = Vector2(1, 1.8200324)

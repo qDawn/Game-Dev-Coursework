@@ -1,11 +1,10 @@
 extends "res://enemies/melee/melee_enemy.gd"
 
-var normal_speed : int
+var max_normal_speed : int
 var max_charge_speed : int
 var ability_on :bool = false
 
 # make the sprite lime bike lancers
-# speed increases until 1000, but cannot change direction.
 # after it collides with 1 enemy, charge stops 
 
 func _ready() -> void:
@@ -13,7 +12,7 @@ func _ready() -> void:
 	max_health = 35
 	current_health = 35
 	speed = 250
-	normal_speed = 250
+	max_normal_speed = 250
 	max_charge_speed = 1000
 	min_range = 70
 	attack_range = 180
@@ -40,26 +39,37 @@ func _on_attack(direction: Vector2) -> bool:
 	return true
 	
 func _process(delta : float) -> void:
-	if ability_on:
-		if speed < max_charge_speed:
-			speed += 250*delta
-	else:
+	if !ability_on or state == 'dead':
 		super(delta)
 		if state == 'alive':
 			_on_ability()
+			if speed > max_normal_speed:
+				speed = min(max_normal_speed, speed - 500*delta)
+	else:
 		
+		if speed < max_charge_speed:
+			speed += 250*delta
+		
+func _physics_process(delta: float) -> void:
+	if !ability_on:
+		super(delta)
+		return
+		
+	# if ability is on, the direction cannot be changed
+	if effects.has("stun") or not target: return
+	if effects.has("slow"): velocity *= 0.5
+	move_and_collide(velocity)
+	
 	
 func _on_ability() -> bool:
 	if not super(): return false
 	
-	var  target_position = get_tree().get_first_node_in_group('ally').global_position
-	speed = speed + 50
+	speed = max_normal_speed + 50
 	ability_on = true
 	return true
 	
 func _on_ability_active_timeout() -> void:
 	super()
-	speed = normal_speed
 	ability_on = false
 
 	
