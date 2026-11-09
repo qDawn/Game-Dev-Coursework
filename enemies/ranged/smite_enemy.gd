@@ -31,7 +31,7 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	super(delta)
 	if state == 'alive':
-		var distance: float = global_position.distance_to(get_tree().get_first_node_in_group('player').global_position)
+		var distance: float = global_position.distance_to(target.global_position)
 		if distance <= smite_range and $ability_cooldown.is_stopped():
 			_on_ability()
 			

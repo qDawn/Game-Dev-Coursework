@@ -3,11 +3,14 @@ extends Area2D
 var speed: float = 150
 var direction : Vector2
 var damage: float = 1
-var effects: Dictionary[String,int] = {}
+var effects: Dictionary[String,float] = {}
 var splitting: bool = false
 var attacking_group: String = "ally"
 var already_hit_entity: bool = false
 signal add_effect
+
+func _ready() -> void:
+	connect("add_effect",_on_add_effect)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

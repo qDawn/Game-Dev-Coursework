@@ -5,6 +5,10 @@ var lazer_width: float = 10
 var damage: float = 1
 var target_group: String = "ally"
 
+func _ready() -> void:
+	connect("setup",_on_setup)
+
+
 func _on_expiration_timer_timeout() -> void:
 	for body in $collision_box.get_overlapping_bodies():
 		if body.is_in_group(target_group):

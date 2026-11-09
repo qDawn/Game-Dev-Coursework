@@ -10,6 +10,10 @@ signal ability_changed
 @onready var wave_label: Label = $wave_label
 
 func _ready() -> void:
+	connect("health_changed",_on_health_changed)
+	connect("score_changed",_on_score_changed)
+	connect("ability_changed",_on_ability_changed)
+	
 	emit_signal("health_changed")
 	emit_signal("score_changed")
 

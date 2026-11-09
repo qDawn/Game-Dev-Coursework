@@ -12,6 +12,7 @@ height = 50.00077
 radius = 96.0
 
 [node name="Player" type="CharacterBody2D" unique_id=737089679 groups=["ally", "player"]]
+collision_mask = 17
 slide_on_ceiling = false
 script = ExtResource("1_4flbx")
 
@@ -45,8 +46,6 @@ one_shot = true
 
 [node name="ui" parent="." unique_id=1116760094 instance=ExtResource("2_mxepk")]
 
-[connection signal="cancel_possession" from="." to="." method="_on_cancel_possession"]
-[connection signal="take_damage" from="." to="." method="_on_take_damage"]
 [connection signal="timeout" from="invincible_timer" to="." method="_on_invincible_timer_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="ability_cooldown" to="." method="_on_ability_cooldown_timeout"]

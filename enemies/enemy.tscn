@@ -69,11 +69,6 @@ texture = ExtResource("3_07tka")
 [node name="origin" type="Node2D" parent="weapon/spr" unique_id=2068338303]
 position = Vector2(-1, -11)
 
-[connection signal="ability" from="." to="." method="_on_ability"]
-[connection signal="attack" from="." to="." method="_on_attack"]
-[connection signal="possession" from="." to="." method="_on_possession"]
-[connection signal="take_damage" from="." to="." method="_on_take_damage"]
-[connection signal="take_effect" from="." to="." method="_on_take_effect"]
 [connection signal="timeout" from="ability_cooldown" to="." method="_on_ability_cooldown_timeout"]
 [connection signal="timeout" from="ability_active" to="." method="_on_ability_active_timeout"]
 [connection signal="timeout" from="possession_window" to="." method="_on_possession_window_timeout"]

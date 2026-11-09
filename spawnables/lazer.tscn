@@ -22,6 +22,5 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="collision_box" unique_id=971317122]
 shape = SubResource("SegmentShape2D_4iejr")
 
-[connection signal="setup" from="." to="." method="_on_setup"]
 [connection signal="timeout" from="expiration_timer" to="." method="_on_expiration_timer_timeout"]
 [connection signal="timeout" from="prime_timer" to="." method="_on_prime_timer_timeout"]

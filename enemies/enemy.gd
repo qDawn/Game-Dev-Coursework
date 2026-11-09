@@ -34,6 +34,12 @@ var attacking : bool = false
 var target: CharacterBody2D
 
 func _ready() -> void:
+	connect("attack",_on_attack)
+	connect("ability",_on_ability)
+	connect("take_damage",_on_take_damage)
+	connect("take_effect",_on_take_effect)
+	connect("possession",_on_possession)
+	
 	target = get_tree().get_first_node_in_group('ally')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

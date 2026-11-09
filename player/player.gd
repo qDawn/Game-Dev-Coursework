@@ -10,6 +10,10 @@ var speed: float = BASE_SPEED
 var ability_cooldown: bool = false
 var possession_cooldown: bool = false
 
+func _ready() -> void:
+	connect("take_damage",_on_take_damage)
+	connect("cancel_possession",_on_cancel_possession)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if not PlayerInfo.possession_target: #if there is currently no possession target

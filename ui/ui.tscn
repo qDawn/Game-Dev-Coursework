@@ -46,7 +46,3 @@ offset_top = 560.0
 offset_right = 768.0
 offset_bottom = 587.0
 show_percentage = false
-
-[connection signal="ability_changed" from="." to="." method="_on_ability_changed"]
-[connection signal="health_changed" from="." to="." method="_on_health_changed"]
-[connection signal="score_changed" from="." to="." method="_on_score_changed"]
