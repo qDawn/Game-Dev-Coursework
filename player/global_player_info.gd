@@ -42,9 +42,6 @@ func _process(delta: float) -> void:
 
 func take_damage(amount: int) -> void:
 	current_health = max(current_health - amount, 0)
-	if current_health ==0:
-		run_active = false
-		player_died.emit()
 
 func add_score(amount: int) -> void:
 	if not run_active: return

@@ -34,8 +34,6 @@ func _ready() -> void:
 	_make_button("Main menu", column, _on_menu_pressed)
 	_make_button("Quit", column, get_tree().quit)
 
-	PlayerInfo.player_died.connect(_on_player_died)
-
 
 func _make_button(text: String, parent: Node, callback: Callable) -> Button:
 	var button := Button.new()
