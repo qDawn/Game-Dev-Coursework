@@ -38,13 +38,13 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed('ability'):
 		if PlayerInfo.possession_target:
 			PlayerInfo.possession_target.emit_signal('ability')
-		elif $ability_cooldown.is_stopped() and $invincible_timer.is_stopped():
+		elif $ability_cooldown.is_stopped() and $ability_active.is_stopped():
 			_on_start_invincibility(3)
-			ability_cooldown = 5
+			$ability_active.start(3)
 			
 	if not PlayerInfo.possession_target:
-		if not $invincible_timer.is_stopped():
-			$ui.emit_signal("ability_changed", $invincible_timer.time_left/$invincible_timer.wait_time)
+		if not $ability_active.is_stopped():
+			$ui.emit_signal("ability_changed", $ability_active.time_left/$ability_active.wait_time)
 		elif not $ability_cooldown.is_stopped():
 			$ui.emit_signal("ability_changed", 1-$ability_cooldown.time_left/$ability_cooldown.wait_time)
 		else:
@@ -88,13 +88,11 @@ func _on_take_damage(_damage: int) -> void:
 	if PlayerInfo.current_health <= 0:
 		$"..".emit_signal("gameover")
 		return
-	ability_cooldown = 3
-	_on_start_invincibility(2)
+	_on_start_invincibility(1)
 	#send a signal to the HUD
 	$ui.emit_signal("health_changed")
 
 func _on_invincible_timer_timeout() -> void:
-	$ability_cooldown.start(ability_cooldown)
 	speed = BASE_SPEED
 	$sprite.self_modulate = Color(1,1,1,1)
 	set_collision_layer_value(1,true)
@@ -111,11 +109,13 @@ func _on_start_invincibility(duration: float) -> void:
 
 func _on_cancel_possession() -> void:
 	#brief invincibility
-	ability_cooldown = 5
 	_on_start_invincibility(0.5)
-	$ability_cooldown.start()
+	$ability_cooldown.start(ability_cooldown)
 	#reset visibility and hitbox
 	$sprite.visible = true
 	$hitbox.disabled = false
 	#reset the possession target
 	PlayerInfo.possession_target = null
+
+func _on_ability_active_timeout() -> void:
+	$ability_cooldown.start(ability_cooldown)

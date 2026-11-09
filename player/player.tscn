@@ -44,8 +44,13 @@ one_shot = true
 [node name="ability_cooldown" type="Timer" parent="." unique_id=2027832323]
 one_shot = true
 
+[node name="ability_active" type="Timer" parent="." unique_id=1997904286]
+wait_time = 3.0
+one_shot = true
+
 [node name="ui" parent="." unique_id=1116760094 instance=ExtResource("2_mxepk")]
 
 [connection signal="timeout" from="invincible_timer" to="." method="_on_invincible_timer_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="ability_cooldown" to="." method="_on_ability_cooldown_timeout"]
+[connection signal="timeout" from="ability_active" to="." method="_on_ability_active_timeout"]
