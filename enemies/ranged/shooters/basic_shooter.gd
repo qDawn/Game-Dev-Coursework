@@ -29,8 +29,6 @@ func _on_take_damage(num: float) -> void:
 	if current_health - num <= 0 and not $ability_active.is_stopped():
 		current_health = num + 1
 	super(num)
-	if state == "dead":
-		_on_ability_active_timeout()
 
 func _on_decay_timer_timeout() -> void:
 	if $ability_active.is_stopped():

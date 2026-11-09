@@ -15,10 +15,10 @@ const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
 
 const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": SPREAD_SHOOTER, "weight": 1},
-									{"resource": SNIPER_SHOOTER, "weight": 1},
+									#{"resource": SNIPER_SHOOTER, "weight": 1},
 									#{"resource": SMITE_SHOOTER, "weight": 1},
 									#{"resource": MELEE_ENEMY, "weight": 1},
-									#{"resource": BURST_SHOOTER, "weight": 1},
+									{"resource": BURST_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
 									#{"resource": HAMMER_ENEMY, "weight": 1},
 									#{"resource": LAZER_ENEMY, "weight": 1}

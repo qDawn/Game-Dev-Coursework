@@ -2,6 +2,34 @@
 
 [ext_resource type="PackedScene" uid="uid://dl7fp1ijpp6r" path="res://enemies/enemy_shooter.tscn" id="1_s6bwl"]
 [ext_resource type="Script" uid="uid://bas77bi1acgrn" path="res://enemies/ranged/shooters/burst_shooter.gd" id="2_sr42r"]
+[ext_resource type="Texture2D" uid="uid://rnyqkfb2tyjo" path="res://assets/sprites/smg_shooter_body.png" id="3_ohgwe"]
+[ext_resource type="Texture2D" uid="uid://bnp50fm48o5ov" path="res://assets/sprites/smg_shooter_gun.png" id="4_efqmw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_843cg"]
+size = Vector2(38, 55)
 
 [node name="burst_shooter" unique_id=107408206 instance=ExtResource("1_s6bwl")]
 script = ExtResource("2_sr42r")
+
+[node name="sprite" parent="." index="0" unique_id=1078032425]
+position = Vector2(-4.499997, 7.0000005)
+scale = Vector2(0.19166669, 0.1775701)
+texture = ExtResource("3_ohgwe")
+
+[node name="collision_shape" parent="." index="3" unique_id=1561700062]
+position = Vector2(1, 8.5)
+shape = SubResource("RectangleShape2D_843cg")
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(46, 6)
+scale = Vector2(0.15915494, 0.18032786)
+texture = ExtResource("4_efqmw")
+
+[node name="origin" parent="weapon/spr" index="0" unique_id=2068338303]
+position = Vector2(157.07965, -38.818184)
+
+[node name="burst_timer" type="Timer" parent="." index="13" unique_id=1962931980]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="burst_timer" to="." method="_on_burst_timer_timeout"]
