@@ -1,8 +1,6 @@
 extends Node
 
 ##This is a global script. EVERYTHING in the scene can access it.
-signal player_died
-
 const max_health: float = 3
 ## Scoring points
 const POINTS_PER_SECOND: int = 10

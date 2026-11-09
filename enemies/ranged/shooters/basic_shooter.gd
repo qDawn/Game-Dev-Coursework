@@ -22,6 +22,12 @@ func _ready() -> void:
 	#how long the ability lasts
 	ability_duration = 2
 
+##This method describes how the enemy attacks
+func _on_attack(direction: Vector2) -> bool:
+	if not super(direction): return false
+	fire_bullet(direction, bullet_speed, damage, BASIC_BULLET)
+	return true
+
 func _on_take_damage(num: float) -> void:
 	#at less than half hp, use ability.
 	if current_health - num <= max_health*0.5 and $ability_cooldown.is_stopped() and state != "possessed" and not used_ability:

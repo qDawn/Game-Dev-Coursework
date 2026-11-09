@@ -7,11 +7,7 @@ var bullet_speed: int = 500
 ##how inaccurate the bullets are
 var inaccuracy: float = 1
 
-##This method describes how the enemy attacks
-func _on_attack(direction: Vector2) -> bool:
-	if not super(direction): return false
-	fire_bullet(direction, bullet_speed, damage, BASIC_BULLET)
-	return true
+
 
 ##Method to fire a bullet.
 func fire_bullet(direction: Vector2, b_speed: float, b_damage: float, bullet_type: Resource) -> Area2D:

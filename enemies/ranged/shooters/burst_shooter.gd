@@ -34,12 +34,12 @@ func _on_attack(direction: Vector2) -> bool:
 	return true
 
 func _on_burst_timer_timeout() -> void:
-	burst_current_count += 1
 	#if the max burst has been reached, stop calling itself
 	if state == "dead" or burst_current_count == burst_max_count: return
 	#spawn bullet
 	var direction: Vector2 = Vector2.from_angle($weapon.rotation)
 	fire_bullet(direction,bullet_speed,damage,BASIC_BULLET)
+	burst_current_count += 1
 	$burst_timer.start()
 
 func _on_ability() -> bool:

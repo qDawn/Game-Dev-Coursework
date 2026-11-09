@@ -29,6 +29,12 @@ func _process(delta : float) -> void:
 		if distance <= smite_range and $ability_cooldown.is_stopped():
 			_on_ability()
 
+##This method describes how the enemy attacks
+func _on_attack(direction: Vector2) -> bool:
+	if not super(direction): return false
+	fire_bullet(direction, bullet_speed, damage, BASIC_BULLET)
+	return true
+
 func _on_ability() -> bool:
 	if not super(): return false
 	var smite: Area2D = SMITE_AREA.instantiate()
