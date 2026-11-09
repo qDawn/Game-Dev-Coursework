@@ -114,16 +114,17 @@ func _on_take_damage(d: float) -> void:
 			$corpse_timer.show()
 			set_collision_layer_value(1,false)
 			set_collision_mask_value(1,false)
-			$sprite.self_modulate = Color(1,1,1,0.8)
+			$sprite.self_modulate = Color(1,1,1,0.5)
 		elif state == 'possessed':
 			#send signal to player that the possessed vessel has died.
 			get_tree().get_first_node_in_group('player').emit_signal('cancel_possession')
 			queue_free()
 			
 	#damage indication
-	var tween_damage: Tween = get_tree().create_tween()
-	tween_damage.tween_property($sprite,"self_modulate",Color(1,0,0),0.1)
-	tween_damage.tween_property($sprite,"self_modulate",Color(1,1,1),0.1)
+	if not state == "dead":
+		var tween_damage: Tween = get_tree().create_tween()
+		tween_damage.tween_property($sprite,"self_modulate",Color(1,0,0),0.1)
+		tween_damage.tween_property($sprite,"self_modulate",Color(1,1,1),0.1)
 	
 	var damage_ui: Label = preload("res://ui/damage_ui.tscn").instantiate()
 	damage_ui.text = str(d)
