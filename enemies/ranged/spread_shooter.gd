@@ -48,3 +48,6 @@ func _on_attack(direction: Vector2) -> bool:
 		tween_flash.tween_property($halo,"self_modulate",Color(1,1,1,1),0.5)
 		tween_flash.tween_property($halo,"self_modulate",Color(1,1,1,0),0.5)
 	return true
+
+func get_ability_cooldown() -> float:
+	return (attack_count % 3)/3.0

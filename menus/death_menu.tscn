@@ -5,10 +5,10 @@ script/source = "extends CanvasLayer
 
 const MAIN_MENU := \"res://Scenes/ui/main_menu.tscn\"
 
-@onready var score_label: Label = %ScoreLabel
-@onready var restart_button: Button = %RestartButton
-@onready var menu_button: Button = %MenuButton
-@onready var quit_button: Button = %QuitButton
+@onready var score_label: Label = $CenterContainer/VBoxContainer/ScoreLabel
+
+func _ready() -> void:
+	score_label.text = \"Final score: %s\" % PlayerInfo.score
 
 func _on_restart_button_pressed() -> void:
 	PlayerInfo.start_new_run()
@@ -19,7 +19,7 @@ func _on_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file(MAIN_MENU)
 
 func _on_quit_button_pressed() -> void:
-	get_tree().quit
+	get_tree().quit()
 "
 
 [node name="DeathMenu" type="CanvasLayer" unique_id=1338676055]

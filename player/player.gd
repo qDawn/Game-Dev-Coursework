@@ -6,9 +6,7 @@ signal cancel_possession
 const PLAYER_BULLET = preload("uid://bys54qkalrh2b")
 const BASE_SPEED: float = 400
 var speed: float = BASE_SPEED
-
-var ability_cooldown: bool = false
-var possession_cooldown: bool = false
+var ability_cooldown: float = 5
 
 func _ready() -> void:
 	connect("take_damage",_on_take_damage)
@@ -42,6 +40,7 @@ func _physics_process(delta: float) -> void:
 			PlayerInfo.possession_target.emit_signal('ability')
 		elif $ability_cooldown.is_stopped() and $invincible_timer.is_stopped():
 			_on_start_invincibility(3)
+			ability_cooldown = 5
 			
 	if not PlayerInfo.possession_target:
 		if not $invincible_timer.is_stopped():
@@ -83,17 +82,19 @@ func _physics_process(delta: float) -> void:
 		$ability_cooldown.stop()
 
 func _on_take_damage(_damage: int) -> void:
+	if not $invincible_timer.is_stopped(): return
 	#player only ever takes 1 damage from sources, become invincible.
 	PlayerInfo.take_damage(1)
 	if PlayerInfo.current_health <= 0:
 		$"..".emit_signal("gameover")
-	
+		return
+	ability_cooldown = 3
 	_on_start_invincibility(2)
 	#send a signal to the HUD
 	$ui.emit_signal("health_changed")
 
 func _on_invincible_timer_timeout() -> void:
-	$ability_cooldown.start($invincible_timer.wait_time*1.5)
+	$ability_cooldown.start(ability_cooldown)
 	speed = BASE_SPEED
 	$sprite.self_modulate = Color(1,1,1,1)
 	set_collision_layer_value(1,true)
@@ -110,6 +111,7 @@ func _on_start_invincibility(duration: float) -> void:
 
 func _on_cancel_possession() -> void:
 	#brief invincibility
+	ability_cooldown = 5
 	_on_start_invincibility(0.5)
 	$ability_cooldown.start()
 	#reset visibility and hitbox

@@ -23,7 +23,7 @@ var damage: float = 5
 #How long the ability cooldown is
 var ability_cooldown: float = 6
 #how long the ability lasts
-var ability_duration: float = 0
+var ability_duration: float = 0.01
 #valid states include: 'alive', 'dead', 'possessed'
 var state: String = 'alive'
 # Stores effects of the enemy. Format: {name: duration}
@@ -44,7 +44,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if state != 'dead':
+	if state != 'dead' and target:
 		var direction: Vector2
 		var distance: float
 		if state == 'possessed':
@@ -68,7 +68,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or stunned in effects
-	if effects.has("stun"): return
+	if effects.has("stun") or not target: return
 	velocity = Vector2.ZERO
 	if state == 'alive':
 		var distance: float = global_position.distance_to(target.global_position)
@@ -131,7 +131,7 @@ func _on_take_damage(d: float) -> void:
 
 
 func _on_ability_active_timeout() -> void:
-	$ability_cooldown.start()
+	$ability_cooldown.start(ability_cooldown)
 
 func _on_ability_cooldown_timeout() -> void:
 	ability_cooldown = false
@@ -193,7 +193,8 @@ func aim(direction: Vector2):
 
 func _on_hesitation_timer_timeout() -> void:
 	$exclamation.visible = false
-	_on_attack(Vector2.from_angle($weapon.rotation))
+	if state == "alive":
+		_on_attack(Vector2.from_angle($weapon.rotation))
 
 #Method to get the current ability cooldown/active remaining time.
 func get_ability_cooldown() -> float:
