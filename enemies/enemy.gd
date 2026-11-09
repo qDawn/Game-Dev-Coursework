@@ -61,8 +61,6 @@ func _process(_delta: float) -> void:
 				$exclamation.visible = true
 				$hesitation_timer.start(randf_range(0.1,1.5))
 
-		if not effects.is_empty() and $effect_timer.is_stopped():
-			$effect_timer.start()
 	else:
 		#update the corpse timer bar with the time left to possess
 		$corpse_timer.value = $possession_window.time_left
