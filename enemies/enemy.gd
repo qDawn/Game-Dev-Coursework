@@ -10,24 +10,25 @@ signal possession
 var max_health: float = 10
 var current_health: float = 10
 
-#how fast it moves
+##how fast the enemy moves
 var speed: float = 200
-#how close it moves to the player
+##how close the enemy moves to the player
 var min_range: float = 200
-#how far it attacks from
+##how far the enemy attacks from
 var attack_range: float = 500
-#how long the attack cooldown is
+##how long the attack cooldown is
 var attack_cooldown: float = 1
-#how much damage the enemy does
+##how much damage the enemy does
 var damage: float = 5
-#How long the ability cooldown is
+##How long the ability cooldown is
 var ability_cooldown: float = 6
-#how long the ability lasts
+##how long the ability lasts
 var ability_duration: float = 0.01
-#valid states include: 'alive', 'dead', 'possessed'
+##valid states include: 'alive', 'dead', 'possessed'
 var state: String = 'alive'
-# Stores effects of the enemy. Format: {name: duration}
-#current effects include: slow, bleed, stun, silence.
+
+## Stores effects of the enemy. Format: {name: duration}
+## current effects include: slow, bleed, stun, silence.
 var effects : Dictionary[String,float] = {}
 #whether the enemy is currently attacking
 var attacking : bool = false

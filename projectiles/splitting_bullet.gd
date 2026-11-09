@@ -1,4 +1,4 @@
-extends "res://projectiles/bullet.gd"
+extends "res://projectiles/basic_bullet.gd"
 
 const ENEMY_BULLET = preload("uid://mq4hucp4nyfe")
 var split_qty = 3

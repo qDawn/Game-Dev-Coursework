@@ -1,21 +1,24 @@
 extends Timer
 
-const SPREAD_SHOOTER = preload("uid://c0x624xsja20d")
-const SNIPER_SHOOTER = preload("uid://bji3srgvip7ib")
-const BASIC_SHOOTER = preload("uid://n16anm4mbvgt")
-const MELEE_ENEMY = preload("uid://cctu3opvidee6")
-const SMITE_ENEMY = preload("uid://b7fvihjufnxxq")
-const SMG_SHOOTER = preload("uid://b2w4alq8aeaio")
-const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
-const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
+const BASIC_SHOOTER = preload("uid://bno1bbsktwtt8")
+const SPREAD_SHOOTER = preload("uid://4bjlne2f0iwv")
+const SNIPER_SHOOTER = preload("uid://cjii0aebj2eeo")
+const BURST_SHOOTER = preload("uid://cwjgu1eo76ek0")
+const SMITE_SHOOTER = preload("uid://bj6iw06pnx22b")
 const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 
+
+const MELEE_ENEMY = preload("uid://cctu3opvidee6")
+const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
+const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
+
+
 const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
-									{"resource": SPREAD_SHOOTER, "weight": 1},
-									#{"resource": SNIPER_SHOOTER, "weight": 1},
-									#{"resource": SMITE_ENEMY, "weight": 1},
+									#{"resource": SPREAD_SHOOTER, "weight": 1},
+									{"resource": SNIPER_SHOOTER, "weight": 1},
+									#{"resource": SMITE_SHOOTER, "weight": 1},
 									#{"resource": MELEE_ENEMY, "weight": 1},
-									#{"resource": SMG_SHOOTER, "weight": 1},
+									#{"resource": BURST_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
 									#{"resource": HAMMER_ENEMY, "weight": 1},
 									#{"resource": LAZER_ENEMY, "weight": 1}

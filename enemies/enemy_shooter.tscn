@@ -1,12 +1,11 @@
-[gd_scene format=3 uid="uid://n16anm4mbvgt"]
+[gd_scene format=3 uid="uid://dl7fp1ijpp6r"]
 
 [ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/enemy.tscn" id="1_556hm"]
-[ext_resource type="Script" uid="uid://bp6lkqhsm1flj" path="res://enemies/ranged/basic_shooter.gd" id="2_pc235"]
+[ext_resource type="Script" uid="uid://b3lhbf17s4eja" path="res://enemies/enemy_shooter.gd" id="2_mq5kd"]
 [ext_resource type="Texture2D" uid="uid://4quce3p51xe4" path="res://assets/sprites/halo.png" id="3_c02pt"]
 
-[node name="basic_shooter" unique_id=107408206 instance=ExtResource("1_556hm")]
-script = ExtResource("2_pc235")
-bullet_speed = 500
+[node name="enemy_shooter" unique_id=107408206 instance=ExtResource("1_556hm")]
+script = ExtResource("2_mq5kd")
 
 [node name="halo" type="Sprite2D" parent="." index="1" unique_id=817740564]
 visible = false
@@ -20,5 +19,3 @@ wait_time = 12.0
 
 [node name="ability_active" parent="." index="6" unique_id=853278684]
 wait_time = 8.0
-
-[connection signal="timeout" from="ability_active" to="." method="_on_ability_active_timeout"]

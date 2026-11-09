@@ -1,8 +1,5 @@
-extends "res://enemies/enemy.gd"
+extends "res://enemies/enemy_shooter.gd"
 
-const ENEMY_BULLET = preload("uid://mq4hucp4nyfe")
-#how fast its projectiles move
-@export var bullet_speed: int = 500
 const base_speed: float = 200
 const base_attack_cooldown: float = 1
 var used_ability: bool = false
@@ -25,7 +22,6 @@ func _ready() -> void:
 	#how long the ability lasts
 	ability_duration = 2
 
-
 func _on_take_damage(num: float) -> void:
 	#at less than half hp, use ability.
 	if current_health - num <= max_health*0.5 and $ability_cooldown.is_stopped() and state != "possessed" and not used_ability:
@@ -43,21 +39,6 @@ func _on_decay_timer_timeout() -> void:
 func _on_possession() -> void:
 	super()
 	ability_duration *= 2
-
-##This method describes how the enemy attacks
-func _on_attack(direction: Vector2) -> bool:
-	if not super(direction): return false
-	var b: Area2D = ENEMY_BULLET.instantiate()
-	b.global_position = $weapon/spr/origin.global_position
-	b.direction = direction
-	b.damage = damage
-	b.speed = bullet_speed
-	if state == 'possessed': 
-		b.attacking_group = "enemy"
-	else:
-		b.attacking_group = "ally"
-	get_tree().current_scene.add_child(b)
-	return true
 
 func _on_ability() -> bool:
 	if not super(): return false

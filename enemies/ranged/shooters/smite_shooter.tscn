@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bj6iw06pnx22b"]
+
+[ext_resource type="PackedScene" uid="uid://dl7fp1ijpp6r" path="res://enemies/enemy_shooter.tscn" id="1_756cp"]
+[ext_resource type="Script" uid="uid://b0gas2k32wy55" path="res://enemies/ranged/shooters/smite_shooter.gd" id="2_v1p38"]
+
+[node name="smite_shooter" unique_id=107408206 instance=ExtResource("1_756cp")]
+script = ExtResource("2_v1p38")
+
+[node name="halo" parent="." index="1" unique_id=817740564]
+visible = true
+self_modulate = Color(1, 1, 1, 0)

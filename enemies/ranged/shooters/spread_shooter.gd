@@ -1,10 +1,8 @@
-extends "res://enemies/enemy.gd"
+extends "res://enemies/enemy_shooter.gd"
 
-const ENEMY_BULLET = preload("uid://mq4hucp4nyfe")
 const SPLITTING_BULLET = preload("uid://bg0r6w8dw8fou")
 
 #how fast its projectiles move
-@export var bullet_speed: int = 500
 var bullet_qty: int = 3
 var attack_count: int = 0
 
@@ -24,23 +22,18 @@ func _ready() -> void:
 	bullet_speed = 500
 	#how much damage the projectiles do
 	damage = 5
+	#how fast the bullet is
+	bullet_speed = 500
 
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2) -> bool:
 	if not super(direction): return false
 	attack_count += 1
 	for i in range(int(-bullet_qty/2.0),int((bullet_qty+1)/2.0)):
-		var b: Area2D = SPLITTING_BULLET.instantiate() if attack_count % 3 == 0 else ENEMY_BULLET.instantiate() 
-		b.global_position = $weapon/spr/origin.global_position
-		b.direction = direction.rotated(PI/12*i)
-		b.damage = damage
-		b.speed = 400
-		if state == 'possessed': 
-			b.attacking_group = "enemy"
+		if attack_count % 3 == 0:
+			fire_bullet(direction.rotated(PI/12*i),bullet_speed,damage,SPLITTING_BULLET)
 		else:
-			b.attacking_group = "ally"
-		get_tree().current_scene.add_child(b)
-	$attack_cooldown.start()
+			fire_bullet(direction.rotated(PI/12*i),bullet_speed,damage,BASIC_BULLET)
 	
 	#ability indication
 	if attack_count % 3 == 0:

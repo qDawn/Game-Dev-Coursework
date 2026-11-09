@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://mcnciit3ai3l"]
+
+[ext_resource type="PackedScene" uid="uid://n16anm4mbvgt" path="res://enemies/ranged/basic_shooter.tscn" id="1_6nnpk"]
+[ext_resource type="Script" uid="uid://3ueo38hr3iks" path="res://enemies/ranged/spread_shooter.gd" id="2_l8qng"]
+
+[node name="spread_shooter" unique_id=107408206 instance=ExtResource("1_6nnpk")]
+script = ExtResource("2_l8qng")
