@@ -51,7 +51,7 @@ func _process(delta : float) -> void:
 			speed += 250*delta
 		
 func _physics_process(delta: float) -> void:
-	if !ability_on:
+	if !ability_on or state == "dead":
 		super(delta)
 		return
 		
@@ -60,7 +60,12 @@ func _physics_process(delta: float) -> void:
 	if effects.has("slow"): velocity *= 0.5
 	move_and_collide(velocity)
 	
-	
+func _on_take_damage(d: float) -> void:
+	super(d)
+	if state == "dead":
+		ability_on = false
+		speed = max_normal_speed
+
 func _on_ability() -> bool:
 	if not super(): return false
 	
