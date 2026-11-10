@@ -8,6 +8,7 @@ const BASE_SPEED: float = 400
 var speed: float = BASE_SPEED
 var ability_cooldown: float = 5
 
+
 func _ready() -> void:
 	connect("take_damage",_on_take_damage)
 	connect("cancel_possession",_on_cancel_possession)
@@ -54,7 +55,12 @@ func _physics_process(delta: float) -> void:
 
 	#possession logic
 	if Input.is_action_just_pressed('possess') and not PlayerInfo.possession_target:
-		var available_hosts: Array[Node2D] = $possession_range.get_overlapping_bodies()
+		var available_hosts: Array[Node2D] = []
+
+		for body in $possession_range.get_overlapping_bodies():
+			if body.get("state") == "dead":
+				available_hosts.append(body)
+
 		if available_hosts:
 			var selected_host: Node2D = available_hosts[0]
 			for host in available_hosts:

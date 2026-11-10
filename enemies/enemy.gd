@@ -134,7 +134,7 @@ func _on_ability_active_timeout() -> void:
 	$ability_cooldown.start(ability_cooldown)
 
 func _on_ability_cooldown_timeout() -> void:
-	ability_cooldown = false
+	pass
 func _on_possession_window_timeout() -> void:
 	queue_free()
 
