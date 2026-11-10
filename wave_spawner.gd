@@ -11,7 +11,7 @@ const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 const MELEE_ENEMY = preload("uid://cctu3opvidee6")
 const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
 const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
-const LANCE_ENEMY = preload("uid://bcdpacwxtejuo")
+const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
 
 
 const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
@@ -23,9 +23,7 @@ const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
 									{"resource": KATANA_ENEMY, "weight": 1},
 									{"resource": HAMMER_ENEMY, "weight": 1},
 									{"resource": LAZER_ENEMY, "weight": 1},
-									{"resource": LANCE_ENEMY, "weight": 1}
 									]
-
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3
 
