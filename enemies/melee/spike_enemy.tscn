@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d2mkh4wjcesqf"]
+
+[ext_resource type="Script" uid="uid://c6x7pvn0bmf0h" path="res://enemies/melee/spike_enemy.gd" id="1_2quno"]
+
+[node name="spike_enemy" type="Area2D" unique_id=656440106]
+script = ExtResource("1_2quno")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=261170719]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1907300486]
+
+[node name="expirytime" type="Timer" parent="." unique_id=81520770]
+
+[node name="weapon_collision" type="Node2D" parent="." unique_id=1331149420]
+
+[node name="weapon_collision_area" type="Area2D" parent="weapon_collision" unique_id=699370799]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon_collision/weapon_collision_area" unique_id=1951012958]
+
+[node name="possession_timer" type="Timer" parent="." unique_id=263691301]
