@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://48j178s0vo16"]
+
+[ext_resource type="PackedScene" uid="uid://mq4hucp4nyfe" path="res://projectiles/basic_bullet.tscn" id="1_50225"]
+[ext_resource type="Script" uid="uid://b062sbjc4cwpi" path="res://projectiles/aoe_dot_bullet.gd" id="2_mw36c"]
+
+[node name="aoe_dot_bullet" unique_id=2096292205 instance=ExtResource("1_50225")]
+script = ExtResource("2_mw36c")
+
+[node name="expiry_timer" parent="." index="2" unique_id=292093934]
+wait_time = 0.5

@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerInfo="*uid://cl56mk6ggg66i"
-Effects="*uid://b6hf1jymxt4xj"
 
 [display]
 

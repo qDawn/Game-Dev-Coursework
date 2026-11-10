@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dyfqojoljvqhi"]
+
+[ext_resource type="Script" uid="uid://2stwbgdb60wu" path="res://spawnables/aoe_dot.gd" id="1_y77n8"]
+[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="2_ccwvn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40x2b"]
+radius = 112.0
+
+[node name="aoe_dot" type="Area2D" unique_id=2080872794]
+z_index = -1
+script = ExtResource("1_y77n8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=41009106]
+position = Vector2(0, -3.8146973e-06)
+scale = Vector2(8, 8)
+texture = ExtResource("2_ccwvn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1071270797]
+shape = SubResource("CircleShape2D_40x2b")
+
+[node name="expiry_timer" type="Timer" parent="." unique_id=667869226]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="damage_timer" type="Timer" parent="." unique_id=1967823838]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="expiry_timer" to="." method="_on_expiry_timer_timeout"]
+[connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]

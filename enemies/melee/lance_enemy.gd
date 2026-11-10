@@ -25,7 +25,7 @@ func _on_attack(direction: Vector2) -> bool:
 	if effects.has("bleed"): _on_take_damage(damage)
 	
 	attacking = true
-	aim(direction)
+
 	#tween for extending
 	var tween_extend: Tween = get_tree().create_tween()
 	tween_extend.tween_property($weapon/spr, "position", Vector2(64,0), swing_speed)

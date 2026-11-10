@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal attack
 signal ability
 signal take_damage
+signal heal
 signal take_effect
 signal possession
 
@@ -42,6 +43,7 @@ func _ready() -> void:
 	connect("attack",_on_attack)
 	connect("ability",_on_ability)
 	connect("take_damage",_on_take_damage)
+	connect("heal",_on_heal)
 	connect("take_effect",_on_take_effect)
 	connect("possession",_on_possession)
 	
@@ -133,6 +135,14 @@ func _on_take_damage(d: float) -> void:
 	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
 	get_tree().root.add_child(damage_ui)
 
+func _on_heal(h: float) -> void:
+	if not state == "dead":
+		current_health = min(current_health+h,max_health)
+		var damage_ui: Label = preload("res://ui/damage_ui.tscn").instantiate()
+		damage_ui.text = "+%s" % h
+		damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
+		damage_ui.add_theme_color_override("font_color",Color(0,1,0,1))
+		get_tree().root.add_child(damage_ui)
 
 func _on_ability_active_timeout() -> void:
 	$ability_cooldown.start(ability_cooldown)
