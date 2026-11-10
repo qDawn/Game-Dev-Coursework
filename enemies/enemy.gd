@@ -32,7 +32,11 @@ var state: String = 'alive'
 var effects : Dictionary[String,float] = {}
 #whether the enemy is currently attacking
 var attacking : bool = false
+#how fast the enemy can move its weapon
+var aim_speed : float = 5
+#whether the enemy is currently moving weapon to aim
 var target: CharacterBody2D
+
 
 func _ready() -> void:
 	connect("attack",_on_attack)
@@ -44,16 +48,16 @@ func _ready() -> void:
 	target = get_tree().get_first_node_in_group('ally')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if state != 'dead' and target:
 		var direction: Vector2
 		var distance: float
 		if state == 'possessed':
 			direction = global_position.direction_to(get_global_mouse_position())
-			aim(direction)
+			aim(direction, delta)
 		else:
 			direction = global_position.direction_to(target.global_position)
-			aim(direction)
+			aim(direction, delta)
 			
 			distance = global_position.distance_to(target.global_position)
 			#if player is in attack range, attack
@@ -185,12 +189,12 @@ func _on_take_effect(effect: String, duration: float) -> void:
 	effects[effect] = max(effects.get(effect,0),duration)
 
 #Method for aiming the weapon
-func aim(direction: Vector2):
+func aim(direction: Vector2, delta : float):
 	if !attacking and not effects.has("stun"):
 		if direction.x < 0: $weapon.scale.y = -1
 		else: $weapon.scale.y = 1
-		$weapon.rotation = direction.angle()
-
+		$weapon.rotation = lerp_angle($weapon.rotation, direction.angle(), delta * aim_speed)
+		
 func _on_hesitation_timer_timeout() -> void:
 	$exclamation.visible = false
 	if state == "alive":
