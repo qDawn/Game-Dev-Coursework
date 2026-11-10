@@ -119,7 +119,7 @@ func _on_cancel_possession() -> void:
 	$ability_cooldown.start(ability_cooldown)
 	#reset visibility and hitbox
 	$sprite.visible = true
-	$hitbox.disabled = false
+	$hitbox.set_deferred("disabled", false)
 	#reset the possession target
 	PlayerInfo.possession_target = null
 
