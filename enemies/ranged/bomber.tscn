@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2n7pwbombth1"]
 
-[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/enemy.tscn" id="1_enemy"]
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/superclasses/enemy.tscn" id="1_enemy"]
 [ext_resource type="Script" uid="uid://b8k3mra1txbom" path="res://enemies/ranged/bomber.gd" id="2_script"]
 [ext_resource type="Texture2D" uid="uid://d4jsvegv0bi83" path="res://assets/sprites/bomb.png" id="3_8k4bq"]
 

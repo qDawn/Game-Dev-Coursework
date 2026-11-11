@@ -1,4 +1,4 @@
-extends "res://enemies/melee/melee_enemy.gd"
+extends "res://enemies/superclasses/melee_enemy.gd"
 
 var stun_duration: float = 1
 var winding_up: bool = false

@@ -1,27 +1,27 @@
 [gd_scene format=3 uid="uid://cctu3opvidee6"]
 
-[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/enemy.tscn" id="1_veapw"]
-[ext_resource type="Script" uid="uid://cgi1k3peajy5n" path="res://enemies/melee/melee_enemy.gd" id="2_cprtf"]
-[ext_resource type="Texture2D" uid="uid://d11akud3jajs0" path="res://assets/sprites/enemy_melee.png" id="2_nnvf6"]
-[ext_resource type="Texture2D" uid="uid://dgm38708ori4c" path="res://assets/bat.png" id="4_cprtf"]
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/superclasses/enemy.tscn" id="1_dawhl"]
+[ext_resource type="Script" uid="uid://cgi1k3peajy5n" path="res://enemies/superclasses/melee_enemy.gd" id="2_dawhl"]
+[ext_resource type="Texture2D" uid="uid://d11akud3jajs0" path="res://assets/sprites/enemy_melee.png" id="3_bnuif"]
+[ext_resource type="Texture2D" uid="uid://dgm38708ori4c" path="res://assets/bat.png" id="4_oi2bk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpjt6"]
 size = Vector2(40, 65)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncer4"]
-size = Vector2(75, 52)
+size = Vector2(107.5, 52)
 
-[node name="melee_enemy" unique_id=107408206 instance=ExtResource("1_veapw")]
-script = ExtResource("2_cprtf")
+[node name="melee_enemy" unique_id=107408206 instance=ExtResource("1_dawhl")]
+script = ExtResource("2_dawhl")
 
 [node name="sprite" parent="." index="0" unique_id=1078032425]
-texture = ExtResource("2_nnvf6")
+texture = ExtResource("3_bnuif")
 
-[node name="collision_shape" parent="." index="2" unique_id=1561700062]
+[node name="collision_shape" parent="." index="1" unique_id=1561700062]
 position = Vector2(1, -13.5)
 shape = SubResource("RectangleShape2D_cpjt6")
 
-[node name="attack_cooldown" parent="." index="3" unique_id=1727736153]
+[node name="attack_cooldown" parent="." index="2" unique_id=1727736153]
 wait_time = 0.5
 
 [node name="weapon_collision" type="Node2D" parent="." index="9" unique_id=1889839535]
@@ -31,12 +31,12 @@ position = Vector2(34, 1)
 rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weapon_collision/melee_collision_area" index="0" unique_id=733389090]
-position = Vector2(-1.5000007, -22)
+position = Vector2(0.24999934, -15)
 shape = SubResource("RectangleShape2D_ncer4")
 
 [node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
 rotation = 1.5707964
-texture = ExtResource("4_cprtf")
+texture = ExtResource("4_oi2bk")
 
 [connection signal="area_entered" from="weapon_collision/melee_collision_area" to="." method="_on_melee_collision_area_area_entered"]
 [connection signal="body_entered" from="weapon_collision/melee_collision_area" to="." method="_on_melee_collision_area_body_entered"]

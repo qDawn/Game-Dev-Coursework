@@ -1,4 +1,4 @@
-extends "res://enemies/enemy_shooter.gd"
+extends "res://enemies/superclasses/enemy_shooter.gd"
 
 const BASE_BURST_MAX_COUNT: int = 3
 const BASE_ATTACK_COOLDOWN: float = 2

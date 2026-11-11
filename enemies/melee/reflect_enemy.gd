@@ -1,4 +1,4 @@
-extends "res://enemies/melee/melee_enemy.gd"
+extends "res://enemies/superclasses/melee_enemy.gd"
 
 var ability_range : int
 const BASE_SPEED: float = 250

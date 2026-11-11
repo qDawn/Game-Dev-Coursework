@@ -1,4 +1,4 @@
-extends "res://enemies/enemy_shooter.gd"
+extends "res://enemies/superclasses/enemy_shooter.gd"
 
 const SPLITTING_BULLET = preload("uid://bg0r6w8dw8fou")
 

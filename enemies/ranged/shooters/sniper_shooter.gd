@@ -1,4 +1,4 @@
-extends "res://enemies/enemy_shooter.gd"
+extends "res://enemies/superclasses/enemy_shooter.gd"
 
 func _ready() -> void:
 	super()

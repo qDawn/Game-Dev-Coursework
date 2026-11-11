@@ -1,4 +1,4 @@
-extends "res://enemies/melee/melee_enemy.gd"
+extends "res://enemies/superclasses/melee_enemy.gd"
 
 var max_normal_speed : int
 var max_charge_speed : int

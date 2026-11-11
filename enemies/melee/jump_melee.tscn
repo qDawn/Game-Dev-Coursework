@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bn26uw2a530px"]
+
+[ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/superclasses/melee_enemy.tscn" id="1_xkchc"]
+[ext_resource type="Script" uid="uid://c2brw6tkcfgap" path="res://enemies/melee/jump_melee.gd" id="2_dc5pk"]
+[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="3_dc5pk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ncer4"]
+radius = 158.38245
+
+[node name="jump_melee" unique_id=107408206 instance=ExtResource("1_xkchc")]
+script = ExtResource("2_dc5pk")
+
+[node name="aoe" type="Area2D" parent="." index="0" unique_id=54055773]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aoe" index="0" unique_id=1939297899]
+shape = SubResource("CircleShape2D_ncer4")
+
+[node name="Sprite2D" type="Sprite2D" parent="aoe" index="1" unique_id=1749691410]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(4.5000057, 0.5000143)
+scale = Vector2(10.21875, 10.468751)
+texture = ExtResource("3_dc5pk")

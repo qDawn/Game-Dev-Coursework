@@ -1,4 +1,4 @@
-extends "res://enemies/enemy_shooter.gd"
+extends "res://enemies/superclasses/enemy_shooter.gd"
 
 const base_speed: float = 200
 const base_attack_cooldown: float = 1

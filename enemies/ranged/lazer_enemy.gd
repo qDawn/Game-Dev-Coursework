@@ -1,4 +1,4 @@
-extends "res://enemies/enemy.gd"
+extends "res://enemies/superclasses/enemy.gd"
 
 const LAZER = preload("uid://bqa3wjbpwh3yv")
 var prime_time: float = 1

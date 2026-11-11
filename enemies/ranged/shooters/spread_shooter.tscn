@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4bjlne2f0iwv"]
 
-[ext_resource type="PackedScene" uid="uid://dl7fp1ijpp6r" path="res://enemies/enemy_shooter.tscn" id="1_t2xlx"]
+[ext_resource type="PackedScene" uid="uid://dl7fp1ijpp6r" path="res://enemies/superclasses/enemy_shooter.tscn" id="1_t2xlx"]
 [ext_resource type="Script" uid="uid://3ueo38hr3iks" path="res://enemies/ranged/shooters/spread_shooter.gd" id="2_8iq72"]
 
 [node name="spread_shooter" unique_id=107408206 instance=ExtResource("1_t2xlx")]

@@ -1,4 +1,4 @@
-extends "res://enemies/enemy_shooter.gd"
+extends "res://enemies/superclasses/enemy_shooter.gd"
 
 const AOE_DOT_BULLET = preload("uid://48j178s0vo16")
 var dot_damage: float = 0.5

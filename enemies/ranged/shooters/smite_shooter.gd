@@ -1,4 +1,4 @@
-extends "res://enemies/enemy_shooter.gd"
+extends "res://enemies/superclasses/enemy_shooter.gd"
 
 const SMITE_AREA = preload("uid://ccyp3ra11vl6l")
 var smite_damage: int = 15

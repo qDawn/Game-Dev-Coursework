@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://cps8a5ofc76u7"]
 
-[ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/melee/melee_enemy.tscn" id="1_ql2ov"]
+[ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/superclasses/melee_enemy.tscn" id="1_ql2ov"]
 [ext_resource type="Script" uid="uid://bau5wwxqpfv7b" path="res://enemies/melee/hammer_enemy.gd" id="2_qcy70"]
 [ext_resource type="Texture2D" uid="uid://b2ucf2xh8uljl" path="res://assets/sprites/hammer_enemy_body.png" id="3_qlytt"]
 [ext_resource type="Texture2D" uid="uid://dqdq6m7vi5yxs" path="res://assets/sprites/hammer_enemy_hammer.png" id="4_66uxq"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_equw2"]
 size = Vector2(28, 64)

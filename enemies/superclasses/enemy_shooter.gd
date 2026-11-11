@@ -1,4 +1,4 @@
-extends "res://enemies/enemy.gd"
+extends "res://enemies/superclasses/enemy.gd"
 
 const BASIC_BULLET = preload("uid://mq4hucp4nyfe")
 

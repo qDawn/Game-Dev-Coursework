@@ -1,4 +1,4 @@
-extends "res://enemies/enemy.gd"
+extends "res://enemies/superclasses/enemy.gd"
 
 ##how close to the player it needs to be to begin explosion timer
 var trigger_range: float = 90

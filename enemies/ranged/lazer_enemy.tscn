@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnrhv5s1314sc"]
 
-[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/enemy.tscn" id="1_xq6ko"]
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/superclasses/enemy.tscn" id="1_xq6ko"]
 [ext_resource type="Script" uid="uid://d5qfk5xnj221" path="res://enemies/ranged/lazer_enemy.gd" id="2_j67pd"]
 
 [node name="lazer_enemy" unique_id=107408206 instance=ExtResource("1_xq6ko")]

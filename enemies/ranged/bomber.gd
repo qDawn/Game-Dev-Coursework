@@ -1,4 +1,4 @@
-extends "res://enemies/enemy.gd"
+extends "res://enemies/superclasses/enemy.gd"
 
 const BOMB = preload("res://projectiles/thrown_bomb.tscn")
 
