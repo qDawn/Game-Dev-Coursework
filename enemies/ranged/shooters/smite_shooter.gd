@@ -39,7 +39,7 @@ func _on_ability() -> bool:
 	var smite: Area2D = SMITE_AREA.instantiate()
 	if state != 'possessed':
 		smite.global_position = target.global_position + target.velocity*35
-		smite.attack_group = "player"
+		smite.attack_group = "ally"
 	else:
 		smite.global_position = get_global_mouse_position()
 		smite.attack_group = "enemy"
