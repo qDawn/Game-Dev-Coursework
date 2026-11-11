@@ -88,15 +88,22 @@ func _physics_process(delta: float) -> void:
 		$ability_cooldown.stop()
 
 func _on_take_damage(_damage: int) -> void:
+	hurt(1)
+
+		
+func take_percent_damage(fraction: float) -> void:
+	hurt(PlayerInfo.max_health * fraction)
+	
+func hurt(amount: float) -> void:
 	if not $invincible_timer.is_stopped(): return
-	#player only ever takes 1 damage from sources, become invincible.
-	PlayerInfo.take_damage(1)
+	PlayerInfo.take_damage(amount)
 	if PlayerInfo.current_health <= 0:
 		$"..".emit_signal("gameover")
 		return
 	_on_start_invincibility(1)
 	#send a signal to the HUD
 	$ui.emit_signal("health_changed")
+	
 
 func _on_invincible_timer_timeout() -> void:
 	speed = BASE_SPEED

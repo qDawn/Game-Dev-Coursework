@@ -1,7 +1,7 @@
 extends Node
 
 ##This is a global script. EVERYTHING in the scene can access it.
-const max_health: float = 3
+const max_health: float = 4
 ## Scoring points
 const POINTS_PER_SECOND: int = 10
 
@@ -22,7 +22,7 @@ const KILL_POINTS: Dictionary = {
 const DEFAULT_KILL_POINTS: int = 50
 
 
-var current_health: float = 3
+var current_health: float = max_health
 var possession_target: CharacterBody2D = null
 
 var score: int = 0
@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 		time_alive -= 1
 		score += POINTS_PER_SECOND
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: float) -> void:
 	current_health = max(current_health - amount, 0)
 
 func add_score(amount: int) -> void:
