@@ -27,6 +27,9 @@ var ability_cooldown: float = 6
 var ability_duration: float = 0.01
 ##valid states include: 'alive', 'dead', 'possessed'
 var state: String = 'alive'
+## Whether the enemy is possessable or not
+var possessable: bool = true
+
 
 ## Stores effects of the enemy. Format: {name: duration}
 ## current effects include: slow, bleed, stun, silence.

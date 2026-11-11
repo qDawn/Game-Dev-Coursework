@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		var available_hosts: Array[Node2D] = []
 
 		for body in $possession_range.get_overlapping_bodies():
-			if body.get("state") == "dead":
+			if body.get("state") == "dead" and body.get("possessable"):
 				available_hosts.append(body)
 
 		if available_hosts:
