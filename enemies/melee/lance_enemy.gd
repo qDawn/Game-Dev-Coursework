@@ -20,7 +20,7 @@ func _ready() -> void:
 	attack_cooldown = 1
 	ability_duration = 2.5
 	
-func _on_attack(direction: Vector2) -> bool:
+func _on_attack(_direction: Vector2) -> bool:
 	if !($attack_cooldown.is_stopped() and not effects.has("stun")): return false
 	if effects.has("bleed"): _on_take_damage(damage)
 	

@@ -17,7 +17,7 @@ const REFLECT_ENEMY = preload("uid://cie7la3cjm2ma")
 const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
 
 
-const enemies1: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
+const enemies1: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": SPREAD_SHOOTER, "weight": 1},
 									#{"resource": SNIPER_SHOOTER, "weight": 1},
 									#{"resource": SMITE_SHOOTER, "weight": 1},
@@ -33,8 +33,8 @@ const enemies1: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
 									]
 									
 #for testing purposes
-const enemies :Array[Dictionary] = [#{"resource": REFLECT_ENEMY, "weight": 1},
-									{"resource": BOMBER, "weight": 1},
+const enemies :Array[Dictionary] = [{"resource": REFLECT_ENEMY, "weight": 1},
+									#{"resource": BOMBER, "weight": 1},
 									]
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3
@@ -57,7 +57,7 @@ func generate_enemies() -> void:
 	var total_weight : int = 0
 	while total_weight < max_weight:
 		# gets a random key from enemies
-		var random_enemy: Dictionary = enemies1.pick_random()
+		var random_enemy: Dictionary = enemies.pick_random()
 		var weight : int = random_enemy["weight"]
 		if weight + total_weight > max_weight: continue
 		total_weight += weight

@@ -2,6 +2,26 @@
 
 [ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/melee/melee_enemy.tscn" id="1_1eb0h"]
 [ext_resource type="Script" uid="uid://bwb1yw66osxua" path="res://enemies/melee/reflect_enemy.gd" id="2_bx26f"]
+[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="3_bx26f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wehpw"]
+radius = 113.004425
 
 [node name="reflect_enemy" unique_id=107408206 instance=ExtResource("1_1eb0h")]
 script = ExtResource("2_bx26f")
+
+[node name="reflect_area" type="Area2D" parent="." index="13" unique_id=1239386286]
+visible = false
+z_index = -1
+monitoring = false
+monitorable = false
+
+[node name="Sprite2D" type="Sprite2D" parent="reflect_area" index="0" unique_id=1458055129]
+modulate = Color(0.5571883, 0.37827352, 1, 1)
+scale = Vector2(7.5, 7.5)
+texture = ExtResource("3_bx26f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="reflect_area" index="1" unique_id=97075609]
+shape = SubResource("CircleShape2D_wehpw")
+
+[connection signal="area_entered" from="reflect_area" to="." method="_on_reflect_area_area_entered"]
