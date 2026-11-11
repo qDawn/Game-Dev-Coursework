@@ -1,14 +1,36 @@
 [gd_scene format=3 uid="uid://bfc88fugdgfwu"]
 
 [ext_resource type="Script" uid="uid://26pmo2aavw5" path="res://projectiles/thrown_bomb.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://d4jsvegv0bi83" path="res://assets/sprites/bomb.png" id="2_jkmy7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bomb"]
-radius = 14.0
+radius = 17.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ncer4"]
+radius = 39.012817
 
 [node name="thrown_bomb" type="Area2D" unique_id=340329780 groups=["projectile"]]
+z_index = 1
 script = ExtResource("1_script")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1524619905]
+[node name="sprite" type="Sprite2D" parent="." unique_id=456266118]
+position = Vector2(0.49999934, -2.0000007)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_jkmy7")
+
+[node name="bomb_collision" type="CollisionShape2D" parent="." unique_id=1524619905]
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_bomb")
 
+[node name="fuse_timer" type="Timer" parent="." unique_id=35022105]
+
+[node name="blast_radius" type="Area2D" parent="." unique_id=1344100611]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blast_radius" unique_id=218094629]
+shape = SubResource("CircleShape2D_ncer4")
+
+[node name="blast_warning" type="Polygon2D" parent="." unique_id=1042967110]
+scale = Vector2(1e-05, 1e-05)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="fuse_timer" to="." method="_on_fuse_timer_timeout"]
