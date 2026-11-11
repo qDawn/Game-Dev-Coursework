@@ -7,7 +7,8 @@ const BURST_SHOOTER = preload("uid://cwjgu1eo76ek0")
 const SMITE_SHOOTER = preload("uid://bj6iw06pnx22b")
 const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 const AOE_DOT_SHOOTER = preload("uid://cgeglg8plfcut")
-const BOMBER = preload("uid://darqnheyb4cf") 
+const SUICIDE_BOMBER = preload("uid://darqnheyb4cf")
+const BOMBER = preload("res://enemies/ranged/bomber.tscn") 
 
 
 const MELEE_ENEMY = preload("uid://cctu3opvidee6")
@@ -23,10 +24,11 @@ const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": MELEE_ENEMY, "weight": 1},
 									#{"resource": BURST_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
-									{"resource": HAMMER_ENEMY, "weight": 1},
+									#{"resource": HAMMER_ENEMY, "weight": 1},
 									#{"resource": LAZER_ENEMY, "weight": 1},
 									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									#{"resource": BOMBER, "weight": 1}
+									#{"resource": SUICIDE_BOMBER, "weight": 1},
+									{"resource": BOMBER, "weight": 1}
 									]
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3

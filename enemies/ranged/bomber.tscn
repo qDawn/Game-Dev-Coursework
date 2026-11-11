@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c2n7pwbombth1"]
+
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/enemy.tscn" id="1_enemy"]
+[ext_resource type="Script" uid="uid://b8k3mra1txbom" path="res://enemies/ranged/bomber.gd" id="2_script"]
+
+[node name="bomber" unique_id=1100322657 instance=ExtResource("1_enemy")]
+script = ExtResource("2_script")
+
+[node name="sprite" parent="." index="0" unique_id=1078032425]
+self_modulate = Color(0.95, 0.48, 0.16, 1)

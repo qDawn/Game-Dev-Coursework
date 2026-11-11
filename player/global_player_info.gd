@@ -17,6 +17,8 @@ const KILL_POINTS: Dictionary = {
 	"katana_enemy": 125,
 	"smite_enemy": 200,
 	"hammer_enemy": 250,
+	"suicide_bomber": 100,
+	"bomber": 125,
 }
 #test case should delete when all enemies finalised
 const DEFAULT_KILL_POINTS: int = 50
