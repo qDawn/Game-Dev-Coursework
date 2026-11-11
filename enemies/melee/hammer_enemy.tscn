@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bau5wwxqpfv7b" path="res://enemies/melee/hammer_enemy.gd" id="2_qcy70"]
 [ext_resource type="Texture2D" uid="uid://b2ucf2xh8uljl" path="res://assets/sprites/hammer_enemy_body.png" id="3_qlytt"]
 [ext_resource type="Texture2D" uid="uid://dqdq6m7vi5yxs" path="res://assets/sprites/hammer_enemy_hammer.png" id="4_66uxq"]
-[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="4_qcy70"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_equw2"]
 size = Vector2(28, 64)
@@ -38,13 +37,6 @@ shape = SubResource("RectangleShape2D_3u6to")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slam_area" index="0" unique_id=1016690279]
 position = Vector2(3, 5)
 shape = SubResource("CircleShape2D_ncer4")
-
-[node name="Sprite2D" type="Sprite2D" parent="slam_area" index="1" unique_id=1020757221]
-self_modulate = Color(1, 1, 1, 0)
-z_index = -1
-position = Vector2(6.4999924, 6.500017)
-scale = Vector2(9.46875, 10.406251)
-texture = ExtResource("4_qcy70")
 
 [node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
 position = Vector2(73, 5.999998)

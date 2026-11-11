@@ -23,10 +23,10 @@ const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": MELEE_ENEMY, "weight": 1},
 									#{"resource": BURST_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
-									#{"resource": HAMMER_ENEMY, "weight": 1},
+									{"resource": HAMMER_ENEMY, "weight": 1},
 									#{"resource": LAZER_ENEMY, "weight": 1},
 									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									{"resource": BOMBER, "weight": 1}
+									#{"resource": BOMBER, "weight": 1}
 									]
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3
