@@ -7,17 +7,17 @@ const BURST_SHOOTER = preload("uid://cwjgu1eo76ek0")
 const SMITE_SHOOTER = preload("uid://bj6iw06pnx22b")
 const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 const AOE_DOT_SHOOTER = preload("uid://cgeglg8plfcut")
-const SUICIDE_BOMBER = preload("uid://darqnheyb4cf")
-const BOMBER = preload("res://enemies/ranged/bomber.tscn") 
+const BOMBER = preload("uid://darqnheyb4cf") 
 
 
 const MELEE_ENEMY = preload("uid://cctu3opvidee6")
 const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
 const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
+const REFLECT_ENEMY = preload("uid://cie7la3cjm2ma")
 const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
 
 
-const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
+const enemies1: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": SPREAD_SHOOTER, "weight": 1},
 									#{"resource": SNIPER_SHOOTER, "weight": 1},
 									#{"resource": SMITE_SHOOTER, "weight": 1},
@@ -27,9 +27,13 @@ const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": HAMMER_ENEMY, "weight": 1},
 									#{"resource": LAZER_ENEMY, "weight": 1},
 									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									#{"resource": SUICIDE_BOMBER, "weight": 1},
-									{"resource": BOMBER, "weight": 1}
+									{"resource": BOMBER, "weight": 1},
+									{"resource": REFLECT_ENEMY, "weight": 1}
 									]
+									
+#for testing purposes
+const enemies :Array[Dictionary] = [{"resource": REFLECT_ENEMY, "weight": 1},
+									{"resource": SPREAD_SHOOTER, "weight": 1}]
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
 var max_enemy_weight_wave_ratio : float = 0.3
 
