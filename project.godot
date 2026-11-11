@@ -24,6 +24,10 @@ PlayerInfo="*uid://cl56mk6ggg66i"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+projectile="All projectiles"
+
 [input]
 
 move_right={

@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gl7bs"]
 radius = 8.246211
 
-[node name="player_bullet" type="Area2D" unique_id=1295280477]
+[node name="player_bullet" type="Area2D" unique_id=1295280477 groups=["projectile"]]
 script = ExtResource("1_vrhen")
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1491523117]
