@@ -59,10 +59,10 @@ func _process(delta: float) -> void:
 		var distance: float
 		if state == 'possessed':
 			direction = global_position.direction_to(get_global_mouse_position())
-			aim(direction, delta)
+			aim(direction)
 		else:
 			direction = global_position.direction_to(target.global_position)
-			aim(direction, delta)
+			aim(direction)
 			
 			distance = global_position.distance_to(target.global_position)
 			#if player is in attack range, attack
@@ -203,7 +203,7 @@ func _on_take_effect(effect: String, duration: float) -> void:
 	effects[effect] = max(effects.get(effect,0),duration)
 
 #Method for aiming the weapon
-func aim(direction: Vector2, delta : float):
+func aim(direction: Vector2):
 	if !attacking and not effects.has("stun"):
 		if direction.x < 0: $weapon.scale.y = -1
 		else: $weapon.scale.y = 1

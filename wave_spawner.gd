@@ -30,7 +30,7 @@ const enemies1: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": BOMBER, "weight": 1},
 									#{"resource": CREEPER, "weight": 1},
 									#{"resource": REFLECT_ENEMY, "weight": 1},
-									{"resource": JUMP_MELEE, "weight": 1}
+									#{"resource": JUMP_MELEE, "weight": 1}
 									]
 									
 #for testing purposes

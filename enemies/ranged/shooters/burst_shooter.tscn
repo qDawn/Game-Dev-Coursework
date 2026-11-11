@@ -29,7 +29,7 @@ texture = ExtResource("4_efqmw")
 position = Vector2(157.07965, -38.818184)
 
 [node name="burst_timer" type="Timer" parent="." index="13" unique_id=1962931980]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
 
 [connection signal="timeout" from="burst_timer" to="." method="_on_burst_timer_timeout"]

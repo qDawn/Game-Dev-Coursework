@@ -43,9 +43,9 @@ func _on_attack(direction: Vector2) -> bool:
 	if winding_up: return false
 	return super(direction)
 
-func aim(direction: Vector2, delta: float):
+func aim(direction: Vector2):
 	if winding_up: return
-	super.aim(direction, delta)
+	super.aim(direction)
 
 func _on_possession() -> void:
 	super()

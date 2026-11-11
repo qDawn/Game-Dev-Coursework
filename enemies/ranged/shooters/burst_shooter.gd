@@ -6,6 +6,7 @@ const BASE_INACCURACY: float = 1.2
 
 var burst_max_count: int = 3
 var burst_current_count: int = 0
+var enhance_count: int = 0
 
 func _ready() -> void:
 	super()
@@ -24,18 +25,15 @@ func _ready() -> void:
 func _on_attack(direction: Vector2) -> bool:
 	if not super(direction): return false
 	burst_current_count = 0
-	if randf() <= 0.1:
-		_on_ability_active_timeout()
-		$ability_cooldown.stop()
-		$ability_active.stop()
-		_on_ability()
-	
 	$burst_timer.start()
 	return true
 
 func _on_burst_timer_timeout() -> void:
 	#if the max burst has been reached, stop calling itself
-	if state == "dead" or burst_current_count == burst_max_count: return
+	if state == "dead" or burst_current_count == burst_max_count: 
+		if randf() <= 0.1 and enhance_count < 3:
+			enhance()
+		return
 	#spawn bullet
 	var direction: Vector2 = Vector2.from_angle($weapon.rotation)
 	fire_bullet(direction,bullet_speed,damage,BASIC_BULLET)
@@ -44,13 +42,16 @@ func _on_burst_timer_timeout() -> void:
 
 func _on_ability() -> bool:
 	if not super(): return false
-	burst_max_count += 2
-	attack_cooldown *= 0.5
-	inaccuracy = 1.4
-	burst_current_count = 0
+	enhance()
 	$attack_cooldown.stop()
-	$halo.visible = true
 	return true
+
+func enhance() -> void:
+	$ability_active.start(ability_cooldown)
+	enhance_count += 1
+	burst_max_count += 1
+	attack_cooldown -= 0.5
+	$halo.visible = true
 
 func _on_ability_active_timeout() -> void:
 	super()
