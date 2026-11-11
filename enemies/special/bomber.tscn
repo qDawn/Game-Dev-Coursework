@@ -1,12 +1,16 @@
-[gd_scene format=3 uid="uid://dhojc836a1asp"]
+[gd_scene format=3 uid="uid://darqnheyb4cf"]
 
-[ext_resource type="Script" uid="uid://dulpxpxv2rcqm" path="res://enemies/special/bomber.gd" id="1_xhak5"]
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/enemy.tscn" id="1_hl0nu"]
+[ext_resource type="Script" uid="uid://dw1mqodvf6cpy" path="res://enemies/special/bomber.gd" id="2_ifi82"]
+[ext_resource type="Texture2D" uid="uid://c1skpll4m42vb" path="res://assets/sprites/creeper.png" id="3_i30jj"]
 
-[node name="Bomber" type="Area2D" unique_id=1571365837]
-script = ExtResource("1_xhak5")
+[node name="bomber" unique_id=1378295628 instance=ExtResource("1_hl0nu")]
+script = ExtResource("2_ifi82")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1618282591]
+[node name="sprite" parent="." index="0" unique_id=1078032425]
+position = Vector2(0, 13)
+scale = Vector2(0.08444444, 0.085)
+texture = ExtResource("3_i30jj")
 
-[node name="Timer" type="Timer" parent="." unique_id=1650030951]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1714516395]
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(22, 18)
