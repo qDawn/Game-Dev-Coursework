@@ -3,7 +3,8 @@ extends CharacterBody2D
 signal take_damage
 signal cancel_possession
 
-const PLAYER_BULLET = preload("uid://bys54qkalrh2b")
+const PLAYER_BULLET = preload("uid://3ly6jrkrfrb3")
+
 const BASE_SPEED: float = 400
 var speed: float = BASE_SPEED
 var ability_cooldown: float = 5
