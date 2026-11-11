@@ -15,5 +15,5 @@ func _process(delta: float) -> void:
 	super(delta)
 	if attacking and not effects.has("silence"):
 		for body in $weapon_collision/melee_collision_area.get_overlapping_bodies():
-			if body.is_in_group("ally") and not state == "possessed" or body.is_in_group("enemy") and state == "possessed":
+			if body.is_in_group("ally") and is_in_group("enemy") or body.is_in_group("enemy") and is_in_group("ally"):
 				body.emit_signal("take_effect","bleed",8)

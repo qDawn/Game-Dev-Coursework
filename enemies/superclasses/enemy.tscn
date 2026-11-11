@@ -16,7 +16,7 @@ script = ExtResource("1_orwns")
 [node name="sprite" type="Sprite2D" parent="." unique_id=1078032425]
 texture = ExtResource("2_a6vjd")
 
-[node name="exclamation" type="Sprite2D" parent="sprite" unique_id=1048159492]
+[node name="exclamation" type="Sprite2D" parent="." unique_id=1048159492]
 visible = false
 z_index = 1
 position = Vector2(34, -45)

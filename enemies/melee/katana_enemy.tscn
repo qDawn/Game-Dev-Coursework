@@ -25,15 +25,15 @@ shape = SubResource("RectangleShape2D_h0ywr")
 [node name="attack_cooldown" parent="." index="2" unique_id=1727736153]
 wait_time = 1.7999999999999998
 
-[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
-position = Vector2(45, 10)
-rotation = 0.7853982
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("4_kypfk")
-
 [node name="melee_collision_area" parent="weapon_collision" parent_id_path=PackedInt32Array(1889839535) index="0" unique_id=1046232765]
 position = Vector2(23, 9)
 
 [node name="CollisionShape2D" parent="weapon_collision/melee_collision_area" index="0" unique_id=733389090]
 position = Vector2(-4.125003, -38.5)
 shape = SubResource("RectangleShape2D_23vcf")
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(45, 10)
+rotation = 0.7853982
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("4_kypfk")

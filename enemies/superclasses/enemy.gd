@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 			distance = global_position.distance_to(target.global_position)
 			#if player is in attack range, attack
 			if distance <= attack_range and $attack_cooldown.is_stopped() and $hesitation_timer.is_stopped() and not effects.has("stun"):
-				$sprite/exclamation.visible = true
+				$exclamation.visible = true
 				$hesitation_timer.start(randf_range(0.1,1.5))
 
 	else:
@@ -210,7 +210,7 @@ func aim(direction: Vector2, delta : float):
 		$weapon.rotation = direction.angle()
 		
 func _on_hesitation_timer_timeout() -> void:
-	$sprite/exclamation.visible = false
+	$exclamation.visible = false
 	if state == "alive":
 		_on_attack(Vector2.from_angle($weapon.rotation))
 
