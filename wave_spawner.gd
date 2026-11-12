@@ -20,7 +20,7 @@ const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
 
 const enemies1: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": SPREAD_SHOOTER, "weight": 1},
-									#{"resource": SNIPER_SHOOTER, "weight": 1},
+									{"resource": SNIPER_SHOOTER, "weight": 1},
 									#{"resource": SMITE_SHOOTER, "weight": 1},
 									#{"resource": BURST_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
@@ -48,8 +48,9 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawn_enemy(SNIPER_SHOOTER)
 	#3 second buffer before starting to spawn
-	start(3)
+	start(300)
 	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn

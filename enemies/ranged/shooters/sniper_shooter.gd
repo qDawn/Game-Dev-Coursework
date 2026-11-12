@@ -1,5 +1,8 @@
 extends "res://enemies/superclasses/enemy_shooter.gd"
 
+const HOMING_BULLET = preload("uid://opb7dv63vy0u")
+
+
 func _ready() -> void:
 	super()
 	max_health = 20
@@ -18,5 +21,4 @@ func _on_attack(direction: Vector2) -> bool:
 	if not effects.has("silence"):
 		b.emit_signal("add_effect","silence",3)
 		b.emit_signal("add_effect","slow",3)
-	$attack_cooldown.start()
 	return true

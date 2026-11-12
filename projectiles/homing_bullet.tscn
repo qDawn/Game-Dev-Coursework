@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://opb7dv63vy0u"]
+
+[ext_resource type="PackedScene" uid="uid://mq4hucp4nyfe" path="res://projectiles/basic_bullet.tscn" id="1_5msfl"]
+[ext_resource type="Script" uid="uid://hhnc0kv1dydr" path="res://projectiles/homing_bullet.gd" id="2_6l85f"]
+
+[node name="homing_bullet" unique_id=2096292205 instance=ExtResource("1_5msfl")]
+script = ExtResource("2_6l85f")
+
+[node name="follow_timer" type="Timer" parent="." index="3" unique_id=861861611]
+wait_time = 0.5
+one_shot = true
+autostart = true
