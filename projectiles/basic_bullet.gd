@@ -6,6 +6,9 @@ var damage: float = 1
 var effects: Dictionary[String,float] = {}
 var splitting: bool = false
 var attacking_group: String = "ally"
+var piercing: int = 1
+var pierce_count: int = 0
+
 signal add_effect
 
 func _ready() -> void:
@@ -23,7 +26,9 @@ func _on_body_entered(body: Node2D) -> void:
 		for effect in effects: 
 			body.emit_signal("take_effect", effect, effects[effect])
 		body.emit_signal('take_damage',damage)
-		_on_expiry_timer_timeout()
+		pierce_count += 1
+		if pierce_count == piercing:
+			_on_expiry_timer_timeout()
 	elif not body.is_in_group("enemy") and not body.is_in_group("ally"):
 		_on_expiry_timer_timeout()
 

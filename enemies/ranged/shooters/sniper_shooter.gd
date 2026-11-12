@@ -21,4 +21,5 @@ func _on_attack(direction: Vector2) -> bool:
 	if not effects.has("silence"):
 		b.emit_signal("add_effect","silence",3)
 		b.emit_signal("add_effect","slow",3)
+	b.piercing = 2
 	return true
