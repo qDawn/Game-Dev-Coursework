@@ -7,6 +7,6 @@
 script = ExtResource("2_6l85f")
 
 [node name="follow_timer" type="Timer" parent="." index="3" unique_id=861861611]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
 autostart = true
