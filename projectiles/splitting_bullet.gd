@@ -12,5 +12,5 @@ func _on_expiry_timer_timeout() -> void:
 		b.speed = speed*1.1
 		b.scale *= 0.5
 		b.attacking_group = attacking_group
-		get_tree().current_scene.add_child(b)
+		get_tree().set_deferred("add_child",b)
 	queue_free()
