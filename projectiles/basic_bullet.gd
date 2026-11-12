@@ -23,8 +23,10 @@ func _on_expiry_timer_timeout() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(attacking_group):
-		for effect in effects: 
-			body.emit_signal("take_effect", effect, effects[effect])
+		#Player cannot be affected by effects
+		if !body.is_in_group("player"):
+			for effect in effects: 
+				body.emit_signal("take_effect", effect, effects[effect])
 		body.emit_signal('take_damage',damage)
 		pierce_count += 1
 		if pierce_count == piercing:
