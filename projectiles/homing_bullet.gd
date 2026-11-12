@@ -4,8 +4,10 @@ extends "res://projectiles/basic_bullet.gd"
 func _physics_process(delta: float) -> void:
 	super(delta)
 	if not $follow_timer.is_stopped():
-		var direction_to_target: Vector2 = global_position.direction_to(seek_closest_target().global_position)
-		direction = (direction+direction_to_target/2)/2
+		var target: Node2D = seek_closest_target()
+		if target:
+			var direction_to_target: Vector2 = global_position.direction_to(seek_closest_target().global_position)
+			direction = (direction+direction_to_target/2)/2
 
 func seek_closest_target() -> Node2D:
 	var closest: Node2D = null
