@@ -1,6 +1,6 @@
 extends "res://enemies/superclasses/enemy_shooter.gd"
 
-const base_speed: float = 200
+var base_speed: float = 200
 const base_attack_cooldown: float = 1
 var used_ability: bool = false
 func _ready() -> void:
@@ -43,6 +43,7 @@ func _on_decay_timer_timeout() -> void:
 func _on_possession() -> void:
 	super()
 	ability_duration *= 2
+	base_speed *= 1.5
 
 func _on_ability() -> bool:
 	if not super(): return false

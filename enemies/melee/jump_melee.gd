@@ -1,6 +1,7 @@
 extends "res://enemies/superclasses/melee_enemy.gd"
 
 var ability_damage_bonus: float = 2
+var base_speed: float = 250
 
 func _ready() -> void:
 	super()
@@ -22,9 +23,14 @@ func _on_attack(direction: Vector2) -> bool:
 	if not $ability_active.is_stopped(): return false
 	return super(direction)
 
+func _on_possession() -> void:
+	super()
+	base_speed *= 1.5
+	$aoe.scale *= 1.1
+
 func _on_ability() -> bool:
 	if not super(): return false
-	speed *= 1.2
+	speed = base_speed*1.2
 	
 	$weapon.visible = false
 	#sprite tween
@@ -47,7 +53,7 @@ func _on_ability() -> bool:
 func _on_ability_active_timeout() -> void:
 	super()
 	_on_take_effect("stun",0.5)
-	speed /= 1.2
+	speed = base_speed
 	for body in $aoe.get_overlapping_bodies():
 		if body.is_in_group("ally") and is_in_group("enemy") or body.is_in_group("enemy") and is_in_group("ally"):
 			body.emit_signal("take_damage", damage + ability_damage_bonus)

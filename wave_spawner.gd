@@ -18,18 +18,18 @@ const REFLECT_ENEMY = preload("uid://cie7la3cjm2ma")
 const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
 
 
-const enemies1: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
-									{"resource": SPREAD_SHOOTER, "weight": 1},
-									{"resource": SNIPER_SHOOTER, "weight": 1},
-									{"resource": SMITE_SHOOTER, "weight": 1},
-									{"resource": BURST_SHOOTER, "weight": 1},
-									{"resource": KATANA_ENEMY, "weight": 1},
-									{"resource": HAMMER_ENEMY, "weight": 1},
-									{"resource": LAZER_ENEMY, "weight": 1},
-									{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									{"resource": BOMBER, "weight": 1},
-									{"resource": CREEPER, "weight": 1},
-									{"resource": REFLECT_ENEMY, "weight": 1},
+const enemies1: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
+									#{"resource": SPREAD_SHOOTER, "weight": 1},
+									#{"resource": SNIPER_SHOOTER, "weight": 1},
+									#{"resource": SMITE_SHOOTER, "weight": 1},
+									#{"resource": BURST_SHOOTER, "weight": 1},
+									#{"resource": KATANA_ENEMY, "weight": 1},
+									#{"resource": HAMMER_ENEMY, "weight": 1},
+									#{"resource": LAZER_ENEMY, "weight": 1},
+									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
+									#{"resource": BOMBER, "weight": 1},
+									#{"resource": CREEPER, "weight": 1},
+									#{"resource": REFLECT_ENEMY, "weight": 1},
 									{"resource": JUMP_MELEE, "weight": 1}
 									]
 									
