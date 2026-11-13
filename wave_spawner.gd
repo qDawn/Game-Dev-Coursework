@@ -9,6 +9,7 @@ const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 const AOE_DOT_SHOOTER = preload("uid://cgeglg8plfcut")
 const CREEPER = preload("uid://darqnheyb4cf")  # change name pls idk
 const BOMBER = preload("uid://c2n7pwbombth1")
+const PALADIN_ENEMY = preload("uid://dkfo4df0de0hj")
 
 
 const JUMP_MELEE = preload("uid://bn26uw2a530px")
@@ -18,7 +19,7 @@ const REFLECT_ENEMY = preload("uid://cie7la3cjm2ma")
 const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
 
 
-const enemies1: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
+const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": SPREAD_SHOOTER, "weight": 1},
 									#{"resource": SNIPER_SHOOTER, "weight": 1},
 									#{"resource": SMITE_SHOOTER, "weight": 1},
@@ -34,7 +35,7 @@ const enemies1: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									]
 									
 #for testing purposes
-const enemies :Array[Dictionary] = [{"resource": REFLECT_ENEMY, "weight": 1},
+const enemies1 :Array[Dictionary] = [{"resource": PALADIN_ENEMY, "weight": 1},
 									#{"resource": BOMBER, "weight": 1},
 									]
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
@@ -49,7 +50,8 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#3 second buffer before starting to spawn
-	start(3)
+	spawn_enemy(PALADIN_ENEMY)
+	start(300)
 	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn

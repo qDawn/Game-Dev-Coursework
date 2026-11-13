@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dkfo4df0de0hj"]
+
+[ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/superclasses/melee_enemy.tscn" id="1_0tjqc"]
+[ext_resource type="Texture2D" uid="uid://b4vr7b6gj55fp" path="res://assets/kenney_ui-pack-rpg-expansion/PNG/cursorSword_silver.png" id="2_y3l8l"]
+[ext_resource type="Script" uid="uid://bgfx5is1ulxcd" path="res://enemies/melee/paladin_enemy.gd" id="2_ybtxm"]
+[ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="4_0gwwa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gwwa"]
+size = Vector2(65, 42)
+
+[node name="paladin_enemy" unique_id=107408206 instance=ExtResource("1_0tjqc")]
+script = ExtResource("2_ybtxm")
+
+[node name="CollisionShape2D" parent="weapon_collision/melee_collision_area" parent_id_path=PackedInt32Array(1046232765) index="0" unique_id=733389090]
+position = Vector2(0.49999934, -10)
+shape = SubResource("RectangleShape2D_0gwwa")
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+texture = ExtResource("2_y3l8l")
+
+[node name="barrier" type="Sprite2D" parent="." index="13" unique_id=2074488780]
+modulate = Color(0.047058824, 0.1764706, 0.8784314, 0.34117648)
+position = Vector2(1.9073486e-06, 0)
+scale = Vector2(5.921875, 5.03125)
+texture = ExtResource("4_0gwwa")
