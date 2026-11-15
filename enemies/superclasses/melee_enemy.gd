@@ -27,17 +27,20 @@ func _on_attack(direction: Vector2) -> bool:
 	#clear the array of entities hit
 	already_hit.clear()
 	return true
-
-func _process(delta: float) -> void:
+	
+func _physics_process(delta: float) -> void:
 	super(delta)
-	if attacking:
-		for body in $weapon_collision/melee_collision_area.get_overlapping_bodies():
-			if body in already_hit: continue #if the entity has already taken damage.
-			already_hit.append(body)
-			#deal damage
-			if attacking and (state == 'possessed' and body.is_in_group('enemy') or state != 'possessed' and body.is_in_group('ally')):
-				body.emit_signal('take_damage', damage)
-		for area in $weapon_collision/melee_collision_area.get_overlapping_areas():
-			#destroy bullets
-			if attacking and state == 'possessed' and area.is_in_group('enemy_bullet'):
-				area.queue_free()
+	handle_weapon_collision()
+		
+func handle_weapon_collision(weapon_area : Area2D = $weapon_collision/melee_collision_area) -> void:
+	if !attacking: return
+	for body in weapon_area.get_overlapping_bodies():
+		if body in already_hit: continue #if the entity has already taken damage.
+		already_hit.append(body)
+		#deal damage
+		if attacking and (state == 'possessed' and body.is_in_group('enemy') or state != 'possessed' and body.is_in_group('ally')):
+			body.emit_signal('take_damage', damage)
+	for area in weapon_area.get_overlapping_areas():
+		#destroy bullets
+		if attacking and state == 'possessed' and area.is_in_group('enemy_bullet'):
+			area.queue_free()	
