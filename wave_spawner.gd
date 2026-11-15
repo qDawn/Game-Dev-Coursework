@@ -11,6 +11,7 @@ const CREEPER = preload("uid://darqnheyb4cf")  # change name pls idk
 const BOMBER = preload("uid://c2n7pwbombth1")
 const PALADIN_ENEMY = preload("uid://dkfo4df0de0hj")
 const SPIKE_ENEMY = preload("uid://d2mkh4wjcesqf")
+const MAGE_ENEMY = preload("uid://g6vf8ke8ux8y")
 
 const JUMP_MELEE = preload("uid://bn26uw2a530px")
 const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
@@ -32,7 +33,8 @@ const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": CREEPER, "weight": 1},
 									#{"resource": REFLECT_ENEMY, "weight": 1},
 									#{"resource": JUMP_MELEE, "weight": 1},
-									{"resource": SPIKE_ENEMY, "weight": 1}
+									{"resource": SPIKE_ENEMY, "weight": 1},
+									{"resource": MAGE_ENEMY, "weight": 1}
 									]
 									
 #for testing purposes
