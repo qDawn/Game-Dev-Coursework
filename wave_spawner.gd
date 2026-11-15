@@ -27,11 +27,11 @@ const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
 									#{"resource": HAMMER_ENEMY, "weight": 1},
 									#{"resource": LAZER_ENEMY, "weight": 1},
-									{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									{"resource": BOMBER, "weight": 1},
-									{"resource": CREEPER, "weight": 1},
-									{"resource": REFLECT_ENEMY, "weight": 1},
-									{"resource": JUMP_MELEE, "weight": 1},
+									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
+									#{"resource": BOMBER, "weight": 1},
+									#{"resource": CREEPER, "weight": 1},
+									#{"resource": REFLECT_ENEMY, "weight": 1},
+									#{"resource": JUMP_MELEE, "weight": 1},
 									{"resource": SPIKE_ENEMY, "weight": 1}
 									]
 									
@@ -52,12 +52,12 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready() -> void:
 	#3 second buffer before starting to spawn
 	generate_enemies()
-	start(300)
+	start(30)
 	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn
 func generate_enemies() -> void:
-	var max_weight : int = 3 + int(PlayerInfo.wave/2.0)
+	var max_weight : int = 10 + int(PlayerInfo.wave/2.0)
 	var total_weight : int = 0
 	while total_weight < max_weight:
 		# gets a random key from enemies
@@ -88,7 +88,7 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	return enemy_position
 	
 func _on_timeout() -> void:
-	#PlayerInfo.wave += 1
+	PlayerInfo.wave += 1
 	var completed_wave: int = PlayerInfo.wave - 2
 	if completed_wave >= 1:
 		PlayerInfo.add_score(PlayerInfo.get_wave_points(completed_wave))
