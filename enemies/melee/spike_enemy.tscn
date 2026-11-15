@@ -5,13 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://b6qe1gurf6sbp" path="res://assets/sprites/spiky_ball.png" id="3_xfsss"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfsss"]
-radius = 19.026299
+radius = 75.00667
 
 [node name="spike_enemy" unique_id=1378295628 instance=ExtResource("1_2quno")]
 script = ExtResource("2_jxsrh")
 
 [node name="sprite" parent="." index="0" unique_id=1078032425]
-scale = Vector2(0.016166668, 0.016166668)
+scale = Vector2(0.053208333, 0.053208333)
 texture = ExtResource("3_xfsss")
 
 [node name="collision_shape" parent="." index="2" unique_id=1561700062]
