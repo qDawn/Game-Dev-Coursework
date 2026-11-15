@@ -10,7 +10,7 @@ const AOE_DOT_SHOOTER = preload("uid://cgeglg8plfcut")
 const CREEPER = preload("uid://darqnheyb4cf")  # change name pls idk
 const BOMBER = preload("uid://c2n7pwbombth1")
 const PALADIN_ENEMY = preload("uid://dkfo4df0de0hj")
-
+const SPIKE_ENEMY = preload("uid://d2mkh4wjcesqf")
 
 const JUMP_MELEE = preload("uid://bn26uw2a530px")
 const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
@@ -27,11 +27,12 @@ const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
 									#{"resource": KATANA_ENEMY, "weight": 1},
 									#{"resource": HAMMER_ENEMY, "weight": 1},
 									#{"resource": LAZER_ENEMY, "weight": 1},
-									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									#{"resource": BOMBER, "weight": 1},
-									#{"resource": CREEPER, "weight": 1},
-									#{"resource": REFLECT_ENEMY, "weight": 1},
-									{"resource": JUMP_MELEE, "weight": 1}
+									{"resource": AOE_DOT_SHOOTER, "weight": 1},
+									{"resource": BOMBER, "weight": 1},
+									{"resource": CREEPER, "weight": 1},
+									{"resource": REFLECT_ENEMY, "weight": 1},
+									{"resource": JUMP_MELEE, "weight": 1},
+									{"resource": SPIKE_ENEMY, "weight": 1}
 									]
 									
 #for testing purposes
@@ -50,7 +51,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#3 second buffer before starting to spawn
-	spawn_enemy(PALADIN_ENEMY)
+	generate_enemies()
 	start(300)
 	PlayerInfo.run_active = true
 
@@ -60,7 +61,7 @@ func generate_enemies() -> void:
 	var total_weight : int = 0
 	while total_weight < max_weight:
 		# gets a random key from enemies
-		var random_enemy: Dictionary = enemies1.pick_random()
+		var random_enemy: Dictionary = enemies.pick_random()
 		var weight : int = random_enemy["weight"]
 		if weight + total_weight > max_weight: continue
 		total_weight += weight
