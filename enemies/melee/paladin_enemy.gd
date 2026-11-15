@@ -1,11 +1,16 @@
 extends "res://enemies/superclasses/melee_enemy.gd"
 
-const max_ability_speed : int= 400
-const base_speed : int = 150
+const max_ability_speed : int= 410
+#Attacks faster during ability
+const ability_attack_cooldown : float = 0.8
+#Swings faster during ability
+const ability_swing_speed = 0.15
+#Attacks from further away during ability
+const ability_min_range = 130
+
+const base_min_range = 80
+const base_speed : int = 200
 const base_attack_cooldown = 1.2
-const base_swing_speed = 0.1
-const ability_attack_cooldown : float = 0.5
-const ability_swing_speed = 0.05
 const max_barrier_health : int = 16 
 const ability_range :int = 400
 
@@ -21,8 +26,9 @@ func _ready() -> void:
 	attack_range = 150
 	damage = 10
 	attack_cooldown = 1.2
-	ability_duration = 3
+	ability_duration = 4
 	$barrier.hide()
+	$ability_weapon.hide()
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -30,34 +36,47 @@ func _process(delta: float) -> void:
 		_on_ability()
 	if ability_on:
 		speed = min(max_ability_speed, speed + 250*delta)
+		
+	
+func _physics_process(delta: float) -> void:
+	super(delta)
+	if ability_on and attacking:
+		handle_weapon_collision($ability_weapon/Area2D)
 	
 func _on_attack(direction: Vector2) -> bool:
-	attacking = true
-	var direction_angle: float = 180*direction.angle()/PI
-	direction_multiplier *= -1
+	if attacking: return false
+	if !ability_on:
+		return super(direction)
+	else:
+		if !($attack_cooldown.is_stopped() and not effects.has("stun")): return false
+		$attack_cooldown.start(attack_cooldown)
+		if effects.has("bleed"): _on_take_damage(damage)
+		
+		attacking = true
+		var direction_angle: float = 180*direction.angle()/PI
+		direction_multiplier *= -1
 
-	#swinging the weapon
-	$weapon.rotation_degrees -= direction_multiplier*70
-	#tween for swinging
-	var tween_swing: Tween = get_tree().create_tween()
-	tween_swing.tween_property($weapon, "rotation_degrees", direction_angle+direction_multiplier*70, swing_speed)
-	tween_swing.tween_property($'.', "attacking", false, 0)
-	#weapon collison
-	$weapon_collision.rotation_degrees = direction_angle
-	
-	#clear the array of entities hit
-	already_hit.clear()
-	return true
+		#swinging the weapon
+		$ability_weapon.rotation_degrees -= direction_multiplier*70
+		#tween for swinging
+		var tween_swing: Tween = get_tree().create_tween()
+		tween_swing.tween_property($ability_weapon, "rotation_degrees", direction_angle+direction_multiplier*100, ability_swing_speed)
+		tween_swing.tween_property($'.', "attacking", false, 0)
+
+		#clear the array of entities hit
+		already_hit.clear()
+		return true
 	
 func _on_ability() -> bool:
 	if not super(): return false
 	$barrier.show()
-	ability_on = true
 	attack_cooldown = ability_attack_cooldown
-	$attack_cooldown.stop()
-	swing_speed = ability_swing_speed
+	$attack_cooldown.start(attack_cooldown)
+	min_range = ability_min_range
 	barrier_health = max_barrier_health
-	$weapon.scale = Vector2(2,2)
+	$weapon.hide()
+	$ability_weapon.show()
+	ability_on = true
 	return true
 
 func _on_ability_active_timeout() -> void:
@@ -65,17 +84,30 @@ func _on_ability_active_timeout() -> void:
 	ability_on = false
 	speed = base_speed
 	attack_cooldown = base_attack_cooldown
-	swing_speed = base_swing_speed
+	min_range = base_min_range
 	barrier_health = 0
-	$weapon.scale = Vector2(1,1)
+	$weapon.show()
+	$ability_weapon.hide()
 	super()
 	
 func _on_take_damage(d: float) -> void:
 	#barrier absorbs the damage. If damage exceeds barrier health, enemy takes remaining damage
 	if barrier_health > 0:
 		barrier_health = barrier_health - d
+		#Barrier removes when health <= 0 and damage is taken when damage > 0
+		if barrier_health <=0:
+			$barrier.hide()
 		if barrier_health < 0:
 			super(-barrier_health)
-			$barrier.hide()
 	else:
 		super(d)
+		
+func aim(direction: Vector2):
+	if !ability_on:
+		super(direction)
+	else:
+		if !attacking and not effects.has("stun"):
+			if direction.x < 0: $ability_weapon.scale.y = -1
+			else: $ability_weapon.scale.y = 1
+			$ability_weapon.rotation = direction.angle()
+		

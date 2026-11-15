@@ -4,22 +4,42 @@
 [ext_resource type="Texture2D" uid="uid://b4vr7b6gj55fp" path="res://assets/kenney_ui-pack-rpg-expansion/PNG/cursorSword_silver.png" id="2_y3l8l"]
 [ext_resource type="Script" uid="uid://bgfx5is1ulxcd" path="res://enemies/melee/paladin_enemy.gd" id="2_ybtxm"]
 [ext_resource type="Texture2D" uid="uid://crlxsrafem6n4" path="res://assets/sprites/bullet.png" id="4_0gwwa"]
+[ext_resource type="Texture2D" uid="uid://dr36lvqrg6ckd" path="res://assets/kenney_ui-pack-rpg-expansion/PNG/cursorSword_gold.png" id="4_hcasi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0gwwa"]
-size = Vector2(65, 42)
+size = Vector2(79, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgns8"]
+size = Vector2(113, 135)
 
 [node name="paladin_enemy" unique_id=107408206 instance=ExtResource("1_0tjqc")]
 script = ExtResource("2_ybtxm")
 
 [node name="CollisionShape2D" parent="weapon_collision/melee_collision_area" parent_id_path=PackedInt32Array(1046232765) index="0" unique_id=733389090]
-position = Vector2(0.49999934, -10)
+position = Vector2(-6.500001, -17)
 shape = SubResource("RectangleShape2D_0gwwa")
 
 [node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(45.97072, -13.349808)
+scale = Vector2(1.7852829, 1.755174)
 texture = ExtResource("2_y3l8l")
 
-[node name="barrier" type="Sprite2D" parent="." index="13" unique_id=2074488780]
+[node name="ability_weapon" type="Node2D" parent="." index="13" unique_id=1053694252]
+
+[node name="Sprite2D" type="Sprite2D" parent="ability_weapon" index="0" unique_id=883062743]
+position = Vector2(62.55902, -16.851486)
+rotation = 1.5707964
+scale = Vector2(4.1255217, 3.1757672)
+texture = ExtResource("4_hcasi")
+
+[node name="Area2D" type="Area2D" parent="ability_weapon" index="1" unique_id=1333854667]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ability_weapon/Area2D" index="0" unique_id=2014928412]
+position = Vector2(64.5, -18.5)
+shape = SubResource("RectangleShape2D_lgns8")
+
+[node name="barrier" type="Sprite2D" parent="." index="14" unique_id=2074488780]
 modulate = Color(0.047058824, 0.1764706, 0.8784314, 0.34117648)
-position = Vector2(1.9073486e-06, 0)
+position = Vector2(6.9999995, -15)
 scale = Vector2(5.921875, 5.03125)
 texture = ExtResource("4_0gwwa")
