@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dn5bowlerscen"]
+
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/superclasses/enemy.tscn" id="1_enemy"]
+[ext_resource type="Script" uid="uid://cm2bowlerenem" path="res://enemies/ranged/boulder_enemy.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://dt4tdfbi07q6x" path="res://assets/sprites/boulder.png" id="3_boulder"]
+
+[node name="boulder_enemy" unique_id=180345479 instance=ExtResource("1_enemy")]
+script = ExtResource("2_script")
+
+[node name="sprite" parent="." index="0" unique_id=1078032425]
+self_modulate = Color(0.86, 0.74, 0.58, 1)
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+texture_filter = 5
+position = Vector2(46, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_boulder")
+
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

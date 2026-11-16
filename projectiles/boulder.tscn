@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bq4boulderscn"]
+
+[ext_resource type="Script" uid="uid://dk8boulder01a" path="res://projectiles/boulder.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dt4tdfbi07q6x" path="res://assets/sprites/boulder.png" id="2_boulder"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_boulder"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 28.0
+
+[node name="boulder" type="RigidBody2D" unique_id=327773925 groups=["projectile"]]
+z_index = 1
+gravity_scale = 0.0
+can_sleep = false
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 8
+linear_damp = 0.15
+script = ExtResource("1_script")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=722419300]
+texture_filter = 5
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_boulder")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=825245831]
+shape = SubResource("CircleShape2D_boulder")
+
+[node name="hit_area" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_area"]
+shape = SubResource("CircleShape2D_hit")
+
+[node name="decay_timer" type="Timer" parent="." unique_id=1728848804]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
+[connection signal="timeout" from="decay_timer" to="." method="_on_decay_timer_timeout"]
