@@ -6,6 +6,7 @@ signal take_damage
 signal heal
 signal take_effect
 signal possession
+signal died
 
 #health
 var max_health: float = 10
@@ -114,6 +115,7 @@ func _on_take_damage(d: float) -> void:
 		if state == 'alive':
 			state = 'dead'
 			PlayerInfo.add_score(PlayerInfo.get_kill_points(scene_file_path.get_file().get_basename()))
+			died.emit()
 			$possession_window.start()
 			#set up and show the corpse timer bar
 			$corpse_timer.max_value = $possession_window.wait_time

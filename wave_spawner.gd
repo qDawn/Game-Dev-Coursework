@@ -7,10 +7,11 @@ const BURST_SHOOTER = preload("uid://cwjgu1eo76ek0")
 const SMITE_SHOOTER = preload("uid://bj6iw06pnx22b")
 const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 const AOE_DOT_SHOOTER = preload("uid://cgeglg8plfcut")
-const CREEPER = preload("uid://darqnheyb4cf")  # change name pls idk
+const SUICIDE_BOMBER = preload("uid://darqnheyb4cf")
 const BOMBER = preload("uid://c2n7pwbombth1")
 const PALADIN_ENEMY = preload("uid://dkfo4df0de0hj")
 const SPIKE_ENEMY = preload("uid://d2mkh4wjcesqf")
+const BOULDER_ENEMY = preload("uid://dn5bowlerscen")
 
 const JUMP_MELEE = preload("uid://bn26uw2a530px")
 const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
@@ -19,20 +20,21 @@ const REFLECT_ENEMY = preload("uid://cie7la3cjm2ma")
 const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
 
 
-const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
-									#{"resource": SPREAD_SHOOTER, "weight": 1},
-									#{"resource": SNIPER_SHOOTER, "weight": 1},
-									#{"resource": SMITE_SHOOTER, "weight": 1},
-									#{"resource": BURST_SHOOTER, "weight": 1},
-									#{"resource": KATANA_ENEMY, "weight": 1},
-									#{"resource": HAMMER_ENEMY, "weight": 1},
-									#{"resource": LAZER_ENEMY, "weight": 1},
-									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									#{"resource": BOMBER, "weight": 1},
-									#{"resource": CREEPER, "weight": 1},
-									#{"resource": REFLECT_ENEMY, "weight": 1},
-									#{"resource": JUMP_MELEE, "weight": 1},
-									{"resource": SPIKE_ENEMY, "weight": 1}
+const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
+									{"resource": SPREAD_SHOOTER, "weight": 1},
+									{"resource": SNIPER_SHOOTER, "weight": 1},
+									{"resource": SMITE_SHOOTER, "weight": 1},
+									{"resource": BURST_SHOOTER, "weight": 1},
+									{"resource": KATANA_ENEMY, "weight": 1},
+									{"resource": HAMMER_ENEMY, "weight": 1},
+									{"resource": LAZER_ENEMY, "weight": 1},
+									{"resource": AOE_DOT_SHOOTER, "weight": 1},
+									{"resource": BOMBER, "weight": 1},
+									{"resource": SUICIDE_BOMBER, "weight": 1},
+									{"resource": REFLECT_ENEMY, "weight": 1},
+									{"resource": JUMP_MELEE, "weight": 1},
+									#{"resource": SPIKE_ENEMY, "weight": 1},
+									#{"resource": BOULDER_ENEMY, "weight": 1}
 									]
 									
 #for testing purposes
@@ -48,16 +50,16 @@ var max_enemy_spawn_distance  : int= 1000
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
+var enemies_alive : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#3 second buffer before starting to spawn
-	generate_enemies()
-	start(30)
+	start(1)
 	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn
 func generate_enemies() -> void:
-	var max_weight : int = 10 + int(PlayerInfo.wave/2.0)
+	var max_weight : int = 3 + int(PlayerInfo.wave/2.0)
 	var total_weight : int = 0
 	while total_weight < max_weight:
 		# gets a random key from enemies
@@ -71,8 +73,10 @@ func generate_enemies() -> void:
 func spawn_enemy(enemy_resource : Resource) -> void:
 	var enemy = enemy_resource.instantiate()
 	enemy.global_position = get_valid_enemy_spawn_position()
+	enemy.died.connect(_on_enemy_died)
+	enemies_alive += 1
 	add_child(enemy)
-		
+	
 ##method for getting a valid coord to spawn an enemy
 func get_valid_enemy_spawn_position() -> Vector2:
 	var player_position : Vector2 = get_parent().get_node("Player").global_position
@@ -94,3 +98,13 @@ func _on_timeout() -> void:
 		PlayerInfo.add_score(PlayerInfo.get_wave_points(completed_wave))
 	generate_enemies()
 	start(15)
+	
+func _on_enemy_died() -> void:
+	if enemies_alive > 0:
+		enemies_alive -= 1
+		
+	if enemies_alive == 0:
+		skip_wave_timer()
+		
+func skip_wave_timer() -> void:
+	start(3)
