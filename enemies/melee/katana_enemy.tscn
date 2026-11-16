@@ -25,11 +25,11 @@ z_index = 1
 position = Vector2(34, -45)
 texture = ExtResource("4_2w38q")
 
-[node name="collision_shape" parent="." index="1" unique_id=1561700062]
+[node name="collision_shape" parent="." index="2" unique_id=1561700062]
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_h0ywr")
 
-[node name="attack_cooldown" parent="." index="2" unique_id=1727736153]
+[node name="attack_cooldown" parent="." index="3" unique_id=1727736153]
 wait_time = 1.7999999999999998
 
 [node name="melee_collision_area" parent="weapon_collision" parent_id_path=PackedInt32Array(1889839535) index="0" unique_id=1046232765]

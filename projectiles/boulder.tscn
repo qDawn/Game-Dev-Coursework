@@ -27,13 +27,12 @@ texture = ExtResource("2_boulder")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=825245831]
 shape = SubResource("CircleShape2D_boulder")
 
-[node name="hit_area" type="Area2D" parent="."]
+[node name="hit_area" type="Area2D" parent="." unique_id=267147142]
+collision_layer = 0
 monitoring = false
 monitorable = false
-collision_layer = 0
-collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_area" unique_id=1206085918]
 shape = SubResource("CircleShape2D_hit")
 
 [node name="decay_timer" type="Timer" parent="." unique_id=1728848804]
