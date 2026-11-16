@@ -40,6 +40,7 @@ func _on_ability() -> bool:
 	return true
 
 func _on_attack(direction: Vector2) -> bool:
+	if not $ability_active.is_stopped(): return false
 	if winding_up: return false
 	return super(direction)
 

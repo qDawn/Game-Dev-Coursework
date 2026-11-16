@@ -9,7 +9,6 @@ func _ready() -> void:
 	super()
 
 func _on_attack(direction: Vector2) -> bool:
-	if not $ability_active.is_stopped(): return false
 	if not super(direction): return false
 	attacking = true
 	var direction_angle: float = 180*direction.angle()/PI
