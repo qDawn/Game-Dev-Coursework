@@ -43,7 +43,6 @@ func _on_burst_timer_timeout() -> void:
 func _on_ability() -> bool:
 	if not super(): return false
 	enhance()
-	$attack_cooldown.stop()
 	return true
 
 func enhance() -> void:

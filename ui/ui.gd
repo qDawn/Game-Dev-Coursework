@@ -26,7 +26,10 @@ func _process(_delta: float) -> void:
 		possession_health_bar.visible = false
 
 	score_label.text = "Score  %d" % PlayerInfo.score
-	wave_label.text = "Wave: %s" % max(PlayerInfo.wave-1,1)
+	if not PlayerInfo.boss:
+		wave_label.text = "Wave: %s" % max(PlayerInfo.wave-1,1)
+	else:
+		wave_label.text = "BOSS"
 
 func _on_health_changed() -> void:
 	player_health_bar.value = player_health_bar.max_value * (PlayerInfo.current_health / PlayerInfo.max_health)

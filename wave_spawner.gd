@@ -1,5 +1,9 @@
 extends Timer
 
+#bosses
+
+
+#shooters
 const BASIC_SHOOTER = preload("uid://bno1bbsktwtt8")
 const SPREAD_SHOOTER = preload("uid://4bjlne2f0iwv")
 const SNIPER_SHOOTER = preload("uid://cjii0aebj2eeo")
@@ -7,18 +11,17 @@ const BURST_SHOOTER = preload("uid://cwjgu1eo76ek0")
 const SMITE_SHOOTER = preload("uid://bj6iw06pnx22b")
 const LAZER_ENEMY = preload("uid://cnrhv5s1314sc")
 const AOE_DOT_SHOOTER = preload("uid://cgeglg8plfcut")
-const SUICIDE_BOMBER = preload("uid://darqnheyb4cf")
 const BOMBER = preload("uid://c2n7pwbombth1")
-const PALADIN_ENEMY = preload("uid://dkfo4df0de0hj")
-const SPIKE_ENEMY = preload("uid://d2mkh4wjcesqf")
 const BOULDER_ENEMY = preload("uid://dn5bowlerscen")
-
+#melee
 const JUMP_MELEE = preload("uid://bn26uw2a530px")
 const KATANA_ENEMY = preload("uid://bcbyxbm1txx8i")
 const HAMMER_ENEMY = preload("uid://cps8a5ofc76u7")
 const REFLECT_ENEMY = preload("uid://cie7la3cjm2ma")
-const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
-
+const PALADIN_ENEMY = preload("uid://dkfo4df0de0hj")
+const SPIKE_ENEMY = preload("uid://d2mkh4wjcesqf")
+const SUICIDE_BOMBER = preload("uid://darqnheyb4cf")
+#const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") removed indefinitely
 
 const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
 									{"resource": SPREAD_SHOOTER, "weight": 1},
@@ -71,7 +74,7 @@ func generate_enemies() -> void:
 
 #method for spawning enemies
 func spawn_enemy(enemy_resource : Resource) -> void:
-	var enemy = enemy_resource.instantiate()
+	var enemy: Enemy = enemy_resource.instantiate()
 	enemy.global_position = get_valid_enemy_spawn_position()
 	enemy.died.connect(_on_enemy_died)
 	enemies_alive += 1
@@ -92,18 +95,16 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	return enemy_position
 	
 func _on_timeout() -> void:
-	PlayerInfo.wave += 1
-	var completed_wave: int = PlayerInfo.wave - 2
-	if completed_wave >= 1:
-		PlayerInfo.add_score(PlayerInfo.get_wave_points(completed_wave))
-	generate_enemies()
-	start(30)
+	if not BossInfo.current_boss:
+		var completed_wave: int = PlayerInfo.wave - 2
+		if completed_wave >= 1: PlayerInfo.add_score(PlayerInfo.get_wave_points(completed_wave))
+		if PlayerInfo.wave % 4 == 0:
+			pass
+		else:
+			generate_enemies()
+			start(30)
+		PlayerInfo.wave += 1
 	
 func _on_enemy_died() -> void:
-	if enemies_alive > 0:
-		enemies_alive -= 1
-	if enemies_alive == 0:
-		skip_wave_timer()
-		
-func skip_wave_timer() -> void:
-	start(3)
+	enemies_alive -= 1
+	if enemies_alive == 0 and not BossInfo: start(3)

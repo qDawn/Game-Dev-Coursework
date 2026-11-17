@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 signal attack
 signal ability
@@ -54,7 +55,7 @@ func _ready() -> void:
 	target = get_tree().get_first_node_in_group('ally')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if state != 'dead' and target:
 		var direction: Vector2
 		var distance: float
@@ -70,7 +71,6 @@ func _process(delta: float) -> void:
 			if distance <= attack_range and $attack_cooldown.is_stopped() and $hesitation_timer.is_stopped() and not effects.has("stun"):
 				$exclamation.visible = true
 				$hesitation_timer.start(randf_range(0.1,1.5))
-
 	else:
 		#update the corpse timer bar with the time left to possess
 		$corpse_timer.value = $possession_window.time_left
