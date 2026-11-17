@@ -20,21 +20,21 @@ const REFLECT_ENEMY = preload("uid://cie7la3cjm2ma")
 const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") # removed indefinitely
 
 
-const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
-									#{"resource": SPREAD_SHOOTER, "weight": 1},
-									#{"resource": SNIPER_SHOOTER, "weight": 1},
-									#{"resource": SMITE_SHOOTER, "weight": 1},
-									#{"resource": BURST_SHOOTER, "weight": 1},
+const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
+									{"resource": SPREAD_SHOOTER, "weight": 1},
+									{"resource": SNIPER_SHOOTER, "weight": 1},
+									{"resource": SMITE_SHOOTER, "weight": 1},
+									{"resource": BURST_SHOOTER, "weight": 1},
 									{"resource": KATANA_ENEMY, "weight": 1},
-									#{"resource": HAMMER_ENEMY, "weight": 1},
-									#{"resource": LAZER_ENEMY, "weight": 1},
-									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									#{"resource": BOMBER, "weight": 1},
-									#{"resource": SUICIDE_BOMBER, "weight": 1},
-									#{"resource": REFLECT_ENEMY, "weight": 1},
-									#{"resource": JUMP_MELEE, "weight": 1},
-									#{"resource": SPIKE_ENEMY, "weight": 1},
-									#{"resource": BOULDER_ENEMY, "weight": 1}
+									{"resource": HAMMER_ENEMY, "weight": 1},
+									{"resource": LAZER_ENEMY, "weight": 1},
+									{"resource": AOE_DOT_SHOOTER, "weight": 1},
+									{"resource": BOMBER, "weight": 1},
+									{"resource": SUICIDE_BOMBER, "weight": 1},
+									{"resource": REFLECT_ENEMY, "weight": 1},
+									{"resource": JUMP_MELEE, "weight": 1},
+									{"resource": SPIKE_ENEMY, "weight": 1},
+									{"resource": BOULDER_ENEMY, "weight": 1}
 									]
 									
 #for testing purposes
@@ -97,12 +97,11 @@ func _on_timeout() -> void:
 	if completed_wave >= 1:
 		PlayerInfo.add_score(PlayerInfo.get_wave_points(completed_wave))
 	generate_enemies()
-	start(15)
+	start(30)
 	
 func _on_enemy_died() -> void:
 	if enemies_alive > 0:
 		enemies_alive -= 1
-		
 	if enemies_alive == 0:
 		skip_wave_timer()
 		

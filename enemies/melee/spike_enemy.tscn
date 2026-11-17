@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b6qe1gurf6sbp" path="res://assets/sprites/spiky_ball.png" id="3_xfsss"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfsss"]
-radius = 75.00667
+radius = 52.009613
 
 [node name="spike_enemy" unique_id=1378295628 instance=ExtResource("1_2quno")]
 script = ExtResource("2_jxsrh")
