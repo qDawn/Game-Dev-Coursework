@@ -7,8 +7,6 @@ var bullet_speed: int = 500
 ##how inaccurate the bullets are
 var inaccuracy: float = 1
 
-
-
 ##Method to fire a bullet.
 func fire_bullet(direction: Vector2, b_speed: float, b_damage: float, bullet_type: Resource) -> Area2D:
 	var b: BasicBullet = bullet_type.instantiate()

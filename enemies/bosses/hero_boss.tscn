@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bavch21aim7nm"]
+
+[ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/superclasses/melee_enemy.tscn" id="1_s3apc"]
+[ext_resource type="Script" uid="uid://dcbu04yqdu0i5" path="res://enemies/bosses/hero_boss.gd" id="2_11gy5"]
+
+[node name="hero_boss" unique_id=107408206 groups=["boss"] instance=ExtResource("1_s3apc")]
+script = ExtResource("2_11gy5")
+
+[node name="origin" parent="weapon/spr" parent_id_path=PackedInt32Array(2048158550) index="0" unique_id=2068338303]
+position = Vector2(2.6226837e-07, 6)
