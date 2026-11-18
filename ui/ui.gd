@@ -8,6 +8,7 @@ signal ability_changed
 @onready var possession_health_bar: TextureProgressBar = $possession_health_bar
 @onready var score_label: Label = %score_label
 @onready var wave_label: Label = $wave_label
+@onready var next_wave_ui: Label = $next_wave_ui
 
 func _ready() -> void:
 	connect("health_changed",_on_health_changed)
@@ -26,9 +27,12 @@ func _process(_delta: float) -> void:
 		possession_health_bar.visible = false
 
 	score_label.text = "Score  %d" % PlayerInfo.score
-	if not PlayerInfo.boss:
+	if not BossInfo.current_boss:
 		wave_label.text = "Wave: %s" % max(PlayerInfo.wave-1,1)
+		next_wave_ui.visible = true
+		next_wave_ui.text = "Time till next wave: %s" % round($"../../wave_spawner".time_left)
 	else:
+		next_wave_ui.visible = false
 		wave_label.text = "BOSS"
 
 func _on_health_changed() -> void:

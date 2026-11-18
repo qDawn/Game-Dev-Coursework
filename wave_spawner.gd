@@ -56,8 +56,9 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var enemies_alive : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawn_enemy(SPREAD_SHOOTER)
 	#3 second buffer before starting to spawn
-	start(1)
+	start(3)
 	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn
@@ -107,4 +108,6 @@ func _on_timeout() -> void:
 	
 func _on_enemy_died() -> void:
 	enemies_alive -= 1
-	if enemies_alive == 0 and not BossInfo: start(3)
+	print(enemies_alive)
+	if enemies_alive == 0 and not BossInfo.current_boss: 
+		start(3)

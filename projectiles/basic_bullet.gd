@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name BasicBullet
+
 var speed: float = 150
 var direction : Vector2
 var damage: float = 1

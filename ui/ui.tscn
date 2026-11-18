@@ -31,9 +31,9 @@ texture_under = ExtResource("2_ag0dx")
 texture_progress = ExtResource("4_atbq8")
 
 [node name="wave_label" type="Label" parent="." unique_id=1030448265]
-offset_left = 384.0
-offset_right = 768.0
-offset_bottom = 128.0
+offset_left = 448.0
+offset_right = 704.0
+offset_bottom = 96.0
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 64
 text = "Wave: 1"
@@ -46,3 +46,13 @@ offset_top = 560.0
 offset_right = 768.0
 offset_bottom = 587.0
 show_percentage = false
+
+[node name="next_wave_ui" type="Label" parent="." unique_id=1208639342]
+offset_left = 448.0
+offset_top = 96.0
+offset_right = 704.0
+offset_bottom = 128.0
+theme_override_constants/outline_size = 8
+text = "Time till next wave:"
+horizontal_alignment = 1
+vertical_alignment = 1
