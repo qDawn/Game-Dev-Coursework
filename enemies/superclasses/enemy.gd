@@ -52,17 +52,17 @@ func _ready() -> void:
 	connect("take_effect",_on_take_effect)
 	connect("possession",_on_possession)
 	
-	target = get_tree().get_first_node_in_group('ally')
+	$retarget_cooldown.emit_signal("timeout")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if state != 'dead' and target:
+	if state != 'dead':
 		var direction: Vector2
 		var distance: float
 		if state == 'possessed':
 			direction = global_position.direction_to(get_global_mouse_position())
 			aim(direction)
-		else:
+		elif target and state != 'possessed':
 			direction = global_position.direction_to(target.global_position)
 			aim(direction)
 			
@@ -77,7 +77,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or stunned in effects
-	if effects.has("stun") or not target: return
+	if effects.has("stun") or (not target and state != 'possessed'): return
 	velocity = Vector2.ZERO
 	if state == 'alive':
 		var distance: float = global_position.distance_to(target.global_position)
@@ -223,3 +223,10 @@ func get_ability_cooldown() -> float:
 	elif not $ability_cooldown.is_stopped():
 		return 1-$ability_cooldown.time_left/$ability_cooldown.wait_time
 	return 1
+
+
+func _on_retarget_cooldown_timeout() -> void:
+	if is_in_group("enemy"):
+		target = get_tree().get_first_node_in_group('ally')
+	elif is_in_group("ally"):
+		target = get_tree().get_first_node_in_group('enemy')

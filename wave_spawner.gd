@@ -21,6 +21,7 @@ const REFLECT_ENEMY = preload("uid://cie7la3cjm2ma")
 const PALADIN_ENEMY = preload("uid://dkfo4df0de0hj")
 const SPIKE_ENEMY = preload("uid://d2mkh4wjcesqf")
 const SUICIDE_BOMBER = preload("uid://darqnheyb4cf")
+const CLONE_ENEMY = preload("uid://cvwu0iar6767i")
 #const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") removed indefinitely
 
 const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
@@ -37,11 +38,12 @@ const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
 									{"resource": REFLECT_ENEMY, "weight": 1},
 									{"resource": JUMP_MELEE, "weight": 1},
 									{"resource": SPIKE_ENEMY, "weight": 1},
-									{"resource": BOULDER_ENEMY, "weight": 1}
+									{"resource": BOULDER_ENEMY, "weight": 1},
+									{"resource": CLONE_ENEMY, "weight": 1}
 									]
 									
 #for testing purposes
-const enemies1 :Array[Dictionary] = [{"resource": PALADIN_ENEMY, "weight": 1},
+const enemies1 :Array[Dictionary] = [{"resource": CLONE_ENEMY, "weight": 1},
 									#{"resource": BOMBER, "weight": 1},
 									]
 #Restricts certain enemies in earlier waves by limiting the weight an enemy can have
@@ -56,9 +58,8 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var enemies_alive : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_enemy(HERO_BOSS)
 	#3 second buffer before starting to spawn
-	start(300)
+	start(3)
 	PlayerInfo.run_active = true
 
 ##Method for determining what types of enemies to spawn
@@ -108,6 +109,5 @@ func _on_timeout() -> void:
 	
 func _on_enemy_died() -> void:
 	enemies_alive -= 1
-	print(enemies_alive)
 	if enemies_alive == 0 and not get_tree().get_first_node_in_group("boss"): 
 		start(3)

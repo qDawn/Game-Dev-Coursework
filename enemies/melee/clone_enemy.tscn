@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cvwu0iar6767i"]
+
+[ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/superclasses/melee_enemy.tscn" id="1_1ab0b"]
+[ext_resource type="Script" uid="uid://bbcga8g7y68fk" path="res://enemies/melee/clone_enemy.gd" id="2_2eqws"]
+
+[node name="clone_enemy" unique_id=107408206 instance=ExtResource("1_1ab0b")]
+script = ExtResource("2_2eqws")
