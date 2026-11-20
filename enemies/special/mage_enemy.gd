@@ -12,7 +12,6 @@ func _ready() -> void:
 	min_range = 450
 	attack_range = 0
 	$weapon.hide()
-	summon_count = 2
-	summon_interval = 6.0
-	max_minions = 4
- 
+	summon_count = 1
+	summon_interval = 10.0
+	max_minions = 2

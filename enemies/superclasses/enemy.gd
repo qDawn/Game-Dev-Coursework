@@ -122,7 +122,7 @@ func _on_take_damage(d: float) -> void:
 			$corpse_timer.value = $possession_window.wait_time
 			$corpse_timer.show()
 			set_collision_layer_value(1,false)
-			set_collision_mask_value(1,false)
+			set_collision_layer_value(2,true)
 			$sprite.self_modulate = Color(1,1,1,0.5)
 		elif state == 'possessed':
 			#send signal to player that the possessed vessel has died.
@@ -165,7 +165,7 @@ func _on_possession() -> void:
 	state = 'possessed'
 	#reset the collision layers (so the possessed enemy can take damage again
 	set_collision_layer_value(1,true)
-	set_collision_mask_value(1,true)
+	set_collision_layer_value(2,false)
 	#make the sprite visible again
 	$sprite.self_modulate = Color(1,1,1,1)
 	#bleed tints modulate and leaves it on the corpse
@@ -226,14 +226,13 @@ func get_ability_cooldown() -> float:
 
 
 func _on_retarget_cooldown_timeout() -> void:
-	if is_in_group("enemy"):
-		target = get_tree().get_first_node_in_group('ally')
-	elif is_in_group("ally"):
-		target = null
-		var best: float = INF
-		for enemy: Node2D in get_tree().get_nodes_in_group('enemy'):
-			if enemy is CharacterBody2D and enemy.get("state") == 'alive':
-				var d: float = global_position.distance_squared_to(enemy.global_position)
-				if d < best:
-					best = d
-					target = enemy
+	var target_group: String = 'ally'
+	if is_in_group('ally'): target_group = 'enemy'
+
+	target = null
+	var best: float = INF
+	for t: Node2D in get_tree().get_nodes_in_group(target_group):
+		var d: float = global_position.distance_to(t.global_position)
+		if d < best:
+			best = d
+			target = t
