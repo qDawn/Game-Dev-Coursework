@@ -114,7 +114,7 @@ func _on_take_damage(d: float) -> void:
 	if current_health <= 0: 
 		if state == 'alive':
 			state = 'dead'
-			PlayerInfo.add_score(PlayerInfo.get_kill_points(scene_file_path.get_file().get_basename()))
+			if is_in_group("enemy"): PlayerInfo.add_score(PlayerInfo.get_kill_points(scene_file_path.get_file().get_basename()))
 			died.emit()
 			$possession_window.start()
 			#set up and show the corpse timer bar
