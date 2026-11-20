@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 signal attack
 signal ability
@@ -6,6 +7,7 @@ signal take_damage
 signal heal
 signal take_effect
 signal possession
+signal died
 
 #health
 var max_health: float = 10
@@ -50,17 +52,17 @@ func _ready() -> void:
 	connect("take_effect",_on_take_effect)
 	connect("possession",_on_possession)
 	
-	target = get_tree().get_first_node_in_group('ally')
+	$retarget_cooldown.emit_signal("timeout")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if state != 'dead' and target:
+func _process(_delta: float) -> void:
+	if state != 'dead':
 		var direction: Vector2
 		var distance: float
 		if state == 'possessed':
 			direction = global_position.direction_to(get_global_mouse_position())
 			aim(direction)
-		else:
+		elif target and state != 'possessed':
 			direction = global_position.direction_to(target.global_position)
 			aim(direction)
 			
@@ -69,14 +71,13 @@ func _process(delta: float) -> void:
 			if distance <= attack_range and $attack_cooldown.is_stopped() and $hesitation_timer.is_stopped() and not effects.has("stun"):
 				$exclamation.visible = true
 				$hesitation_timer.start(randf_range(0.1,1.5))
-
 	else:
 		#update the corpse timer bar with the time left to possess
 		$corpse_timer.value = $possession_window.time_left
 
 func _physics_process(delta: float) -> void:
 	# Skip if enemy is dead or stunned in effects
-	if effects.has("stun") or not target: return
+	if effects.has("stun") or (not target and state != 'possessed'): return
 	velocity = Vector2.ZERO
 	if state == 'alive':
 		var distance: float = global_position.distance_to(target.global_position)
@@ -114,6 +115,7 @@ func _on_take_damage(d: float) -> void:
 		if state == 'alive':
 			state = 'dead'
 			PlayerInfo.add_score(PlayerInfo.get_kill_points(scene_file_path.get_file().get_basename()))
+			died.emit()
 			$possession_window.start()
 			#set up and show the corpse timer bar
 			$corpse_timer.max_value = $possession_window.wait_time
@@ -221,3 +223,17 @@ func get_ability_cooldown() -> float:
 	elif not $ability_cooldown.is_stopped():
 		return 1-$ability_cooldown.time_left/$ability_cooldown.wait_time
 	return 1
+
+
+func _on_retarget_cooldown_timeout() -> void:
+	if is_in_group("enemy"):
+		target = get_tree().get_first_node_in_group('ally')
+	elif is_in_group("ally"):
+		target = null
+		var best: float = INF
+		for enemy: Node2D in get_tree().get_nodes_in_group('enemy'):
+			if enemy is CharacterBody2D and enemy.get("state") == 'alive':
+				var d: float = global_position.distance_squared_to(enemy.global_position)
+				if d < best:
+					best = d
+					target = enemy

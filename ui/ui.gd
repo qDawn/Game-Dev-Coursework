@@ -8,6 +8,9 @@ signal ability_changed
 @onready var possession_health_bar: TextureProgressBar = $possession_health_bar
 @onready var score_label: Label = %score_label
 @onready var wave_label: Label = $wave_label
+@onready var next_wave_ui: Label = $next_wave_ui
+@onready var boss_health_bar: TextureProgressBar = %boss_health_bar
+
 
 func _ready() -> void:
 	connect("health_changed",_on_health_changed)
@@ -26,7 +29,17 @@ func _process(_delta: float) -> void:
 		possession_health_bar.visible = false
 
 	score_label.text = "Score  %d" % PlayerInfo.score
-	wave_label.text = "Wave: %s" % max(PlayerInfo.wave-1,1)
+	var boss: Enemy = get_tree().get_first_node_in_group("boss")
+	if not boss:
+		wave_label.text = "Wave: %s" % max(PlayerInfo.wave-1,1)
+		next_wave_ui.visible = true
+		boss_health_bar.visible = false
+		next_wave_ui.text = "Time till next wave: %s" % round($"../../wave_spawner".time_left)
+	else:
+		next_wave_ui.visible = false
+		wave_label.text = "BOSS"
+		boss_health_bar.visible = true
+		boss_health_bar.value = boss_health_bar.max_value * (boss.current_health/boss.max_health)
 
 func _on_health_changed() -> void:
 	player_health_bar.value = player_health_bar.max_value * (PlayerInfo.current_health / PlayerInfo.max_health)

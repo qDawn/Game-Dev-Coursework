@@ -8,7 +8,7 @@ func _ready() -> void:
 	minion_types = [{"scene": IMP_ENEMY, "weight": 1}]
 	max_health = 25
 	current_health = 25
-	speed = 160
+	speed = 240
 	min_range = 450
 	attack_range = 0
 	$weapon.hide()

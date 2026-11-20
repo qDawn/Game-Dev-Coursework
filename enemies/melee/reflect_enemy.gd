@@ -25,6 +25,11 @@ func _process(delta : float) -> void:
 		if distance <= ability_range and $ability_cooldown.is_stopped():
 			_on_ability()
 
+func _on_attack(direction: Vector2) -> bool:
+	if not $ability_active.is_stopped(): return false
+	return super(direction)
+
+
 func _on_ability() -> bool:
 	if not super(): return false
 	$reflect_area.visible = true

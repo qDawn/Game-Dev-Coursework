@@ -7,11 +7,9 @@ var bullet_speed: int = 500
 ##how inaccurate the bullets are
 var inaccuracy: float = 1
 
-
-
 ##Method to fire a bullet.
 func fire_bullet(direction: Vector2, b_speed: float, b_damage: float, bullet_type: Resource) -> Area2D:
-	var b: Area2D = bullet_type.instantiate()
+	var b: BasicBullet = bullet_type.instantiate()
 	b.global_position = $weapon/spr/origin.global_position
 	b.direction = Vector2.from_angle(direction.angle() + randf_range(-PI/36*inaccuracy, PI/36*inaccuracy))
 	b.damage = b_damage

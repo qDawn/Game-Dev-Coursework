@@ -69,23 +69,23 @@ func _on_attack(direction: Vector2) -> bool:
 	
 func _on_ability() -> bool:
 	if not super(): return false
-	$barrier.show()
 	attack_cooldown = ability_attack_cooldown
 	$attack_cooldown.start(attack_cooldown)
 	min_range = ability_min_range
 	barrier_health = max_barrier_health
+	$barrier.show()
 	$weapon.hide()
 	$ability_weapon.show()
 	ability_on = true
 	return true
 
 func _on_ability_active_timeout() -> void:
-	$barrier.hide()
 	ability_on = false
 	speed = base_speed
 	attack_cooldown = base_attack_cooldown
 	min_range = base_min_range
 	barrier_health = 0
+	$barrier.hide()
 	$weapon.show()
 	$ability_weapon.hide()
 	super()

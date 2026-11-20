@@ -1,5 +1,6 @@
 extends "res://enemies/superclasses/enemy.gd"
 
+
 var minion_types: Array[Dictionary] = []
 var summon_count: int = 2
 var summon_interval: float = 6.0
@@ -7,6 +8,8 @@ var max_minions: int = 4
 var cast_time: float = 0.6
 var summon_distance: float = 60
 var first_summon_delay: float = 2.0
+var minions_possessable: bool = false
+var ally_tint: Color = Color(0.6, 0.8, 1.0)
 
 var minions: Array[Node2D] = []
 var summon_clock: float = 0
@@ -50,6 +53,12 @@ func _summon() -> void:
 		if not scene: return
 		var minion: Node2D = scene.instantiate()
 		minion.global_position = _find_summon_point()
+		minion.possessable = minions_possessable
+		if not minions_possessable: minion.died.connect(minion.queue_free, CONNECT_DEFERRED)
+		if is_in_group("ally"):
+			minion.remove_from_group("enemy")
+			minion.add_to_group("ally")
+			minion.get_node("sprite").modulate = ally_tint
 		get_parent().add_child(minion)
 		minions.append(minion)
 		minion.tree_exited.connect(minions.erase.bind(minion))
@@ -86,11 +95,22 @@ func _find_summon_point() -> Vector2:
 		if space.intersect_point(query, 1).is_empty(): return point
 	return global_position
 
+
+func _on_ability() -> bool:
+	if not super(): return false
+	if state == 'possessed': _summon()
+	return true
+
 func _on_take_damage(d: float) -> void:
 	var was_alive: bool = state == 'alive'
 	super(d)
 	if was_alive and state == 'dead': _dismiss_minions()
 
+## minions also vanish when a possessed summoner dies
+func _exit_tree() -> void:
+	_dismiss_minions()
+
+##The minions vanish when the summoner dies (unless the player has possessed one).
 func _dismiss_minions() -> void:
 	for minion in minions:
 		if is_instance_valid(minion) and minion.get("state") != 'possessed':

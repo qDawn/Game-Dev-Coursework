@@ -1,5 +1,7 @@
 extends "res://enemies/superclasses/enemy.gd"
 
+signal attack_end
+
 var already_hit: Array[Node2D] = []
 var swing_speed: float = 0.1
 var direction_multiplier: float = 1
@@ -7,9 +9,9 @@ var direction_multiplier: float = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	connect("attack_end", _on_attack_end)
 
 func _on_attack(direction: Vector2) -> bool:
-	if not $ability_active.is_stopped(): return false
 	if not super(direction): return false
 	attacking = true
 	var direction_angle: float = 180*direction.angle()/PI
@@ -20,7 +22,7 @@ func _on_attack(direction: Vector2) -> bool:
 	#tween for swinging
 	var tween_swing: Tween = get_tree().create_tween()
 	tween_swing.tween_property($weapon, "rotation_degrees", direction_angle+direction_multiplier*70, swing_speed)
-	tween_swing.tween_property($'.', "attacking", false, 0)
+	tween_swing.tween_callback(func(): emit_signal("attack_end"); attacking = false)
 	#weapon collison
 	$weapon_collision.rotation_degrees = direction_angle
 	
@@ -44,3 +46,6 @@ func handle_weapon_collision(weapon_area : Area2D = $weapon_collision/melee_coll
 		#destroy bullets
 		if attacking and state == 'possessed' and area.is_in_group('enemy_bullet'):
 			area.queue_free()	
+
+func _on_attack_end():
+	pass

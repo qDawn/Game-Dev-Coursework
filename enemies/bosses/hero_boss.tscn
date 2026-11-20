@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bavch21aim7nm"]
+
+[ext_resource type="PackedScene" uid="uid://cctu3opvidee6" path="res://enemies/superclasses/melee_enemy.tscn" id="1_s3apc"]
+[ext_resource type="Script" uid="uid://dcbu04yqdu0i5" path="res://enemies/bosses/hero_boss.gd" id="2_11gy5"]
+[ext_resource type="Texture2D" uid="uid://3ydx37cjoa67" path="res://assets/sprites/hero.png" id="3_iucin"]
+[ext_resource type="Texture2D" uid="uid://4r85jatr6hw4" path="res://assets/sprites/hero_sword.png" id="4_ch217"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ch217"]
+size = Vector2(40, 123)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_luybm"]
+size = Vector2(107.5, 104)
+
+[node name="hero_boss" unique_id=107408206 groups=["boss"] instance=ExtResource("1_s3apc")]
+script = ExtResource("2_11gy5")
+
+[node name="sprite" parent="." index="0" unique_id=1078032425]
+position = Vector2(-1, 39)
+texture = ExtResource("3_iucin")
+
+[node name="exclamation" parent="." index="1" unique_id=1048159492]
+position = Vector2(31, -61)
+
+[node name="collision_shape" parent="." index="2" unique_id=1561700062]
+position = Vector2(-2, -5)
+shape = SubResource("RectangleShape2D_ch217")
+
+[node name="CollisionShape2D" parent="weapon_collision/melee_collision_area" parent_id_path=PackedInt32Array(1046232765) index="0" unique_id=733389090]
+position = Vector2(0.24999934, -41)
+shape = SubResource("RectangleShape2D_luybm")
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(73, 2)
+rotation = 0.0
+texture = ExtResource("4_ch217")
+
+[node name="origin" parent="weapon/spr" index="0" unique_id=2068338303]
+position = Vector2(-48, -1)

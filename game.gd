@@ -11,5 +11,4 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_gameover() -> void:
-	
-	get_tree().change_scene_to_file("res://menus/death_menu.tscn")
+	get_tree().call_deferred("change_scene_to_file","res://menus/death_menu.tscn")

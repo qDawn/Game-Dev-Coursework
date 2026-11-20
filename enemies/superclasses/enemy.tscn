@@ -10,6 +10,7 @@ size = Vector2(59, 66)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1378295628 groups=["enemy"]]
 collision_layer = 3
+collision_mask = 128
 input_pickable = true
 script = ExtResource("1_orwns")
 
@@ -68,9 +69,13 @@ texture = ExtResource("3_07tka")
 [node name="origin" type="Node2D" parent="weapon/spr" unique_id=2068338303]
 position = Vector2(-1, -11)
 
+[node name="retarget_cooldown" type="Timer" parent="." unique_id=211168863]
+autostart = true
+
 [connection signal="timeout" from="ability_cooldown" to="." method="_on_ability_cooldown_timeout"]
 [connection signal="timeout" from="ability_active" to="." method="_on_ability_active_timeout"]
 [connection signal="timeout" from="possession_window" to="." method="_on_possession_window_timeout"]
 [connection signal="timeout" from="decay_timer" to="." method="_on_decay_timer_timeout"]
 [connection signal="timeout" from="effect_timer" to="." method="_on_effect_timer_timeout"]
 [connection signal="timeout" from="hesitation_timer" to="." method="_on_hesitation_timer_timeout"]
+[connection signal="timeout" from="retarget_cooldown" to="." method="_on_retarget_cooldown_timeout"]
