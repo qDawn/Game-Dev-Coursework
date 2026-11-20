@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://g6vf8ke8ux8y"]
+
+[ext_resource type="PackedScene" uid="uid://b1pvmldgnnno5" path="res://enemies/superclasses/summoner_enemy.tscn" id="1_h5xom"]
+[ext_resource type="Script" uid="uid://br2ms7dc4yke4" path="res://enemies/special/mage_enemy.gd" id="2_tt8xe"]
+
+[node name="mage_enemy" unique_id=1378295628 instance=ExtResource("1_h5xom")]
+script = ExtResource("2_tt8xe")

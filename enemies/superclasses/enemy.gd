@@ -114,7 +114,7 @@ func _on_take_damage(d: float) -> void:
 	if current_health <= 0: 
 		if state == 'alive':
 			state = 'dead'
-			PlayerInfo.add_score(PlayerInfo.get_kill_points(scene_file_path.get_file().get_basename()))
+			if is_in_group("enemy"): PlayerInfo.add_score(PlayerInfo.get_kill_points(scene_file_path.get_file().get_basename()))
 			died.emit()
 			$possession_window.start()
 			#set up and show the corpse timer bar
@@ -229,4 +229,11 @@ func _on_retarget_cooldown_timeout() -> void:
 	if is_in_group("enemy"):
 		target = get_tree().get_first_node_in_group('ally')
 	elif is_in_group("ally"):
-		target = get_tree().get_first_node_in_group('enemy')
+		target = null
+		var best: float = INF
+		for enemy: Node2D in get_tree().get_nodes_in_group('enemy'):
+			if enemy is CharacterBody2D and enemy.get("state") == 'alive':
+				var d: float = global_position.distance_squared_to(enemy.global_position)
+				if d < best:
+					best = d
+					target = enemy
