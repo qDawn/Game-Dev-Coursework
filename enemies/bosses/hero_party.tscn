@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://wkxmxu5x27w3"]
+
+[ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/superclasses/enemy.tscn" id="1_gh01o"]
+[ext_resource type="Script" uid="uid://ernm4pfpt2q5" path="res://enemies/bosses/hero_party.gd" id="2_rjke2"]
+[ext_resource type="PackedScene" uid="uid://bavch21aim7nm" path="res://enemies/bosses/hero_boss.tscn" id="3_rjke2"]
+
+[node name="hero_party" unique_id=1378295628 groups=["boss"] instance=ExtResource("1_gh01o")]
+script = ExtResource("2_rjke2")
+
+[node name="sprite" parent="." index="0" unique_id=1078032425]
+visible = false
+
+[node name="collision_shape" parent="." index="2" unique_id=1561700062]
+visible = false
+disabled = true
+
+[node name="effect_timer" parent="." index="8" unique_id=472479290]
+autostart = false
+
+[node name="weapon" parent="." index="11" unique_id=911033185]
+visible = false
+
+[node name="hero_boss" parent="." index="13" unique_id=107408206 instance=ExtResource("3_rjke2")]
+position = Vector2(0, 123)

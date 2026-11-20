@@ -1,7 +1,7 @@
 extends Timer
 
 #bosses
-const HERO_BOSS = preload("uid://bavch21aim7nm")
+const HERO_PARTY = preload("uid://wkxmxu5x27w3")
 
 #shooters
 const BASIC_SHOOTER = preload("uid://bno1bbsktwtt8")
@@ -63,7 +63,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var enemies_alive : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_enemy(HERO_BOSS)
+	spawn_enemy(HERO_PARTY)
 	#3 second buffer before starting to spawn
 	start(3)
 	PlayerInfo.run_active = true

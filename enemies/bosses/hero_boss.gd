@@ -21,8 +21,6 @@ func _on_attack(direction: Vector2) -> bool:
 	last_attack_direction = direction
 	return super(direction)
 
-
-
 ##Method to fire a bullet.
 func fire_bullet(direction: Vector2, b_speed: float, b_damage: float, bullet_type: Resource) -> Area2D:
 	var b: BasicBullet = bullet_type.instantiate()
@@ -30,14 +28,21 @@ func fire_bullet(direction: Vector2, b_speed: float, b_damage: float, bullet_typ
 	b.direction = direction
 	b.damage = b_damage
 	b.speed = b_speed
-	if state == 'possessed': b.attacking_group = "enemy"
-	else: b.attacking_group = "ally"
+	b.attacking_group = "ally"
 	get_tree().current_scene.add_child(b)
 	return b
 
 func _on_take_damage(d: float) -> void:
-	super(d)
-	if state == "dead": queue_free()
+	var tween_damage: Tween = get_tree().create_tween()
+	tween_damage.tween_property($sprite,"self_modulate",Color(1,0,0),0.1)
+	tween_damage.tween_property($sprite,"self_modulate",Color(1,1,1),0.1)
+	
+	var damage_ui: Label = preload("res://ui/damage_ui.tscn").instantiate()
+	damage_ui.text = str(d)
+	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
+	
+	get_tree().root.add_child(damage_ui)
+	$"..".emit_signal("take_damage",d)
 
 func _on_attack_end():
 	for i in range(-2,3):

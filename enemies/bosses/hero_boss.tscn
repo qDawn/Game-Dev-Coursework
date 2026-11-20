@@ -12,6 +12,7 @@ size = Vector2(40, 123)
 size = Vector2(107.5, 104)
 
 [node name="hero_boss" unique_id=107408206 groups=["boss"] instance=ExtResource("1_s3apc")]
+collision_layer = 3
 script = ExtResource("2_11gy5")
 
 [node name="sprite" parent="." index="0" unique_id=1078032425]
