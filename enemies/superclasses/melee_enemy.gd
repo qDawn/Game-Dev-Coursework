@@ -43,10 +43,6 @@ func handle_weapon_collision(weapon_area : Area2D = $weapon_collision/melee_coll
 		if attacking:
 			if is_in_group('ally') and body.is_in_group('enemy') or is_in_group('enemy') and body.is_in_group('ally'):
 				body.emit_signal('take_damage', damage)
-	for area in weapon_area.get_overlapping_areas():
-		#destroy bullets
-		if area.is_in_group('enemy_bullet'):
-			area.queue_free()	
 
 func _on_attack_end():
 	pass

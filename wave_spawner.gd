@@ -63,6 +63,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var enemies_alive : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawn_enemy(HERO_BOSS)
 	#3 second buffer before starting to spawn
 	start(3)
 	PlayerInfo.run_active = true
