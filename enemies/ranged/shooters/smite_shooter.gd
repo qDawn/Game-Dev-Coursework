@@ -37,7 +37,7 @@ func _on_attack(direction: Vector2) -> bool:
 func _on_ability() -> bool:
 	if not super(): return false
 	var smite: Area2D = SMITE_AREA.instantiate()
-	if state != 'possessed':
+	if is_in_group("enemy"):
 		smite.global_position = target.global_position + target.velocity*35
 		smite.attack_group = "ally"
 	else:

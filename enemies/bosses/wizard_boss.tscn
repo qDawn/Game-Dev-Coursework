@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d1b6fgbae3ltb"]
+
+[ext_resource type="PackedScene" uid="uid://dl7fp1ijpp6r" path="res://enemies/superclasses/enemy_shooter.tscn" id="1_euog2"]
+[ext_resource type="Script" uid="uid://bkkuecd838rdu" path="res://enemies/bosses/wizard_boss.gd" id="2_0i62h"]
+
+[node name="wizard_boss" unique_id=107408206 instance=ExtResource("1_euog2")]
+script = ExtResource("2_0i62h")

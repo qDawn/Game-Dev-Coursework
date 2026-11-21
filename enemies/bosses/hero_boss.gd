@@ -6,18 +6,18 @@ var last_attack_direction: Vector2
 var attack_count: int = 0
 var attack_max_count: int = 2
 
-
 func _ready() -> void:
 	super()
-	max_health = 500
-	current_health = 500
-	speed = 200
+	max_health = 1
+	current_health = 1
+	speed = 100
 	min_range = 80
 	attack_range = 600
 	damage = 8
 	attack_cooldown = 3
 
 func _on_attack(direction: Vector2) -> bool:
+	if PlayerInfo.possession_target and PlayerInfo.possession_target.is_in_group("hero_party"): return false
 	last_attack_direction = direction
 	return super(direction)
 
@@ -33,6 +33,8 @@ func fire_bullet(direction: Vector2, b_speed: float, b_damage: float, bullet_typ
 	return b
 
 func _on_take_damage(d: float) -> void:
+	if PlayerInfo.possession_target and PlayerInfo.possession_target.is_in_group("hero_party"): d *= 2
+	
 	var tween_damage: Tween = get_tree().create_tween()
 	tween_damage.tween_property($sprite,"self_modulate",Color(1,0,0),0.1)
 	tween_damage.tween_property($sprite,"self_modulate",Color(1,1,1),0.1)

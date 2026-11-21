@@ -79,7 +79,7 @@ func _physics_process(delta: float) -> void:
 
 	#possession cancel logic
 	if Input.is_action_just_pressed('cancel_possession') and PlayerInfo.possession_target:
-		PlayerInfo.possession_target.queue_free()
+		PlayerInfo.possession_target.emit_signal("take_damage",PlayerInfo.possession_target.max_health)
 		#reset the possession target
 		PlayerInfo.possession_target = null
 		#reset visibility and hitbox
