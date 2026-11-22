@@ -31,7 +31,7 @@ func _process(delta : float) -> void:
 ##This method describes how the enemy attacks
 func _on_attack(direction: Vector2) -> bool:
 	if not super(direction): return false
-	fire_bullet(direction, bullet_speed, damage, BASIC_BULLET)
+	fire_bullet(direction, bullet_speed, damage, default_bullet)
 	return true
 
 func _on_ability() -> bool:

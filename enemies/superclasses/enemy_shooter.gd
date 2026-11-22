@@ -1,6 +1,6 @@
 extends "res://enemies/superclasses/enemy.gd"
 
-const BASIC_BULLET = preload("uid://mq4hucp4nyfe")
+var default_bullet = preload("uid://mq4hucp4nyfe")
 
 ##how fast its bullets move
 var bullet_speed: int = 500

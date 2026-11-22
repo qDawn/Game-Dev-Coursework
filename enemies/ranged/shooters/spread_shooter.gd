@@ -33,7 +33,7 @@ func _on_attack(direction: Vector2) -> bool:
 		if attack_count % 3 == 0:
 			fire_bullet(direction.rotated(PI/12*i),bullet_speed,damage,SPLITTING_BULLET)
 		else:
-			fire_bullet(direction.rotated(PI/12*i),bullet_speed,damage,BASIC_BULLET)
+			fire_bullet(direction.rotated(PI/12*i),bullet_speed,damage,default_bullet)
 	
 	#ability indication
 	if attack_count % 3 == 0:

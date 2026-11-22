@@ -36,7 +36,7 @@ func _on_burst_timer_timeout() -> void:
 		return
 	#spawn bullet
 	var direction: Vector2 = Vector2.from_angle($weapon.rotation)
-	fire_bullet(direction,bullet_speed,damage,BASIC_BULLET)
+	fire_bullet(direction,bullet_speed,damage,default_bullet)
 	burst_current_count += 1
 	$burst_timer.start()
 

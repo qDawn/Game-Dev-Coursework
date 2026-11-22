@@ -1,7 +1,5 @@
 extends "res://enemies/ranged/shooters/smite_shooter.gd"
-
-const HOMING_BULLET = preload("uid://opb7dv63vy0u")
-const BASE_MAX_HEALTH: float = 30
+const BASE_MAX_HEALTH: float = 40
 const BASE_SPEED: float = 100
 const BASE_DAMAGE: float = 5
 
@@ -16,16 +14,11 @@ func _ready() -> void:
 	bullet_speed = 400
 	damage = BASE_DAMAGE
 	ability_cooldown = 5
-
-##This method describes how the enemy attacks
-func _on_attack(direction: Vector2) -> bool:
-	if not super(direction): return false
-	fire_bullet(direction, bullet_speed, damage, HOMING_BULLET)
-	return true
+	default_bullet = preload("uid://opb7dv63vy0u")
 
 func _on_decay_timer_timeout() -> void:
 	#lose 5% health 
-	current_health -= int(max_health*0.05)
+	current_health -= int(max_health*0.1)
 	if current_health <= 0 and state == 'possessed': 
 		#send signal to player that the possessed vessel has died.
 		get_tree().get_first_node_in_group('player').emit_signal('cancel_possession')

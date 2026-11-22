@@ -21,7 +21,7 @@ func _ready() -> void:
 func _on_attack(direction: Vector2) -> bool:
 	if not super(direction): return false
 	
-	var b: Area2D = fire_bullet(direction, bullet_speed, damage, BASIC_BULLET) if $ability_active.is_stopped() else fire_bullet(direction, bullet_speed, damage, HOMING_BULLET)
+	var b: Area2D = fire_bullet(direction, bullet_speed, damage, default_bullet) if $ability_active.is_stopped() else fire_bullet(direction, bullet_speed, damage, HOMING_BULLET)
 	b.emit_signal("add_effect","slow",2)
 	b.piercing = bullet_piercing
 	

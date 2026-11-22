@@ -8,6 +8,7 @@
 radius = 158.38245
 
 [node name="jump_melee" unique_id=107408206 instance=ExtResource("1_xkchc")]
+collision_layer = 0
 script = ExtResource("2_dc5pk")
 
 [node name="aoe" type="Area2D" parent="." index="0" unique_id=54055773]

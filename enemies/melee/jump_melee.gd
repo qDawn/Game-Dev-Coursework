@@ -46,23 +46,18 @@ func _on_ability() -> bool:
 	
 	#invulnerability
 	set_collision_layer_value(1,false)
-	set_collision_mask_value(1,false)
-	
 	return true
 
 func _on_ability_active_timeout() -> void:
 	super()
 	_on_take_effect("stun",0.5)
 	speed = base_speed
-	for body in $aoe.get_overlapping_bodies():
+	for body: Node2D in $aoe.get_overlapping_bodies():
 		if body.is_in_group("ally") and is_in_group("enemy") or body.is_in_group("enemy") and is_in_group("ally"):
 			body.emit_signal("take_damage", damage + ability_damage_bonus)
-			body.emit_signal("take_effect","stun",1)
-	for area: Area2D in $aoe.get_overlapping_areas():
-		if area.is_in_group("projectile"):
-			area.queue_free()
+			if body.has_signal("take_effect"):
+				body.emit_signal("take_effect","stun",1)
 
 	#reset visibility
 	$weapon.visible = true
 	set_collision_layer_value(1,true)
-	set_collision_mask_value(1,true)
