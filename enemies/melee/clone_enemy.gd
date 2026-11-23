@@ -28,8 +28,8 @@ func _on_attack(direction: Vector2) -> bool:
 	super(direction)
 	return true
 	
-func _on_take_damage(damage: float) -> void:
-	super(damage)
+func _on_take_damage(d: float) -> void:
+	super(d)
 	if state == 'dead':
 		if leader == self:
 			leader_died.emit()

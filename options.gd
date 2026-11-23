@@ -1,30 +1,27 @@
 extends Node
 
-
 const CONFIG_PATH: String = "user://config.ini"
-static var config : ConfigFile = ConfigFile.new()
+var config : ConfigFile = ConfigFile.new()
 
 
-static func save_options() -> void:
+func save_options() -> void:
 	config.save(CONFIG_PATH)
 
 
-static func set_option(section : String, key : String, value: String) -> void:
+func set_option(section : String, key : String, value: String) -> void:
 	config.set_value(section, key, value)
 	
 
-static func set_controls_option(section : String, key : String, value: Dictionary) -> void:
+func set_controls_option(section : String, key : String, value: Dictionary) -> void:
 	config.set_value(section, key, value)	
 
-static func load_options() -> void:
+func load_options() -> void:
 	var err = config.load(CONFIG_PATH)
 	if err != OK:	return
 	
 	load_controls()
 	
-
-
-static func load_controls() -> void:
+func load_controls() -> void:
 	for action in config.get_section_keys("controls"):
 		
 		var event : InputEvent

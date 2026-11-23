@@ -113,9 +113,8 @@ func _on_take_damage(d: float) -> void:
 	current_health -= d
 	if current_health <= 0: 
 		if state == 'alive':
+			if not possessable: queue_free()
 			state = 'dead'
-			if is_in_group("enemy"): PlayerInfo.add_score(PlayerInfo.get_kill_points(scene_file_path.get_file().get_basename()))
-			died.emit()
 			$possession_window.start()
 			#set up and show the corpse timer bar
 			$corpse_timer.max_value = $possession_window.wait_time

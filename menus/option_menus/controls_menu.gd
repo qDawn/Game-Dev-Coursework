@@ -15,7 +15,7 @@ func _ready() -> void:
 		is_duplicate(bind)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if $Return.button_pressed:
 		get_parent().get_node("OptionMenu").show()
 		queue_free()

@@ -6,8 +6,8 @@ var winding_up: bool = false
 func _ready() -> void:
 	super()
 	# Keep whatever position was set on weapon/spr in the editor.
-	max_health = 80
-	current_health = 80
+	max_health = 50
+	current_health = 50
 	speed = 100
 	min_range = 80
 	attack_range = 150

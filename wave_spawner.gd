@@ -28,21 +28,21 @@ const CLONE_ENEMY = preload("uid://cvwu0iar6767i")
 #const LANCE_ENEMY = preload("uid://bcdpacwxtejuo") removed indefinitely
 
 
-const enemies: Array[Dictionary] = [#{"resource": BASIC_SHOOTER, "weight": 1},
-									#{"resource": SPREAD_SHOOTER, "weight": 1},
-									#{"resource": SNIPER_SHOOTER, "weight": 1},
-									#{"resource": SMITE_SHOOTER, "weight": 1},
-									#{"resource": BURST_SHOOTER, "weight": 1},
-									#{"resource": KATANA_ENEMY, "weight": 1},
-									#{"resource": HAMMER_ENEMY, "weight": 1},
-									#{"resource": LAZER_ENEMY, "weight": 1},
-									#{"resource": AOE_DOT_SHOOTER, "weight": 1},
-									#{"resource": BOMBER, "weight": 1},
-									#{"resource": SUICIDE_BOMBER, "weight": 1},
-									#{"resource": REFLECT_ENEMY, "weight": 1},
-									#{"resource": JUMP_MELEE, "weight": 1},
-									#{"resource": SPIKE_ENEMY, "weight": 1},
-									#{"resource": BOULDER_ENEMY, "weight": 1},
+const enemies: Array[Dictionary] = [{"resource": BASIC_SHOOTER, "weight": 1},
+									{"resource": SPREAD_SHOOTER, "weight": 1},
+									{"resource": SNIPER_SHOOTER, "weight": 1},
+									{"resource": SMITE_SHOOTER, "weight": 1},
+									{"resource": BURST_SHOOTER, "weight": 1},
+									{"resource": KATANA_ENEMY, "weight": 1},
+									{"resource": HAMMER_ENEMY, "weight": 1},
+									{"resource": LAZER_ENEMY, "weight": 1},
+									{"resource": AOE_DOT_SHOOTER, "weight": 1},
+									{"resource": BOMBER, "weight": 1},
+									{"resource": SUICIDE_BOMBER, "weight": 1},
+									{"resource": REFLECT_ENEMY, "weight": 1},
+									{"resource": JUMP_MELEE, "weight": 1},
+									{"resource": SPIKE_ENEMY, "weight": 1},
+									{"resource": BOULDER_ENEMY, "weight": 1},
 									#{"resource": CLONE_ENEMY, "weight": 1},
 									{"resource": MAGE_ENEMY, "weight": 1}]
 
@@ -60,14 +60,15 @@ var max_enemy_spawn_distance  : int= 1000
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
-var enemies_alive : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_enemy(HERO_PARTY)
 	#3 second buffer before starting to spawn
 	start(3)
-	PlayerInfo.run_active = true
 
+func _process(_delta: float) -> void:
+	if get_tree().get_nodes_in_group("enemy").filter(func(e: Enemy): return e.state == "alive").size() == 0 and time_left > 3 and not get_tree().get_first_node_in_group("boss"):
+		start(3)
+		
 ##Method for determining what types of enemies to spawn
 func generate_enemies() -> void:
 	var max_weight : int = 3 + int(PlayerInfo.wave/2.0)
@@ -84,8 +85,6 @@ func generate_enemies() -> void:
 func spawn_enemy(enemy_resource : Resource) -> void:
 	var enemy: Enemy = enemy_resource.instantiate()
 	enemy.global_position = get_valid_enemy_spawn_position()
-	enemy.died.connect(_on_enemy_died)
-	enemies_alive += 1
 	add_child(enemy)
 	
 ##method for getting a valid coord to spawn an enemy
@@ -104,16 +103,12 @@ func get_valid_enemy_spawn_position() -> Vector2:
 	
 func _on_timeout() -> void:
 	if not get_tree().get_first_node_in_group("boss"):
-		var completed_wave: int = PlayerInfo.wave - 2
-		if completed_wave >= 1: PlayerInfo.add_score(PlayerInfo.get_wave_points(completed_wave))
+		var wave_multiplier: int = max(PlayerInfo.wave - 1,0)
+		PlayerInfo.score += 50*wave_multiplier
 		if PlayerInfo.wave % 4 == 0:
+			#spawn a boss
 			pass
 		else:
 			generate_enemies()
 			start(30)
 		PlayerInfo.wave += 1
-	
-func _on_enemy_died() -> void:
-	enemies_alive -= 1
-	if enemies_alive == 0 and not get_tree().get_first_node_in_group("boss"): 
-		start(3)

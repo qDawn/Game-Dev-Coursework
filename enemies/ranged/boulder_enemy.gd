@@ -13,8 +13,8 @@ var held_scale: Vector2 = Vector2.ONE
 
 func _ready() -> void:
 	super()
-	max_health = 70
-	current_health = 70
+	max_health = 40
+	current_health = 40
 	speed = 90
 	min_range = 220
 	attack_range = 480

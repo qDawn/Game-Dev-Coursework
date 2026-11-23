@@ -1,20 +1,20 @@
 extends "res://enemies/superclasses/melee_enemy.gd"
 
-const max_ability_speed : int= 410
+const max_ability_speed: float = 410
 #Attacks faster during ability
 const ability_attack_cooldown : float = 0.8
 #Swings faster during ability
-const ability_swing_speed = 0.15
+const ability_swing_speed: float = 0.15
 #Attacks from further away during ability
-const ability_min_range = 130
+const ability_min_range: float = 130
 
-const base_min_range = 80
-const base_speed : int = 200
-const base_attack_cooldown = 1.2
-const max_barrier_health : int = 16 
-const ability_range :int = 400
+const base_min_range: float = 80
+const base_speed: float = 200
+const base_attack_cooldown: float = 1.2
+const max_barrier_health: float = 16 
+const ability_range: float = 400
 
-var barrier_health : int = max_barrier_health
+var barrier_health : float = max_barrier_health
 var ability_on :bool = false
 
 func _ready() -> void:

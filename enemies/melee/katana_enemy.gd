@@ -2,7 +2,6 @@ extends "res://enemies/superclasses/melee_enemy.gd"
 
 var base_damage: float = 7
 var base_speed: float = 230
-var ability_count: int = 0
 var reset_ability: bool = false
 
 func _ready() -> void:
@@ -26,11 +25,10 @@ func _process(delta: float) -> void:
 				if body.has_signal("take_effect"):
 					body.emit_signal("take_effect","bleed",5)
 				if not $ability_active.is_stopped():
-					if ability_count < 3 and body.state == "dead":
+					if body.state == "dead":
 						reset_ability = true
 
 		if reset_ability:
-			ability_count += 1
 			$ability_active.start()
 		elif not $ability_active.is_stopped():
 			$ability_active.stop()
@@ -43,7 +41,6 @@ func _on_attack(direction: Vector2) -> bool:
 
 func _on_ability() -> bool:
 	if not super(): return false
-	ability_count = 0
 	damage = base_damage * 2
 	speed = base_speed * 1.5
 	$weapon.scale = Vector2(2,2)

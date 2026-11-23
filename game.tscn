@@ -214,6 +214,5 @@ tile_map_data = PackedByteArray("AAD1//z/AAABAAQAAAD2//z/AAABAAQAAAD3//z/AAABAAQ
 tile_set = SubResource("TileSet_4iwvc")
 
 [node name="PauseMenu" parent="." unique_id=1681441348 instance=ExtResource("6_ryrav")]
-z_index = 4096
 
 [connection signal="timeout" from="wave_spawner" to="wave_spawner" method="_on_timeout"]

@@ -9,11 +9,11 @@ var player : Player
 func _ready() -> void:
 	$MenuButtons.visible = false
 	$ColorRect.visible = false
-	
 
-func _process(delta: float) -> void:
+
+func _process(_delta: float) -> void:
 	if player == null:
-		player =get_parent().get_node("Player")
+		player = get_parent().get_node("Player")
 		
 	
 	if Input.is_action_just_pressed("pause") and !paused:

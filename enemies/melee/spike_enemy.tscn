@@ -8,6 +8,7 @@
 radius = 52.009613
 
 [node name="spike_enemy" unique_id=1378295628 instance=ExtResource("1_2quno")]
+collision_mask = 129
 script = ExtResource("2_jxsrh")
 
 [node name="sprite" parent="." index="0" unique_id=1078032425]
