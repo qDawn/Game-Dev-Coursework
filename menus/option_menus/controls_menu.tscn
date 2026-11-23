@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://ddgm7b33h2whq"]
+
+[ext_resource type="Script" uid="uid://dthbvjknpaams" path="res://menus/option_menus/controls_menu.gd" id="1_oedss"]
+
+[node name="ControlsMenu" type="CanvasLayer" unique_id=3814397]
+process_mode = 2
+layer = 12
+script = ExtResource("1_oedss")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1290253784]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25252834, 0.2528548, 0.24476275, 1)
+
+[node name="Return" type="Button" parent="." unique_id=1715155625]
+offset_left = 465.0
+offset_top = 530.0
+offset_right = 661.0
+offset_bottom = 605.0
+theme_override_font_sizes/font_size = 48
+text = "RETURN"
+
+[node name="Control" type="Control" parent="." unique_id=1926370736]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="move_right" type="Button" parent="Control" unique_id=1694414243]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 49.0
+offset_right = 171.0
+offset_bottom = 124.0
+theme_override_font_sizes/font_size = 48
+text = "Right
+"
+
+[node name="bind" type="Label" parent="Control/move_right" unique_id=309787005]
+layout_mode = 0
+offset_left = 184.0
+offset_right = 435.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+
+[node name="move_left" type="Button" parent="Control" unique_id=714619101]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 140.0
+offset_right = 190.0
+offset_bottom = 215.0
+theme_override_font_sizes/font_size = 48
+text = "Left"
+
+[node name="bind" type="Label" parent="Control/move_left" unique_id=126379001]
+layout_mode = 0
+offset_left = 184.0
+offset_right = 435.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+
+[node name="move_up" type="Button" parent="Control" unique_id=1527647570]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 198.0
+offset_right = 188.0
+offset_bottom = 273.0
+theme_override_font_sizes/font_size = 48
+text = "Up
+"
+
+[node name="bind" type="Label" parent="Control/move_up" unique_id=527983028]
+layout_mode = 0
+offset_left = 184.0
+offset_right = 435.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+
+[node name="move_down" type="Button" parent="Control" unique_id=1368804667]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 285.0
+offset_right = 219.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 48
+text = "Down
+"
+
+[node name="bind" type="Label" parent="Control/move_down" unique_id=354183753]
+layout_mode = 0
+offset_left = 184.0
+offset_right = 435.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+
+[node name="shoot" type="Button" parent="Control" unique_id=1318910439]
+layout_mode = 0
+offset_left = 644.0
+offset_top = 158.0
+offset_right = 786.0
+offset_bottom = 233.0
+theme_override_font_sizes/font_size = 48
+text = "Shoot"
+
+[node name="bind" type="Label" parent="Control/shoot" unique_id=1756785342]
+layout_mode = 0
+offset_left = 184.0
+offset_right = 435.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+
+[node name="possess" type="Button" parent="Control" unique_id=1220034672]
+layout_mode = 0
+offset_left = 619.0
+offset_top = 239.0
+offset_right = 807.0
+offset_bottom = 314.0
+theme_override_font_sizes/font_size = 48
+text = "Possess"
+
+[node name="bind" type="Label" parent="Control/possess" unique_id=17147346]
+layout_mode = 0
+offset_left = 184.0
+offset_right = 435.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+
+[node name="cancel_possession" type="Button" parent="Control" unique_id=1736349607]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 432.0
+offset_right = 478.0
+offset_bottom = 507.0
+theme_override_font_sizes/font_size = 48
+text = "Cancel Possession"
+
+[node name="bind" type="Label" parent="Control/cancel_possession" unique_id=1380191694]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 6.0
+offset_right = 709.0
+offset_bottom = 73.0
+theme_override_font_sizes/font_size = 48
+
+[node name="ability" type="Button" parent="Control" unique_id=1194312605]
+layout_mode = 0
+offset_left = 607.0
+offset_top = 57.0
+offset_right = 761.0
+offset_bottom = 132.0
+theme_override_font_sizes/font_size = 48
+text = "Ability
+"
+
+[node name="bind" type="Label" parent="Control/ability" unique_id=362707668]
+layout_mode = 0
+offset_left = 184.0
+offset_right = 435.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48

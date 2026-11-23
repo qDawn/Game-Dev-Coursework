@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cqavnj68bppr0"]
+
+[ext_resource type="Script" uid="uid://du8oijkjfl6w0" path="res://menus/pause_menu.gd" id="1_s0u37"]
+
+[sub_resource type="Theme" id="Theme_p1qj3"]
+default_font_size = 64
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=308968707]
+process_mode = 3
+layer = 10
+script = ExtResource("1_s0u37")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1105890277]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25252834, 0.2528548, 0.24476275, 1)
+
+[node name="MenuButtons" type="CenterContainer" parent="." unique_id=1598925673]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuButtons" unique_id=1807093952]
+layout_mode = 2
+theme = SubResource("Theme_p1qj3")
+
+[node name="Control" type="Control" parent="MenuButtons/PanelContainer" unique_id=2126478484]
+layout_mode = 2
+
+[node name="MainMenu" type="Button" parent="MenuButtons/PanelContainer/Control" unique_id=510218887]
+layout_mode = 0
+offset_left = -66.0
+offset_top = 95.0
+offset_right = 76.0
+offset_bottom = 191.0
+text = "Return to Main Menu
+"
+
+[node name="Resume" type="Button" parent="MenuButtons/PanelContainer/Control" unique_id=1746063094]
+layout_mode = 0
+offset_left = -104.0
+offset_top = -207.0
+offset_right = 152.0
+offset_bottom = -111.0
+text = "Resume
+"
+
+[node name="Option" type="Button" parent="MenuButtons/PanelContainer/Control" unique_id=1704049455]
+layout_mode = 0
+offset_left = -112.0
+offset_top = -72.0
+offset_right = 144.0
+offset_bottom = 24.0
+text = "Options
+"

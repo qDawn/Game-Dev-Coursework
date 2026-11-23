@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dbtsqrdnhsgin"]
+
+[ext_resource type="Script" uid="uid://pysmpsmgjqmh" path="res://menus/option_menus/option_menu.gd" id="1_pe5v4"]
+
+[node name="OptionMenu" type="CanvasLayer" unique_id=1452378336]
+process_mode = 2
+layer = 11
+script = ExtResource("1_pe5v4")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1203735042]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25252834, 0.2528548, 0.24476275, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=224790444]
+offset_left = 459.0
+offset_top = 170.0
+offset_right = 663.0
+offset_bottom = 455.0
+theme_override_constants/separation = 30
+
+[node name="Controls" type="Button" parent="VBoxContainer" unique_id=33519517]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Controls
+"
+
+[node name="Visuals" type="Button" parent="VBoxContainer" unique_id=18028513]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Visuals
+"
+
+[node name="Return" type="Button" parent="VBoxContainer" unique_id=559712765]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Return
+"
