@@ -53,8 +53,7 @@ func _summon() -> void:
 		if not scene: return
 		var minion: Node2D = scene.instantiate()
 		minion.global_position = _find_summon_point()
-		minion.possessable = minions_possessable
-		if not minions_possessable: minion.died.connect(minion.queue_free, CONNECT_DEFERRED)
+		minion.possessable = false
 		if is_in_group("ally"):
 			minion.remove_from_group("enemy")
 			minion.add_to_group("ally")

@@ -1,18 +1,18 @@
 extends Control
 
-const GAME_SCENE := "uid://dlbjkwvlm4ula"
-
-@onready var play_button: Button = %PlayButton
-@onready var quit_button: Button = %QuitButton
 
 
 func _ready() -> void:
-	play_button.pressed.connect(_on_play_pressed)
-	quit_button.pressed.connect(get_tree().quit)
-	play_button.grab_focus()
+	Highscores.load_high_scores()
+	var highscore_str: String = "Top highscores\n"
+	for highscore in Highscores.high_scores:
+		highscore_str += "%s\n" % highscore
+	$highscores_label.text = highscore_str
 
-
-func _on_play_pressed() -> void:
+func _on_play_button_pressed() -> void:
 	PlayerInfo.start_new_run()
 	Options.load_options()
-	get_tree().change_scene_to_file(GAME_SCENE)
+	get_tree().change_scene_to_file("res://game.tscn")
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

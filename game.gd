@@ -33,6 +33,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_gameover() -> void:
+	Highscores.add_high_score(PlayerInfo.score)
 	get_tree().call_deferred("change_scene_to_file","res://menus/death_menu.tscn")
 
 func get_kill_points(enemy_name: String) -> int:

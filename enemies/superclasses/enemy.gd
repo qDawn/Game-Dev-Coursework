@@ -7,7 +7,6 @@ signal take_damage
 signal heal
 signal take_effect
 signal possession
-signal died
 
 #health
 var max_health: float = 10
