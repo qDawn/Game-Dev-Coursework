@@ -16,8 +16,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	if not state == "possessed" and not state == "dead" and global_position.distance_to(target.global_position) > attack_range:
-		_on_ability()
+	if not state == "possessed" and not state == "dead":
+		if target and global_position.distance_to(target.global_position) > attack_range:
+			_on_ability()
 
 func _on_attack(direction: Vector2) -> bool:
 	if not $ability_active.is_stopped(): return false

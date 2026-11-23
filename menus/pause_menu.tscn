@@ -36,27 +36,27 @@ layout_mode = 2
 
 [node name="MainMenu" type="Button" parent="MenuButtons/PanelContainer/Control" unique_id=510218887]
 layout_mode = 0
-offset_left = -66.0
-offset_top = 95.0
-offset_right = 76.0
-offset_bottom = 191.0
+offset_left = -448.0
+offset_top = 76.0
+offset_right = 448.0
+offset_bottom = 172.0
 text = "Return to Main Menu
 "
 
 [node name="Resume" type="Button" parent="MenuButtons/PanelContainer/Control" unique_id=1746063094]
 layout_mode = 0
-offset_left = -104.0
-offset_top = -207.0
-offset_right = 152.0
-offset_bottom = -111.0
+offset_left = -128.0
+offset_top = -180.0
+offset_right = 128.0
+offset_bottom = -84.0
 text = "Resume
 "
 
 [node name="Option" type="Button" parent="MenuButtons/PanelContainer/Control" unique_id=1704049455]
 layout_mode = 0
-offset_left = -112.0
-offset_top = -72.0
-offset_right = 144.0
-offset_bottom = 24.0
+offset_left = -192.0
+offset_top = -52.0
+offset_right = 192.0
+offset_bottom = 44.0
 text = "Options
 "

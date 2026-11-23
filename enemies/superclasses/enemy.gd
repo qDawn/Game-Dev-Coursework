@@ -29,9 +29,10 @@ var ability_cooldown: float = 6
 var ability_duration: float = 0.01
 ##valid states include: 'alive', 'dead', 'possessed'
 var state: String = 'alive'
-## Whether the enemy is possessable or not
+##Whether the enemy is possessable or not
 var possessable: bool = true
-
+##How much the enemy is worth, score-wise
+var score: int = 10
 
 ## Stores effects of the enemy. Format: {name: duration}
 ## current effects include: slow, bleed, stun, silence.
@@ -113,6 +114,7 @@ func _on_take_damage(d: float) -> void:
 	current_health -= d
 	if current_health <= 0: 
 		if state == 'alive':
+			PlayerInfo.add_score(score)
 			if not possessable: queue_free()
 			state = 'dead'
 			$possession_window.start()
