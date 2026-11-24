@@ -5,6 +5,7 @@ const SAVE_FILE_PATH: String = "user://high_scores.save"
 
 ##Function for adding a new high score to the array of highscores
 func add_high_score(new_score: int) -> void:
+	if new_score == 0: return
 	var current_index: int = 0
 	while current_index < high_scores.size() and high_scores[current_index] > new_score: current_index += 1
 	if current_index == high_scores.size() and high_scores.size() < 5: high_scores.append(new_score)

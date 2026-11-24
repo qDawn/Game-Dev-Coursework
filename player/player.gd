@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 			bullet.global_position = global_position
 			bullet.direction = direction
 			bullet.speed = 500
-			get_tree().root.add_child(bullet)
+			get_tree().root.get_node("Game").add_child(bullet)
 			$attack_cooldown.start()
 	
 	#ability logic
