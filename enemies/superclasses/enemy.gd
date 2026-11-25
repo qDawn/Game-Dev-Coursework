@@ -138,7 +138,7 @@ func _on_take_damage(d: float) -> void:
 	var damage_ui: Label = preload("res://ui/damage_ui.tscn").instantiate()
 	damage_ui.text = str(d)
 	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
-	get_tree().root.add_child(damage_ui)
+	$'..'.add_child(damage_ui)
 
 func _on_heal(h: float) -> void:
 	if not state == "dead":

@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	if not state == "possessed" and not state == "dead" and global_position.distance_to(target.global_position) > ability_range:
+	if state != "possessed" and state != "dead" and global_position.distance_to(target.global_position) < ability_range:
 		_on_ability()
 	if ability_on:
 		speed = min(max_ability_speed, speed + 250*delta)
