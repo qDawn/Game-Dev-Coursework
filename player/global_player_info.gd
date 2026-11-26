@@ -8,6 +8,23 @@ var possession_target: Enemy = null
 var score: int = 0
 var wave: int = 1
 
+## Enemies that spawned during the current run. Scene filenames, e.g. "bomber", so when viewing in compendium can maybe just append .tscn
+var seen_this_run: Array[String] = []
+## Every enemy seen in any run this session. Not written to disk yet.
+var discovered: Array[String] = []
+
+func mark_enemy_seen(enemy_name: String) -> void:
+	if enemy_name == "" or enemy_name in seen_this_run:
+		return
+	seen_this_run.append(enemy_name)
+
+#Add seen enemies to discovered and reset for a new run
+func keep_seen_enemies() -> void:
+	for enemy_name in seen_this_run:
+		if enemy_name not in discovered:
+			discovered.append(enemy_name)
+	seen_this_run.clear()
+
 func take_damage(amount: float) -> void:
 	current_health = max(current_health - amount, 0)
 
@@ -15,6 +32,7 @@ func add_score(amount: int) -> void:
 	score += amount
 
 func start_new_run() -> void:
+	keep_seen_enemies()
 	current_health = max_health
 	score = 0
 	wave = 1
