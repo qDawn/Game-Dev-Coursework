@@ -87,6 +87,7 @@ func generate_enemies() -> void:
 #method for spawning enemies
 func spawn_enemy(enemy_resource : Resource) -> void:
 	var enemy: Enemy = enemy_resource.instantiate()
+	PlayerInfo.mark_enemy_seen(enemy.scene_file_path.get_file().get_basename()) #Get just the enemy name from tscn file name
 	enemy.global_position = get_valid_enemy_spawn_position()
 	add_child(enemy)
 	

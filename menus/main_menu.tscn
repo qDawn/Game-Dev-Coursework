@@ -55,4 +55,5 @@ text = "Top highscores"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/compendium_button" to="." method="_on_compendium_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
