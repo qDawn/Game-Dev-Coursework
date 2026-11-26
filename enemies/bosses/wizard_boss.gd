@@ -34,6 +34,18 @@ func _on_take_damage(d: float) -> void:
 func _on_possession_window_timeout() -> void:
 	revive()
 
+func fire_bullet(direction: Vector2, b_speed: float, b_damage: float, bullet_type: Resource) -> Area2D:
+	var b: HomingBullet = bullet_type.instantiate()
+	b.global_position = $weapon/spr/origin.global_position
+	b.direction = Vector2.from_angle(direction.angle() + randf_range(-PI/36*inaccuracy, PI/36*inaccuracy))
+	b.damage = b_damage
+	b.speed = b_speed
+	b.follow_duration = 3
+	if state == 'possessed': b.attacking_group = "enemy"
+	else: b.attacking_group = "ally"
+	get_tree().current_scene.add_child(b)
+	return b
+
 func revive():
 	remove_from_group("ally")
 	add_to_group("enemy")

@@ -1,5 +1,12 @@
 extends "res://projectiles/basic_bullet.gd"
 
+class_name HomingBullet
+
+var follow_duration: float = 0.5
+
+func _ready() -> void:
+	$follow_timer.start(follow_duration)
+
 func _physics_process(delta: float) -> void:
 	super(delta)
 	if not $follow_timer.is_stopped():

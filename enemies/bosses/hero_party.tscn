@@ -24,4 +24,4 @@ visible = false
 [node name="hero_boss" parent="." index="13" unique_id=107408206 groups=["hero_party"] instance=ExtResource("3_rjke2")]
 
 [node name="wizard_boss" parent="." index="14" unique_id=1585726591 groups=["hero_party"] instance=ExtResource("4_d2qo3")]
-position = Vector2(-1, 135)
+position = Vector2(-120, 125)
