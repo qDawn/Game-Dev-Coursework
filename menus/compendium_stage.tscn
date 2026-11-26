@@ -7,6 +7,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5xxlj"]
 radius = 18.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xxlj"]
+size = Vector2(100, 10)
+
 [node name="CompendiumStage" type="Node2D" unique_id=1741348056]
 script = ExtResource("1_w0xom")
 
@@ -14,6 +17,9 @@ script = ExtResource("1_w0xom")
 
 [node name="dummy" type="CharacterBody2D" parent="." unique_id=1812992924 groups=["ally"]]
 position = Vector2(140, 0)
+disable_mode = 2
+collision_layer = 255
+collision_mask = 255
 script = ExtResource("2_p2r60")
 
 [node name="Sprite2D" type="Sprite2D" parent="dummy" unique_id=89090073]
@@ -62,3 +68,47 @@ offset_top = 608.0
 offset_right = 324.0
 offset_bottom = 648.0
 text = "Back"
+
+[node name="walls" type="Node2D" parent="." unique_id=1446094585]
+
+[node name="Left" type="StaticBody2D" parent="walls" unique_id=1006459463]
+position = Vector2(-576, 0)
+scale = Vector2(1, 6.58)
+disable_mode = 1
+collision_layer = 2147483903
+collision_mask = 2147483903
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Left" unique_id=2115202189]
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_5xxlj")
+
+[node name="Right" type="StaticBody2D" parent="walls" unique_id=871343981]
+position = Vector2(576, 0)
+scale = Vector2(1, 6.58)
+disable_mode = 1
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Right" unique_id=899491918]
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_5xxlj")
+
+[node name="Top" type="StaticBody2D" parent="walls" unique_id=733138075]
+disable_mode = 1
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Top" unique_id=2091043091]
+position = Vector2(0, -324)
+scale = Vector2(11.52, 1)
+shape = SubResource("RectangleShape2D_5xxlj")
+
+[node name="Bottom" type="StaticBody2D" parent="walls" unique_id=406720264]
+position = Vector2(0, 324)
+disable_mode = 1
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Bottom" unique_id=1815703019]
+scale = Vector2(11.52, 1)
+shape = SubResource("RectangleShape2D_5xxlj")
