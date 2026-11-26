@@ -64,7 +64,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#3 second buffer before starting to spawn
-	spawn_enemy(GRAND_PRIEST)
+	spawn_enemy(HERO_PARTY)
 	
 	start(300)
 

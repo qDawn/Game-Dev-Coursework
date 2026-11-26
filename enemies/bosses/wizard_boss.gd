@@ -28,7 +28,8 @@ func _on_take_damage(d: float) -> void:
 	if current_health - d <= 0 and state == 'possessed':
 		get_tree().get_first_node_in_group('player').emit_signal('cancel_possession')
 		revive()
-	else: super(d)
+	else: 
+		super(d)
 
 func _on_possession_window_timeout() -> void:
 	revive()

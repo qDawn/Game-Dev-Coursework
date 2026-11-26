@@ -51,7 +51,7 @@ func _on_take_damage(d: float) -> void:
 	damage_ui.text = str(d)
 	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
 	
-	$'..'.add_child(damage_ui)
+	get_tree().current_scene.add_child(damage_ui)
 	$"..".emit_signal("take_damage",d)
 
 func _on_attack_end():

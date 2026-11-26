@@ -4,13 +4,13 @@ const ENEMIES: Dictionary = {
 	"basic_shooter": {
 		"scene": preload("res://enemies/ranged/shooters/basic_shooter.tscn"),
 		"title": "Basic shooter",
-		"text": "Fires a single bullet. Its ability makes it shoot faster.",
+		"text": "Fires a single bullet. Its ability increases firing speed, movement speed and grants death immunity",
 		"melee": false
 	},
 	"spread_shooter": {
 		"scene": preload("res://enemies/ranged/shooters/spread_shooter.tscn"),
 		"title": "Spread shooter",
-		"text": "Fires a fan of bullets. Its ability widens the volley.",
+		"text": "Fires a fan of bullets. Every third shot, the bullet split into more bullets!",
 		"melee": false
 	},
 	"sniper_shooter": {
@@ -22,7 +22,7 @@ const ENEMIES: Dictionary = {
 	"burst_shooter": {
 		"scene": preload("res://enemies/ranged/shooters/burst_shooter.tscn"),
 		"title": "Burst shooter",
-		"text": "Fires a short burst. Its ability adds another shot to the burst.",
+		"text": "Fires a short burst. Its ability adds another shot to the burst, every attack has a 10% chance to activate the ability.",
 		"melee": false
 	},
 	"smite_shooter": {
@@ -64,7 +64,7 @@ const ENEMIES: Dictionary = {
 	"katana_enemy": {
 		"scene": preload("res://enemies/melee/katana_enemy.tscn"),
 		"title": "Katana",
-		"text": "A fast sword swing that causes bleeding.",
+		"text": "A fast sword swing that causes bleeding. It's ability enhances the next attack to deal double damage. On kill: instantly refreshes ability.",
 		"melee": true
 	},
 	"jump_melee": {

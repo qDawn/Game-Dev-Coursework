@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://lrppqsr377tw" path="res://ui/damage_ui.gd" id="1_batlw"]
 
 [node name="damage_ui" type="Label" unique_id=956876178]
+z_index = 5
+offset_right = 18.0
+offset_bottom = 45.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
