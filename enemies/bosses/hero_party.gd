@@ -20,3 +20,8 @@ func _physics_process(_delta: float) -> void:
 
 func _on_take_damage(d: float) -> void:
 	self.current_health -= d
+	if self.current_health < 0:
+		queue_free()
+
+func _on_heal(h: float) -> void:
+	self.current_health = min(current_health+h/2,max_health)

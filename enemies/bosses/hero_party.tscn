@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dhvcl8f06upfi" path="res://enemies/superclasses/enemy.tscn" id="1_gh01o"]
 [ext_resource type="Script" uid="uid://ernm4pfpt2q5" path="res://enemies/bosses/hero_party.gd" id="2_rjke2"]
-[ext_resource type="PackedScene" uid="uid://brkx0at1kpdqo" path="res://enemies/bosses/hero_boss.tscn" id="3_rjke2"]
-[ext_resource type="PackedScene" uid="uid://docmii8vpivoo" path="res://enemies/bosses/wizard_boss.tscn" id="4_d2qo3"]
+[ext_resource type="PackedScene" uid="uid://brkx0at1kpdqo" path="res://enemies/bosses/party_hero.tscn" id="3_rjke2"]
+[ext_resource type="PackedScene" uid="uid://docmii8vpivoo" path="res://enemies/bosses/party_wizard.tscn" id="4_d2qo3"]
+[ext_resource type="PackedScene" uid="uid://bwfxvylvynbtt" path="res://enemies/bosses/party_healer.tscn" id="5_4dmus"]
 
 [node name="hero_party" unique_id=1378295628 groups=["boss"] instance=ExtResource("1_gh01o")]
 script = ExtResource("2_rjke2")
@@ -21,7 +22,10 @@ autostart = false
 [node name="weapon" parent="." index="11" unique_id=911033185]
 visible = false
 
-[node name="hero_boss" parent="." index="13" unique_id=107408206 groups=["hero_party"] instance=ExtResource("3_rjke2")]
+[node name="party_healer" parent="." index="13" unique_id=1727762752 groups=["hero_party"] instance=ExtResource("5_4dmus")]
+position = Vector2(81, 97)
 
-[node name="wizard_boss" parent="." index="14" unique_id=1585726591 groups=["hero_party"] instance=ExtResource("4_d2qo3")]
-position = Vector2(-120, 125)
+[node name="hero_boss" parent="." index="14" unique_id=107408206 groups=["hero_party"] instance=ExtResource("3_rjke2")]
+
+[node name="wizard_boss" parent="." index="15" unique_id=708803024 groups=["hero_party"] instance=ExtResource("4_d2qo3")]
+position = Vector2(-89, 98)

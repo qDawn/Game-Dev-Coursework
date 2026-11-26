@@ -8,8 +8,8 @@ var attack_max_count: int = 1
 
 func _ready() -> void:
 	super()
-	max_health = 1
-	current_health = 1
+	max_health = $"..".max_health
+	current_health = $"..".current_health
 	base_speed = 100
 	speed = 100
 	ability_damage_bonus = 5
@@ -53,6 +53,16 @@ func _on_take_damage(d: float) -> void:
 	
 	get_tree().current_scene.add_child(damage_ui)
 	$"..".emit_signal("take_damage",d)
+	current_health = $"..".current_health
+
+func _on_heal(h: float) -> void:
+	var damage_ui: Label = preload("res://ui/damage_ui.tscn").instantiate()
+	damage_ui.text = "+%s" % h
+	damage_ui.global_position = Vector2(global_position.x+20,global_position.y-20)
+	damage_ui.add_theme_color_override("font_color",Color(0,1,0,1))
+	get_tree().current_scene.add_child(damage_ui)
+	
+	$"..".emit_signal("heal",h)
 
 func _on_attack_end():
 	if attack_count < attack_max_count:

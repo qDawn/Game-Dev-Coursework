@@ -12,5 +12,4 @@ func _on_expiry_timer_timeout() -> void:
 		area.attacking_group = attacking_group
 		area.damage = dot_damage
 		get_tree().root.call_deferred("add_child",area)
-	
 	super()

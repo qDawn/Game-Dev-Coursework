@@ -1,6 +1,6 @@
 extends "res://enemies/ranged/shooters/smite_shooter.gd"
-const BASE_MAX_HEALTH: float = 40
-const BASE_SPEED: float = 100
+const BASE_MAX_HEALTH: float = 50
+const BASE_SPEED: float = 150
 const BASE_DAMAGE: float = 5
 
 func _ready() -> void:
@@ -56,3 +56,9 @@ func revive():
 	state = 'alive'
 	emit_signal("take_effect","stun",3)
 	$retarget_cooldown.emit_signal("timeout")
+	#reset the collision layers (so the possessed enemy can take damage again
+	set_collision_layer_value(1,true)
+	set_collision_layer_value(2,false)
+	#make the sprite visible again
+	$sprite.self_modulate = Color(1,1,1,1)
+	$corpse_timer.hide()
