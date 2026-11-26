@@ -1,8 +1,7 @@
 extends Timer
 
 #bosses
-const HERO_PARTY = preload("uid://wkxmxu5x27w3")
-const GRAND_PRIEST = preload("uid://cpl57oxxurp1r")
+const bosses: Array[Resource] = [preload("uid://wkxmxu5x27w3"), preload("uid://cpl57oxxurp1r")]
 
 #shooters
 const BASIC_SHOOTER = preload("uid://bno1bbsktwtt8")
@@ -61,15 +60,17 @@ var max_enemy_spawn_distance  : int= 1000
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
+var boss: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#3 second buffer before starting to spawn
-	spawn_enemy(HERO_PARTY)
-	
-	start(300)
+	start(3)
 
 func _process(_delta: float) -> void:
 	if get_tree().get_nodes_in_group("enemy").filter(func(e: Enemy): return e.state == "alive").size() == 0 and time_left > 3 and not get_tree().get_first_node_in_group("boss"):
+		start(3)
+	if boss and not get_tree().get_nodes_in_group("boss"):
 		start(3)
 		
 ##Method for determining what types of enemies to spawn
@@ -111,7 +112,7 @@ func _on_timeout() -> void:
 		PlayerInfo.score += 50*wave_multiplier
 		if PlayerInfo.wave % 4 == 0:
 			#spawn a boss
-			pass
+			spawn_enemy(bosses.pick_random())
 		else:
 			generate_enemies()
 			start(30)
