@@ -112,3 +112,7 @@ collision_mask = 255
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Bottom" unique_id=1815703019]
 scale = Vector2(11.52, 1)
 shape = SubResource("RectangleShape2D_5xxlj")
+
+[connection signal="item_selected" from="CanvasLayer/Panel/enemy_list" to="." method="_on_enemy_selected"]
+[connection signal="pressed" from="CanvasLayer/Panel/ability_button" to="." method="_on_ability_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/back_button" to="." method="_on_back_button_pressed"]
