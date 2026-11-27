@@ -10,11 +10,13 @@ var splitting: bool = false
 var attacking_group: String = "ally"
 var piercing: int = 1
 var pierce_count: int = 0
+var expiry_time : int = 3
 
 signal add_effect
 
 func _ready() -> void:
 	connect("add_effect",_on_add_effect)
+	$expiry_timer.start(expiry_time)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

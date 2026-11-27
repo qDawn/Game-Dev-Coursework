@@ -4,6 +4,7 @@ const SMITE_AREA = preload("uid://ccyp3ra11vl6l")
 const LASER = preload("uid://bqa3wjbpwh3yv")
 const BASIC_BULLET = preload("uid://mq4hucp4nyfe")
 
+#Affects boss health, smite ring count, bullet speeds
 var difficulty : float = 1
 func _ready() -> void:
 	super()
@@ -20,30 +21,32 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	super(delta)
-	if not effects.has("silence") and state != "possessed" and state != "dead" and global_position.distance_to(target.global_position) < attack_range:
-		#spawn_smites(3)
-		pass
-	_on_ability()
+	if global_position.distance_to(target.global_position) < attack_range:
+		_on_ability()
 	
 
 func _on_attack(direction: Vector2) -> bool:
 	if !$ability_active.is_stopped(): return false
 	if super(direction):
-		print("Attack")
 		shoot_bullets(5, 200, 250)
 	return true
+	
 func _on_ability() -> bool:
 	if super():
-		var rand = randi_range(1,3) # 6 ability patterns
+		var rand = randi_range(1,5) # 6 ability patterns
 		#Continues using an ability pattern until ability timer is off
 		while !$ability_active.is_stopped():
 			match rand:
 				1:
-					await spawn_smites(3, 256)
+					await smite_pattern_1(min(5,round(3*difficulty)), 256)
 				2:
 					await bullet_pattern_1()
 				3:
 					await bullet_pattern_2()
+				4:
+					await smite_pattern_2(5, 256)
+				5:
+					await spawn_lasers(7)
 					
 			await get_tree().create_timer(1).timeout
 		return true
@@ -53,11 +56,12 @@ func _on_ability_cooldown_timeout() -> void:
 	pass
 	
 func spawn_lasers(count : int):
+	_on_take_effect('stun',1*2)
 	for i in range(0, count):
 		var angle : float = 2 * PI * i / count
 		var direction : Vector2 = global_position.direction_to(target.global_position).rotated(angle)
 		spawn_laser(direction)
-	_on_take_effect('stun',1*2)
+		await get_tree().create_timer(0.1).timeout
 	
 func spawn_laser(direction : Vector2):
 	var space_state = get_world_2d().direct_space_state
@@ -72,11 +76,12 @@ func spawn_laser(direction : Vector2):
 		l.target_group = "ally"  
 		l.damage = 10
 		
-		add_child(l)
+		get_tree().current_scene.add_child(l)
 		l.emit_signal("setup",1, start, result.position, 20)
 	
 	
-func spawn_smites(ring_count : int, smite_gap : int) -> void:
+func smite_pattern_1(ring_count : int, smite_gap : int) -> void:
+	# Spawns smites in rings that goes outwards
 	var pos : Vector2 = target.global_position
 	spawn_smite(pos)
 	# Default radius of smite is 128
@@ -93,6 +98,24 @@ func spawn_smites(ring_count : int, smite_gap : int) -> void:
 		await get_tree().create_timer(0.3).timeout
 	await get_tree().create_timer(1.5).timeout	
 		
+func smite_pattern_2(count : int, smite_gap : int) -> void:
+	#Spawns a row of smites from above and below the player.
+	var pos : Vector2 = target.global_position
+	for i in range(-ceil(count/2.0), floor(count/2.0)):
+		for j in range(-3,3):
+			var offset : Vector2 = Vector2(j*smite_gap, i*smite_gap)
+			spawn_smite(pos + offset)
+		await get_tree().create_timer(0.2).timeout
+		
+	await get_tree().create_timer(0.7).timeout
+	pos  = target.global_position
+	for i in range(-ceil(count/2.0), floor(count/2.0)):
+		for j in range(-3,3):
+			var offset : Vector2 = Vector2(j*smite_gap, -i*smite_gap)
+			spawn_smite(pos + offset)
+		await get_tree().create_timer(0.2).timeout
+	
+		
 func spawn_smite(pos : Vector2) -> void:
 	var smite : Area2D = SMITE_AREA.instantiate()
 	smite.attack_group = "ally"
@@ -100,7 +123,6 @@ func spawn_smite(pos : Vector2) -> void:
 	get_tree().current_scene.add_child(smite)
 	
 func bullet_pattern_1() -> void:
-	# make new bullet that lasts longer and is smaller
 	shoot_bullets(10, 130, 160)
 	await get_tree().create_timer(1).timeout
 	shoot_bullets(10, 110, 120)
@@ -120,6 +142,7 @@ func shoot_bullets(count : int, min_speed: int, max_speed: int) -> void:
 
 func shoot_basic_bullet(direction : Vector2, speed : int) -> void:
 	var b = BASIC_BULLET.instantiate()
+	b.expiry_time = 7
 	b.global_position = $weapon/spr/origin.global_position
 	b.direction = direction
 	b.damage = 10

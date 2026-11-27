@@ -66,7 +66,8 @@ var boss: bool = false
 func _ready() -> void:
 	spawn_enemy(preload("uid://wkxmxu5x27w3"))
 	#3 second buffer before starting to spawn
-	start(3)
+	spawn_enemy(preload("uid://cpl57oxxurp1r"))
+	start(300)
 
 func _process(_delta: float) -> void:
 	if get_tree().get_nodes_in_group("enemy").filter(func(e: Enemy): return e.state == "alive").size() == 0 and time_left > 3 and not get_tree().get_first_node_in_group("boss"):

@@ -23,6 +23,7 @@ func _on_setup(prime_time: float, start_point: Vector2, end_point: Vector2, widt
 	$prime_timer.start(prime_time)
 	$Line2D.add_point(start_point)
 	$Line2D.add_point(end_point)
+	$collision_box/CollisionShape2D.shape = $collision_box/CollisionShape2D.shape.duplicate()
 	$collision_box/CollisionShape2D.shape.a = start_point
 	$collision_box/CollisionShape2D.shape.b = end_point
 	width = width
