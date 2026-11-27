@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bj6iw06pnx22b" path="res://enemies/ranged/shooters/smite_shooter.tscn" id="1_eym8g"]
 [ext_resource type="Script" uid="uid://bkkuecd838rdu" path="res://enemies/bosses/party_wizard.gd" id="2_jemdq"]
 [ext_resource type="Texture2D" uid="uid://btioquh67v3j5" path="res://assets/sprites/wizard.png" id="3_7s5jl"]
+[ext_resource type="Texture2D" uid="uid://wbqb2qarbwl5" path="res://assets/sprites/staff.png" id="4_rkbre"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7s5jl"]
 load_path = "res://.godot/imported/halo.png-639dfc2dd5f7a4f12a46de1cefd78c06.ctex"
@@ -24,3 +25,11 @@ texture = SubResource("CompressedTexture2D_7s5jl")
 [node name="collision_shape" parent="." index="3" unique_id=1561700062]
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_rkbre")
+
+[node name="spr" parent="weapon" parent_id_path=PackedInt32Array(911033185) index="0" unique_id=2048158550]
+position = Vector2(45, -2.3841858e-07)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_rkbre")
+
+[node name="origin" parent="weapon/spr" index="0" unique_id=2068338303]
+position = Vector2(-1.250001, -44.999996)

@@ -23,6 +23,7 @@ func _on_take_damage(d: float) -> void:
 	if self.current_health < 0:
 		$party_healer.current_health = 0
 		$wizard_boss.current_health = 0
+		
 		queue_free()
 
 func _on_heal(h: float) -> void:

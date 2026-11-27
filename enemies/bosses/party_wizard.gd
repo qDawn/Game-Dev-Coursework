@@ -11,7 +11,7 @@ func _ready() -> void:
 	min_range = 400
 	attack_range = 600
 	attack_cooldown = 3
-	bullet_speed = 400
+	bullet_speed = 200
 	damage = BASE_DAMAGE
 	ability_cooldown = 5
 	smite_scale = Vector2(2,2)
