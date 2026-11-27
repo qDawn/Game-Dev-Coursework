@@ -14,6 +14,7 @@ func _ready() -> void:
 	bullet_speed = 400
 	damage = BASE_DAMAGE
 	ability_cooldown = 5
+	smite_scale = Vector2(2,2)
 	default_bullet = preload("uid://opb7dv63vy0u")
 
 func _on_decay_timer_timeout() -> void:

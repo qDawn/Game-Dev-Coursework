@@ -64,6 +64,7 @@ var boss: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawn_enemy(preload("uid://wkxmxu5x27w3"))
 	#3 second buffer before starting to spawn
 	start(3)
 

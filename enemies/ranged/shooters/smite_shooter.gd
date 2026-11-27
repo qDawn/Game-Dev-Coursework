@@ -3,6 +3,7 @@ extends "res://enemies/superclasses/enemy_shooter.gd"
 const SMITE_AREA = preload("uid://ccyp3ra11vl6l")
 var smite_damage: int = 15
 var smite_range : int = 700
+var smite_scale: Vector2 = Vector2.ONE
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
@@ -43,6 +44,7 @@ func _on_ability() -> bool:
 	else:
 		smite.global_position = get_global_mouse_position()
 		smite.attack_group = "enemy"
+	smite.scale = smite_scale
 	get_tree().current_scene.add_child(smite)
 	_on_take_effect("stun", 1)
 	#halo
