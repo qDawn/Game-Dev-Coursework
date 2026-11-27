@@ -44,6 +44,24 @@ layout_mode = 2
 text = "Quit
 "
 
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1306699148]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=908571052]
+layout_mode = 2
+text = "Difficulty"
+
+[node name="difficulty_button" type="OptionButton" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1769100455]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Easy"
+popup/item_0/id = 0
+popup/item_1/text = "Normal"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+
 [node name="highscores_label" type="Label" parent="." unique_id=1290565086]
 layout_mode = 0
 offset_left = 64.0
@@ -58,3 +76,4 @@ horizontal_alignment = 1
 [connection signal="pressed" from="CenterContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/compendium_button" to="." method="_on_compendium_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="item_selected" from="CenterContainer/VBoxContainer/HBoxContainer/difficulty_button" to="." method="_on_difficulty_button_item_selected"]
