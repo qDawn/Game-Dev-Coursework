@@ -36,7 +36,7 @@ func _on_attack(direction: Vector2) -> bool:
 			l.target_group = "ally"  
 		l.damage = damage
 		
-		get_tree().root.add_child(l)
+		get_tree().current_scene.add_child(l)
 		l.emit_signal("setup",prime_time, start, result.position, 20)
 	_on_take_effect('stun',prime_time*2)
 	return true
