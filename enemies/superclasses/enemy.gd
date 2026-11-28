@@ -33,6 +33,8 @@ var possessable: bool = true
 ##How much the enemy is worth, score-wise
 var score: int = 10
 
+var difficulty : float
+
 ## Stores effects of the enemy. Format: {name: duration}
 ## current effects include: slow, bleed, stun, silence.
 var effects : Dictionary[String,float] = {}

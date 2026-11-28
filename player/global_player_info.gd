@@ -7,6 +7,7 @@ var possession_target: Enemy = null
 
 var score: int = 0
 var wave: int = 1
+var difficulty : float = 1
 
 ## Enemies that spawned during the current run. Scene filenames, e.g. "bomber", so when viewing in compendium can maybe just append .tscn
 var seen_this_run: Array[String] = []
